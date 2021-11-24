@@ -5,8 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
     <title>Chat</title>
-    <link rel="stylesheet" href="/css/style.css">
+
+
 </head>
 
 <body>
@@ -28,26 +34,26 @@
     <A HREF="profile.html"> Profile</A>
     &verbar;
     <A class="red " HREF="friends.html"> Remove Friend</A> -->
-        <div class="chat-background" style="border-radius: 10px;" id = "chat">
-           </div>
-<br>
-<span class = centerinput ><input type="text" placeholder="New Message" class="pd-up-down-light" style="border-radius: 10px;"
-    id="message">
-<button onclick="send()" class="btn" type="button" id= "sendbutton">Send</button>
-</span>
+        <div class="chat-background" style="border-radius: 10px;" id="chat">
         </div>
+        <br>
+        <span class=centerinput><input type="text" placeholder="New Message" class="pd-up-down-light"
+                style="border-radius: 10px;" id="message">
+            <button onclick="send()" class="btn" type="button" id="sendbutton">Send</button>
+        </span>
+    </div>
 
-        
 
-        <script src = \js\chatscript.js>
-         /* function send() {
+
+    <script src=\js\chatscript.js>
+        /* function send() {
 
                 var node = document.createElement("li");
 
                (document.getElementById('message').value);
                 document.getElementById("textmessage").appendChild(node);
            } */
-        </script>
+    </script>
 </body>
 
 </html>

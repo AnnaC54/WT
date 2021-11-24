@@ -5,8 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
     <title>Register</title>
-    <link rel="stylesheet" href="/css/style.css">
+
 </head>
 
 <body>
@@ -19,34 +24,34 @@
         <fieldset class="fieldset-login">
             <legend></legend>
             <div class="mg-up-down">
-                <form id="registrationForm" name="myForm" action="friends.html"  method="">
+                <form id="registrationForm" name="myForm" action="friends.html" method="">
                     <div class="bg-color-white pd-outer mg-up-down register-form-inner">
 
                         <!-- username -->
                         <div class="username">
                             <label for="fname" class="login-register-label">Username</label>
                             <input name="fname" id="username" type="text" placeholder="Username"
-                                class="login-register-input" ><br>
+                                class="login-register-input"><br>
                         </div>
 
                         <!-- password I -->
                         <div class="passwordOne">
                             <label for="pword" class="login-register-label">Password</label>
                             <input name="password" id="password" type="password" placeholder="Password"
-                                class="login-register-input"  onchange="passwordCheck()"><br>
+                                class="login-register-input" onchange="passwordCheck()"><br>
                         </div>
 
                         <!-- password II -->
                         <div class="passwordTwo">
                             <label for="cpword" class="login-register-label">Confirm Password</label>
                             <input name="passwordConfirmation" id="password-rep" type="password"
-                                placeholder="Confirm Password" class="login-register-input" 
+                                placeholder="Confirm Password" class="login-register-input"
                                 onchange="passwordCheck()"><span id='message'></span>
                         </div>
                     </div>
                     <div class="div-btn">
                         <button class="btn btn-register"><a href="login.html">Cancel</a></button>
-                        <input id="submit" type="submit" class="btn btn-wide" value="Create Account" ></input>
+                        <input id="submit" type="submit" class="btn btn-wide" value="Create Account"></input>
                     </div>
                 </form>
 
