@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="inner-body bg-color-lg pd-outer">
+        <div class="heading">
+            <h2 class=" h2 pd-up-down">Chat with Tom</h2>
+        </div>
+        <header class="header">
+            <nav class="navigation">
+                <button class="btn btn-large"><a class="white link" href="friends.html"> &#60; Back</a></button>
+                <button class="btn btn-large"><a class="white link" href="profile.html"> Profile</a></button>
+                <button class="btn btn-large btn-remove"><a class="white link" href="friends.html">Remove
+                        Friend</a></button>
+            </nav>
+            <br>
+        </header>
+        <!-- <A HREF="friends.html" Back</A>
+    &verbar;
+    <A HREF="profile.html"> Profile</A>
+    &verbar;
+    <A class="red " HREF="friends.html"> Remove Friend</A> -->
+        <div class="chat-background" style="border-radius: 10px;" id = "chat">
+           </div>
+<br>
+<span class = centerinput ><input type="text" placeholder="New Message" class="pd-up-down-light" style="border-radius: 10px;"
+    id="message">
+<button onclick="send()" class="btn" type="button" id= "sendbutton">Send</button>
+</span>
+        </div>
+
+        
+
+        <script src = \js\chatscript.js>
+         /* function send() {
+
+                var node = document.createElement("li");
+
+               (document.getElementById('message').value);
+                document.getElementById("textmessage").appendChild(node);
+           } */
+        </script>
+</body>
+
+</html>

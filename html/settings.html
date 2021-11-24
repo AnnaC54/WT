@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="profileandsettings.css">
+    <title>Settings</title>
+</head>
+
+<body>
+    <div class="heading">
+        <h2 class="h2 form-headline pd-up-down">Profile Settings</h2>
+    </div>
+    <div class="body-inner">
+        <div id="form-settings" class="bg-color-lg form-settings form-outer pd-outer">
+            <form action="example.php">
+                <div class="form-inner">
+                    <section>
+                        <div class="form-first bg-color-white pd-outer mg-up-down">
+                            <fieldset class="fieldset-first" title="Base Data">
+                                <legend class="legend">Base Data</legend>
+                                <br>
+                                <div class="basedata-inner grid-container">
+                                    <div class="firstname">
+                                        <label for="firstname">First Name</label>
+                                        <input type="Your name">
+                                    </div>
+                                    <br>
+                                    <div class="secondname">
+                                        <label for="lastname">Last Name</label>
+                                        <input type="Your name">
+                                    </div>
+                                    <br>
+                                    <div class="coffeetea">
+                                        <label class="coffeetea-label" for="coffeetea">Coffee or Tea?</label></br>
+                                        <select class="coffeetea-label" name="coffeetea" id="coffeetea">
+                                            <option value="tea">Neither nor</option>
+                                            <option value="coffee">Coffee</option>
+                                            <option value="tea">Tea</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="form-second bg-color-white pd-outer mg-up-down">
+                            <fieldset title="aboutyou"><br>
+                                <legend class="legend">Tell Something About You</legend>
+                                <div class="aboutyou-first">
+                                    <textarea class="aboutyou-textarea pd-outer-relative" name=""
+                                        placeholder="Leave a comment here"></textarea>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="form-third bg-color-white pd-outer">
+                            <fieldset title="chatlayout "><br>
+                                <legend class="legend ">Prefered Chat Layout</legend>
+                                <div class="chatlayout-first">
+                                    <ul class="chat-list">
+                                        <li> <input class="chat-answer" type="radio" name="option">Username and message
+                                            in
+                                            one
+                                            line
+                                        </li>
+                                        <br>
+                                        <li> <input class="chat-answer" type="radio" name="option">Username and message
+                                            in
+                                            separated
+                                            lines
+                                        </li>
+                                    </ul>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="pd-up-down form-fourth">
+                            <button class="btn btn-cancel" type="button"><a class="white link"
+                                    href="friends.html">Cancel</a></button>
+                            <button class="btn btn-save" type="button"><a class="white link" href="">Save</a></button>
+                        </div>
+                </div>
+                </section>
+
+        </div>
+        </form>
+    </div>
+</body>
+
+</html>
