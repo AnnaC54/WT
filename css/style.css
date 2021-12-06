@@ -1,0 +1,20 @@
+
+/* chat-html*/ 
+
+body{
+    background-color: rgb(247, 248, 248);
+    padding: 70px 0; 
+}
+
+.btn-link {
+    color: white; 
+    text-decoration: none;
+}
+
+.btn-link:hover{
+    color: white;
+}
+
+#message{
+    border: 1px solid lightgray;
+}
