@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <div class="container ">
+    <div class="container">
         <header class="row ">
             <h2 class="offset-1">Chat with Tom</h2>
             <div class="row mt-4 offset-1 ">
@@ -23,8 +23,8 @@
                         &#60; Back</a></button>
                 <button type="button" class=" me-3 col-2 btn btn-secondary"><a class="btn-link" href="profile.html">
                         Show Profil</a></button>
-                <button type="button" class=" me-3 col-2 btn btn-danger" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">Remove Friend</button>
+                <button type="button" class=" me-3 col-2 btn btn-danger"><a class="btn-link" href="friends.html">Remove
+                        Friend</a></button>
             </div>
         </header>
 
@@ -33,7 +33,8 @@
         <section class="row input-group mt-4 offset-1" id="chat">
             <input class="col-8" id="message" type="text" class="form-control" placeholder="New message"
                 aria-label="New message" aria-describedby="button-addon2">
-            <button class=" col-1 btn btn-primary" type="button"  id="button-addon2 sendbutton">Send</button>
+            <button class=" col-1 btn btn-primary" type="button" data-bs-toggle="modal"
+                data-bs-target="#exampleModal" id="button-addon2 sendbutton">Send</button>
         </section>
     </div>
 
@@ -51,7 +52,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button onclick="send()" type="button" class="btn btn-primary"><a class="btn-link" href="friends.html">Jup, skip em</a></button>
+                    <button onclick="send()" type="button" class="btn btn-primary"><a class="btn-link" href="friends.html">Jup ,skip em </a></button>
                 </div>
             </div>
         </div>
