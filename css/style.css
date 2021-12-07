@@ -4,9 +4,7 @@
 body{
     background-color: rgb(247, 248, 248);
     padding: 70px 0; 
-    background-image: url(/images/green.jpeg);
-    background-size: cover;
-    background-repeat: no-repeat;
+  
 }
 
 .btn-link {
@@ -23,9 +21,44 @@ body{
     border: 1px solid lightgray;
 }
 
+.chat-background {
+    background-color: white;
+}
+
 /* settings */ 
 
 .container{
     padding: 0; 
 }
+
+
+.leftdiv{
+    
+    float: left;
+    width: 15%;
+    text-align: left;
+}
+
+.centerdiv{
+    display: flex;
+    float: left;
+    width: 70%;
+    text-align: left;
+}
+
+.rightdiv{
+    float: right;
+    width: 15%;
+    text-align: right;
+}
+
+#chat{
+    display:flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 200px;
+    overflow-y: auto;
+    position: relative;
+}
+
 
