@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -16,8 +16,10 @@
 <title>Friends</title>
 
 <body>
-    <script src="/js/scriptFriends.js"></script>
 
+
+    <script src="/js/scriptFriends.js"></script>
+    <!--
     <div class="inner-body bg-color-lg pd-outer">
         <div class="heading">
             <h2 class=" h2 pd-up-down">Friends</h2>
@@ -28,13 +30,13 @@
                 <button class="btn btn-large btn-remove"><a class="white link"
                         href="settings.html">Settings</a></button>
             </nav>
-        </header>
-        <!--<div class="pd-outer" >
+        </header> -->
+    <!-- <div class="pd-outer" >
     <A class="white" HREF="Logout.html">&#60; Logout</A>
     &verbar;
     <A class="white" HREF="Settings.html"> Settings</A>
     <hr> -->
-        <br>
+    <!--    <br>
         <div class="bg-color-white pd-list " style="width:230px; border-radius: 10px;">
 
             <ul class="friends-list pd-light">
@@ -54,22 +56,72 @@
             </li>
         </ol>
 
-        <!--<p class="cv"><input type="text" placeholder="New Message" class="pd-up-down-light"> 
+        <p class="cv"><input type="text" placeholder="New Message" class="pd-up-down-light"> 
 <button class="btn" type="button">Send</button></p>
-</body> -->
-        <p>
-        <form id="add" action>
-            <input type="text" name="friend" list="friendsList" id="friendsAdd" placeholder="Add to friend list"
-                class="pd-up-down-light" style="border-radius: 10px;">
-            <datalist id="friendsList"></datalist>
+        -->
 
-            <a href="friends.html">
-                <button class="btn">Add</button>
-            </a>
-        </form>
-        </p>
+
+
+    <div class="container justify-content-center">
+        <div class="offset-2 col-8 mb-5">
+            <h2>Friends</h2>
+            <hr>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a class="text-decoration-none" href="chat.html">Tom</a>
+                    <!-- <span class="badge bg-primary rounded-pill">0</span> -->
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a class="text-decoration-none" href="chat.html">Marvin</a>
+                    <span class="badge bg-primary rounded-pill">1</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a class="text-decoration-none" href="chat.html">Tick</a>
+                    <!-- <span class="badge bg-primary rounded-pill">1</span> -->
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a class="text-decoration-none" href="chat.html">Trick</a>
+                    <!-- <span class="badge bg-primary rounded-pill">1</span> -->
+                </li>
+            </ul>
+            <hr>
+            <ul class="list-group list-group-numbered">
+                <a class="text-decoration-none" href="chat.html">
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Friend request from Tom</div>
+                            Do you wanna be his/her friend?
+                        </div>
+                        <span class="badge bg-primary rounded-pill">Do u?</span>
+                    </li>
+                </a>
+            </ul>
+            <hr>
+            <div class="input-group mb-3">
+                <form id="add" action>
+                    <input type="text" class="form-control" name="friend" list="friendsList" id="friendsAdd" placeholder="Add to friend list" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <datalist id="friendsList"></datalist>
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                </form>
+            </div>
+
+            <form id="add" action>
+                <input type="text" name="friend" list="friendsList" id="friendsAdd" placeholder="Add to friend list"
+                    class="pd-up-down-light" style="border-radius: 10px;">
+                <datalist id="friendsList"></datalist>
+
+                <a href="friends.html">
+                    <button class="btn">Add</button>
+                </a>
+            </form>
+
+
+
+        </div>
 
     </div>
+
+
 </body>
 
 </html>
