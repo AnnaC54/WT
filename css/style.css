@@ -32,8 +32,9 @@ body{
 }
 
 
+/* chat - overtaken from old css */ 
+
 .leftdiv{
-    
     float: left;
     width: 15%;
     text-align: left;
