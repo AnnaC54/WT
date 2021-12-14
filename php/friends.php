@@ -67,31 +67,31 @@
             <h2>Friends</h2>
             <hr>
             <div class="btn-group">
-                <a href="logout.html" class="btn btn-secondary">Logout</a>
-                <a href="settings.html" class="btn btn-secondary">Edit Profile</a>
+                <a href="logout.php" class="btn btn-secondary">Logout</a>
+                <a href="settings.php" class="btn btn-secondary">Edit Profile</a>
             </div>
             <hr>
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a class="text-decoration-none" href="chat.html">Tom</a>
+                    <a class="text-decoration-none" href="chat.php">Tom</a>
                     <!-- <span class="badge bg-primary rounded-pill">0</span> -->
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a class="text-decoration-none" href="chat.html">Marvin</a>
+                    <a class="text-decoration-none" href="chat.php">Marvin</a>
                     <span class="badge bg-primary rounded-pill">1</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a class="text-decoration-none" href="chat.html">Tick</a>
+                    <a class="text-decoration-none" href="chat.php">Tick</a>
                     <!-- <span class="badge bg-primary rounded-pill">1</span> -->
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a class="text-decoration-none" href="chat.html">Trick</a>
+                    <a class="text-decoration-none" href="chat.php">Trick</a>
                     <!-- <span class="badge bg-primary rounded-pill">1</span> -->
                 </li>
             </ul>
             <hr>
             <ul class="list-group list-group-numbered">
-                <a class="text-decoration-none" href="chat.html" id="friendRequest" data-bs-toggle="modal"
+                <a class="text-decoration-none" href="chat.php" id="friendRequest" data-bs-toggle="modal"
                     data-bs-target="#exampleModal">
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">

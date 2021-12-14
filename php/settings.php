@@ -69,7 +69,7 @@
             </div>
 
             <div class="row justify-content-center">
-                    <button class=" col-5 btn btn-lg btn-secondary mx-1 "><a class="btn-link" href="friends.html">Cancel</a></button>
+                    <button class=" col-5 btn btn-lg btn-secondary mx-1 "><a class="btn-link" href="friends.php">Cancel</a></button>
                     <button class=" col-6 btn btn-lg btn-primary ms-4" type="submit"><a class="btn-link" href="#">Save</a></button>
             </div>
         </form>

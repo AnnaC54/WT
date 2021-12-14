@@ -35,7 +35,7 @@
             <h1 class="h1 mb-4 mt-2 fw-normal text-center">Logged out...</h1>
             <h4 class="h4 mb-4 mt-2 fw-normal text-center">See u! uWu</h1>
             <div class="m-3 text-center">
-                <a href="login.html">
+                <a href="login.php">
                     <button class="btn btn-lg btn-primary" type="button">Log in</button></a>
             </div>
         </div>

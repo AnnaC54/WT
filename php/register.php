@@ -26,7 +26,7 @@
         <fieldset class="fieldset-login">
             <legend></legend>
             <div class="mg-up-down">
-                <form id="registrationForm" name="myForm" action="friends.html" method="">
+                <form id="registrationForm" name="myForm" action="friends.php" method="">
                     <div class="bg-color-white pd-outer mg-up-down register-form-inner">
 
                         <!-- username -->
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="div-btn">
-                        <button class="btn btn-register"><a href="login.html">Cancel</a></button>
+                        <button class="btn btn-register"><a href="login.php">Cancel</a></button>
                         <input id="submit" type="submit" class="btn btn-wide" value="Create Account"></input>
                     </div>
                 </form>

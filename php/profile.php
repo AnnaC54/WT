@@ -19,8 +19,8 @@
         </div>
         <header class="header">
             <nav class="navigation">
-                <button class="btn btn-large"><a class="white link" href="chat.html"> > Back to Chat</a></button>
-                <button class="btn btn-large btn-remove"><a class="white link" href="friends.html">Remove
+                <button class="btn btn-large"><a class="white link" href="chat.php"> > Back to Chat</a></button>
+                <button class="btn btn-large btn-remove"><a class="white link" href="friends.php">Remove
                         Friend</a>
                 </button>
             </nav>

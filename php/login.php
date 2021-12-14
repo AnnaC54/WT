@@ -65,9 +65,9 @@
                     </div>
                 </form>
             <div class="m-3 text-center">
-                <a href="register.html">
+                <a href="register.php">
                     <button class="btn btn-lg btn-secondary">Register</button></a>
-                <a href="friends.html">
+                <a href="friends.php">
                     <button class="btn btn-lg btn-primary" type="submit">Sign in</button></a>
             </div>
         </div>
