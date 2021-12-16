@@ -1,6 +1,8 @@
 <?php
 namespace Model;
 use JsonSerializable;
+require("start.php");
+
 
 class User implements JsonSerializable {
     private $username;
