@@ -1,5 +1,7 @@
 <?php
 
+require('start.php');
+
 namespace Utils;
 
 use Model\User;
@@ -25,7 +27,7 @@ class BackendService
             $result = HttpClient::post($url, $data);
             // Wichtig: Verzichten Sie auf "echo"-Anweisungen im BackendService!
             // Tipp: Fehler mit error_log();
-            return $result->token;
+            return $result->token; // return true?
         } catch (\Exception $e) {
             // error_log landet im XAMPP logs/php-error-log
             error_log("Authentification failed: $e");
@@ -37,8 +39,9 @@ class BackendService
         try {
             $url = "$this->base/$this->collectionId/login";
             $data = array("username" => $username, "password" => $password);
-            $result = HttpClient::post($url, $data);
-            return $result->token;
+            $chat_token = HttpClient::post($url, $data);
+            
+            return $chat_token->token; // return true?
         } catch (\Exception $e) {
             error_log("Authentification failed: $e");
             return false;
@@ -55,10 +58,10 @@ class BackendService
             return false;
         }
     }
-    public function loadUser($username, $token)
+    public function loadUser($username)
     {
         try {
-            $data = HttpClient::get("$this->base/$this->collectionId/user/$username", $token);
+            $data = HttpClient::get("$this->base/$this->collectionId/user/$username");
             $user = User::fromJson($data);
             return $user;
         } catch (\Exception $e) {

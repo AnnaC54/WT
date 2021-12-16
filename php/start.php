@@ -13,6 +13,6 @@ spl_autoload_register(function($class) {
 
 // Define erstellt eine Konstante, die kann dann im folgenden einfach mit dem namen verwendet werden... z.B. CHAT_SERVER_URL (ohne $)
 define("CHAT_SERVER_URL", "https://online-lectures-cs.thi.de/chat");
-define("CHAT_SERVER_ID", "186411aa-a8c2-4f94-bb55-0562d085d5f0");
+define("CHAT_SERVER_ID", "185ead53-1b4c-40a3-beff-89c5560908a2");
  // $service = new Utils\BackendService(CHAT_SERVER_URL, CHAT_SERVER_ID);
 ?>
