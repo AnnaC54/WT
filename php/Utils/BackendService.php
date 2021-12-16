@@ -101,16 +101,33 @@ class BackendService
     {
         $friend = new User($_SESSION["user"]);
         $result = HttpClient::post("$this->base/$this->collectionId/", $friend);
-        return $result; 
+        return $result;
     }
 
     public function friendAccept($friend = NULL)
     {
         $friend = new User($_SESSION["user"]);
         $result = HttpClient::put("$this->base/$this->collectionId/", $friend);
-        return $result; 
+        return $result;
     }
 
+    public function friendDismiss($friend = NULL)
+    {
+    }
+
+    public function friendRemove($friend = NULL)
+    {
+    }
+
+    public function userExists($username)
+    {
+        // get aufruf mit token
+    }
+
+    public function getUnread()
+    {
+        // get aufruf mit token
+    }
 
     //test -> works fine
     public function test()

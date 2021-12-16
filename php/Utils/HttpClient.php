@@ -3,6 +3,7 @@ namespace Utils;
 
 class HttpClient {
     // Source: https://thisinterestsme.com/sending-json-via-post-php/
+    
     public static function post($url, $data, $token = null) {
         //Initiate cURL.
         $ch = curl_init();
