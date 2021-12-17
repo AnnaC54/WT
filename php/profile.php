@@ -17,25 +17,30 @@ require("start.php");
 </head>
 
 <body>
-    <div class="inner-body bg-color-lg pd-outer">
-        <div class="heading">
-            <h2 class=" h2 pd-up-down">Profile of Tom</h2>
-        </div>
-        <header class="header">
-            <nav class="navigation">
-                <button class="btn btn-large"><a class="white link" href="chat.php"> > Back to Chat</a></button>
-                <button class="btn btn-large btn-remove"><a class="white link" href="friends.php">Remove
-                        Friend</a>
-                </button>
-            </nav>
+
+<br><br><br>
+    <div class="container justify-content-center">
+        <div class="offset-2 col-8 mb-5">
+            <h2 >Profile of Tom</h2>
+            <hr>
+        
+        <header class="btn-group">
+            <!-- <div class="d-flex justify-content-center"> -->
+                <a href="chat.php" class="btn btn-secondary"> Back to Chat</a>
+                <a href="friends.php" class="btn btn-secondary"  data-bs-toggle="modal"
+                    data-bs-target="#exampleModal" id="button-addon2 sendbutton">Remove Friend</a>
+            </div>
+            
+</div>
+
         </header>
 
-        <div class="main-profile mg-up-down pd-up-down pd-left-right pd-outer">
-            <div class=" cv ">
-                <div class="personality-one pd-outer">
-                    <img src="../images/profile.png" alt="profile" width="100" height="100">
+        <div class="row align-items-startrow align-items-start">
+            <div class=" col-4 ">
+                <div class="mg-left-right d-flex justify-content-center ">
+                    <img src="../images/profile.png" alt="profile" class="rounded-circle justify-content-center" style="width: 100px;">
                 </div>
-                <div class="personality-two pd-outer">
+                <div class="text-center">
                     <p class="coffee">
                         <h4>Coffee or Tea?</h4>
                         Tea
@@ -47,7 +52,8 @@ require("start.php");
                 </div>
             </div>
 
-            <div class="paragraph-first pd-up-down pd-outer">
+            <div class="col-4">
+                <hr>
                 <p class="para-one">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni, beatae perferendis
                     modi perspiciatis, veniam repellendus ratione dolore, dolor accusamus dicta ipsam! Delectus, eaque
                     facilis sint omnis laborum dolores explicabo temporibus culpa enim! Quam voluptatibus quis nesciunt
@@ -56,6 +62,28 @@ require("start.php");
             </div>
 
         </div>
+
+
+        <!-- Modal section -->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Remove Friend</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Do you really want to end your friendship?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button onclick="send()" type="button" class="btn btn-primary"><a class="btn-link  link-light"
+                            href="friends.php" >Jup, skip em </a></button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </body>

@@ -26,7 +26,7 @@ var userName;
 
 // ******************* password check *******************
 
-function passwordCheck() {
+function passwordCheck(){
 
     if (password1.value == password2.value) {
         document.getElementById('message').style.color = 'green';
