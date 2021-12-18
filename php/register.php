@@ -39,7 +39,7 @@ require("start.php");
             <fieldset class="fieldset-login">
                
                 <div class="mg-up-down ">
-                    <form id="registrationForm" name="myForm" action="friends.html" method="" oninput='up2.setCustomValidity(up2.value != up.value ? "Passwords do not match." : "")'>
+                    <form id="registrationForm" name="myForm" action="friends.html" method="" class="was-validated" style>
                         <div class="bg-color-white pd-outer mg-up-down register-form-inner">
 <!-- >>>>>>> Stashed changes:html/register.html  -->
 
