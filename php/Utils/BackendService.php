@@ -101,21 +101,15 @@ class BackendService
     // http get aufruf mit token -> in lok. variable speichern
     // fromJson methode von Friend-Klasse um Methoden zu erzeugen
     // backend liefert lieste von freunden zurück -> result zurückgeben
-    public function loadFriends()
+    public function loadFriends($username)
     {
         try{
             // Wo kommt Friend Token her?
             
-            $data = HttpClient::get("");
-<<<<<<< Updated upstream
+            $data = HttpClient::get("$this->base/$this->collectionId/user/$username");
             $data2 = \Model\Friend::fromJson($data);
             var_dump($data2);
             return $data2;
-=======
-            Model\Friend::fromJson($data);
-            
-            return ;
->>>>>>> Stashed changes
         } catch(\Exception $e){
             error_log("Error: " + $e);
             return false;
