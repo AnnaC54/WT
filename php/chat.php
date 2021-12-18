@@ -33,13 +33,17 @@ require("start.php");
             </div>
         </header>
 
-        <div class=" col-9  offset-1 my-5 chat-background" id="chat"> </div>
+        <!-- <div class=" col-9  offset-1 my-5 chat-background" id="chat"> </div> --> 
+
+        <div class="container overflow-scroll col-9 offset-1 my-5 bg-white pt-2 " style="height: 300px" id="chat" ></div>
+
+
 
         <section class="row input-group mt-4 offset-1">
             <input class="col-8" id="message" type="text" class="form-control" placeholder="New message"
                 aria-label="New message" aria-describedby="button-addon2">
             <button onclick="send()" id="sendbutton" type="button" class="col-1 btn btn-primary"><a class="btn-link"
-                    href="friends.php">Send</a></button>
+                    >Send</a></button>
         </section>
     </div>
 
