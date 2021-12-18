@@ -18,55 +18,7 @@ require("start.php");
 
 <body>
 
-
-
     <script src="../js/scriptFriends.js"></script>
-=======
-
-    <!--
-    <div class="inner-body bg-color-lg pd-outer">
-        <div class="heading">
-            <h2 class=" h2 pd-up-down">Friends</h2>
-        </div>
-        <header class="header">
-            <nav class="navigation">
-                <button class="btn btn-large"><a class="white link" href="logout.html"> &#60; Logout</a></button>
-                <button class="btn btn-large btn-remove"><a class="white link"
-                        href="settings.html">Settings</a></button>
-            </nav>
-        </header> -->
-    <!-- <div class="pd-outer" >
-    <A class="white" HREF="Logout.html">&#60; Logout</A>
-    &verbar;
-    <A class="white" HREF="Settings.html"> Settings</A>
-    <hr> -->
-    <!--    <br>
-        <div class="bg-color-white pd-list " style="width:230px; border-radius: 10px;">
-
-            <ul class="friends-list pd-light">
-                <li><A HREF="chat.html"> Tom</A>
-                    <span class="number-right pd-light">3</span>
-                </li>
-                <li><A HREF="chat.html"> Marvin (1)</A></li>
-                <li><A HREF="chat.html"> Tick</A></li>
-                <li><A HREF="chat.html"> Trick</A></li>
-            </ul>
-        </div>
-        <br>
-        <h2 class="white">New Requests</h2>
-        <ol>
-            <li><A HREF="Request1.html" style="color: rgb(100, 182, 250);;"> Friend request from </A><A
-                    style="font-weight:bold;color: rgb(100, 182, 250);" HREF="Track.html">Track</A>
-            </li>
-        </ol>
-
-        <p class="cv"><input type="text" placeholder="New Message" class="pd-up-down-light"> 
-<button class="btn" type="button">Send</button></p>
-        -->
-
-    <script src="../js/scriptFriends.js"></script>
-
-
 
     <div class="container justify-content-center">
         <div class="offset-2 col-8 mb-5">
