@@ -5,6 +5,8 @@ use JsonSerializable;
 
 class User implements JsonSerializable {
     private $username;
+    private $firstname;
+    private $lastname;
     // ggf. weitere Attribute, z.B. description, layout optionen...
 
     public function __construct($username = null) {
@@ -13,6 +15,24 @@ class User implements JsonSerializable {
 
     public function getUsername() {
         return $this->username;
+    }
+    public function setFirstname($firstname){
+        $this->firstname = $firstname;
+        echo $firstname;
+
+    }
+    
+    public function getFirstname(){
+        return $this->firstname;
+    }
+    
+    public function setLastname($lastname){
+        $this->lastname = $lastname;
+        echo $lastname;
+    }
+    
+    public function getLastname(){
+        return $this->lastname;
     }
 
     public function jsonSerialize() {
@@ -34,5 +54,9 @@ public static function fromJson($data) {
     // public function toJson() { manuell, nicht nötig...!
     //     return "{\"username\": \"$this->username\"}";
     // }
+
+    
 }
+
+
 ?>

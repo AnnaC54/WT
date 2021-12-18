@@ -20,38 +20,7 @@ require("start.php");
 <title>Profile</title>
 
 <body>
-    <!--
-        <div class="heading">
-        <img src="../images/chat.png" alt="chat" style="width:100px;height:100px;" class="center">
-        <h1 class="h2 pd-up-down">Please sign in</h1>
-    </div>
-    <div class="bg-color-white pd-up-down pd-left-right login-register-mg login-register-mg-up-down">
-        <div>
-            <fieldset class="fieldset-login">
-                
-                <div class="mg-up-down">
-                    <form action=".html" method="get">
-                        <label for="fname" class="login-register-label">Username</label>
-                        <input type="text" placeholder="Username" class="login-register-input"><br>
-                        <label for="lname" class="login-register-label">Password</label>
-                        <input type="password" placeholder="Password" class="login-register-input">
-                    </form>
-                </div>
 
-
-            </fieldset>
-        </div>
-    </div>
-    <div class="div-btn">
-        <a href="register.html">
-            <button class="btn-register">Register</button>
-        </a>
-        <a href="friends.html">
-            <button class="btn">Login</button>
-        </a>
-    </div> 
- 
-    -->
     <div class="container">
         <div class="text-center p-5">
             <img src="../images/chat.png" alt="chat" class="rounded-circle" style="width: 100px;">

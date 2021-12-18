@@ -19,6 +19,12 @@ require("start.php");
 <body>
 
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+    <script src="../js/scriptFriends.js"></script>
+=======
+>>>>>>> Stashed changes
 
     <!--
     <div class="inner-body bg-color-lg pd-outer">
@@ -64,6 +70,7 @@ require("start.php");
     <script src="../js/scriptFriends.js"></script>
 
 
+>>>>>>> 12feb6f41fe6bff6f82cfb918410aa39c6f74d5e
 
     <div class="container justify-content-center">
         <div class="offset-2 col-8 mb-5">

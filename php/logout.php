@@ -20,16 +20,7 @@ require("start.php");
 <title>Logout</title>
 
 <body>
-    <!-- <div class="heading ">
-        <img src="../images/logout.png" alt="logout" style="width:100px;height:100px;" class="center">
-        <h1 class="h2 pd-up-down">Logged out...</h1>
-        <h2 class="h3">See u! UwU </h2>
-    </div>
-    <div class="div-btn pd-up-down">
-        <a href="login.html">
-            <button class="btn-wide">Login again</button>
-        </a>
-    </div> -->
+  
 
     <div class="container">
         <div class="text-center p-5">

@@ -107,9 +107,15 @@ class BackendService
             // Wo kommt Friend Token her?
             
             $data = HttpClient::get("");
+<<<<<<< Updated upstream
             $data2 = \Model\Friend::fromJson($data);
             var_dump($data2);
             return $data2;
+=======
+            Model\Friend::fromJson($data);
+            
+            return ;
+>>>>>>> Stashed changes
         } catch(\Exception $e){
             error_log("Error: " + $e);
             return false;
