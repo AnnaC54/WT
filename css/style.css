@@ -4,7 +4,6 @@
 body{
     background-color: rgb(247, 248, 248);
     padding: 70px 0; 
-  
 }
 
 .btn-link {
@@ -21,18 +20,13 @@ body{
     border: 1px solid lightgray;
 }
 
-.chat-background {
-    background-color: white;
-}
-
 /* settings */ 
 
 .container{
     padding: 0; 
 }
 
-
-/* chat - overtaken from old css */ 
+/* chat - overtaken from old css 
 
 .leftdiv{
     float: left;
@@ -63,3 +57,4 @@ body{
 }
 
 
+*/
