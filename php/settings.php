@@ -1,8 +1,6 @@
 <?php
 require("start.php");
-?>
 
-<?php
 $_SESSION["user"] = new Model\User ("SomeUser");
 
 if (isset($_SESSION["user"])) {
@@ -37,18 +35,18 @@ if (isset($_SESSION["user"])) {
 <body>
     <div class="container justify-content-center ">
 
-        <form class=" offset-2 col-8 mb-5">
+        <form class=" offset-2 col-8 mb-5" method="post">
             <h2>Profile Settings</h2>
 
             <h4>Base Data</h4>
             <div class="mb-3 form-floating">
-                <input aria-label="First name" placeholder="First Name" type="name" class="form-control" id="firstname" aria-describedby="firstname">
-                <label for="firstname">First Name</label>
+                <input aria-label="First name" name="firstname" placeholder="First Name" type="name" class="form-control" id="firstname" aria-describedby="firstname">
+                <label for="firstname" >First Name</label>
 
             </div>
             <div class="mb-3 form-floating">
-                <input aria-label="Last name" placeholder="Last name" type="name" class="form-control" id="lastname" aria-describedby="lastname">
-                <label for="lastname">Last Name</label>
+                <input aria-label="Last name" name="lastname" placeholder="Last name" type="name" class="form-control" id="lastname" aria-describedby="lastname">
+                <label for="lastname"  >Last Name</label>
 
             </div>
 
