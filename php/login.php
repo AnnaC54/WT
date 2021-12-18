@@ -1,6 +1,19 @@
 <?php
 require("start.php");
-?>
+if(isset($_SESSION["user"])){
+    header("Location: friends.php");
+}
+if (isset($_POST['username'])) {  //check if filled post form
+    $username = $_POST['username']; 
+    $password = $_POST['password']; 
+    if(BackendService::login($username, $password)){//login with variables
+    $_SESSION["user"]=$username;
+    echo var_dump($_SESSION["user"]);
+    header("Location: friends.php");   //forward to friends like that???
+}
+}
+?>        
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,13 +40,13 @@ require("start.php");
         </div>
         <div class="inputWidth p-3 m-3 rounded-3 bg-white justify-content-center">
             <h1 class="h1 mb-4 mt-2 fw-normal text-center">Please sign in</h1>
-                <form>
+                <form action = "login.php" method="post">                        <!-- action="</?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"  -->
                     <div class="form-floating m-1">
-                        <input type="text" class="form-control" id="username" placeholder="Username">
+                        <input type="text" class="form-control" name="username"  id="username" placeholder="Username">
                         <label for="floatingInput">Username</label>
                     </div>
                     <div class="form-floating m-1">
-                        <input type="password" class="form-control" id="password" placeholder="Username">
+                        <input type="password" class="form-control" name ="password" id="password" placeholder="Username">
                         <label for="floatingInput">Password</label>
                     </div>
                 </form>
