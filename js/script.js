@@ -29,13 +29,19 @@ var userName;
 function passwordCheck(){
 
     if (password1.value == password2.value) {
-        //document.getElementById('message').style.color = 'green';
-       // document.getElementById('message').innerHTML = 'matching';
+       
+       document.getElementById('password').classList.remove('is-invalid');
+       document.getElementById('password-rep').classList.remove('is-invalid');
+       document.getElementById('password').classList.add('is-valid');
+       document.getElementById('password-rep').classList.add('is-valid');
     }
 
     else {
-        document.getElementById('message').style.color = 'red';
-        document.getElementById('message').innerHTML = 'not matching';
+        
+        document.getElementById('password').classList.remove('is-valid');
+       document.getElementById('password-rep').classList.remove('is-valid');
+        document.getElementById('password').classList.add('is-invalid');
+        document.getElementById('password-rep').classList.add('is-invalid');
     }
 }
 
@@ -65,34 +71,40 @@ function checkExistState(userName) {
 document.getElementById("registrationForm").onsubmit = function (evt) {
 
     var validation = true;
-    user.style.border = "1px solid green";
-    password1.style.border = "1px solid green";
-    password2.style.border = "1px solid green";
-
+   document.getElementById('username').classList.remove('is-invalid');
+   document.getElementById('username').classList.add('is-valid');
 
     if (user.value.length < 3) {
-        user.style.border = "1px solid red";
+        
+        document.getElementById('username').classList.remove('is-valid');
+        document.getElementById('username').classList.add('is-invalid');
         validation = false;
         alert("alarm")
     }
 
-    if (password1.value.length < 8) {
-        password1.style.border = "1px solid red";
+    if (password1.value.length < 8 || password2.value.length < 8) {
+        document.getElementById('password').classList.remove('is-valid');
+       document.getElementById('password-rep').classList.remove('is-valid');
+        document.getElementById('password').classList.add('is-invalid');
+        document.getElementById('password-rep').classList.add('is-invalid');
         validation = false;
     }
 
-    if (password2.value.length < 8) {
-        password2.style.border = "1px solid red";
-        validation = false;
-    }
+   
 
     if (password2.value != password1.value) {
-        password2.style.border = "1px solid red";
+        
+        document.getElementById('password').classList.remove('is-valid');
+       document.getElementById('password-rep').classList.remove('is-valid');
+        document.getElementById('password').classList.add('is-invalid');
+        document.getElementById('password-rep').classList.add('is-invalid');
         validation = false;
     }
 
     if (checkExistState(user.value) == false ) {
-        user.style.border = "1px solid red";
+        
+        document.getElementById('username').classList.remove('is-valid');
+        document.getElementById('username').classList.add('is-invalid');
         validation = false;
     }
 
