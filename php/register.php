@@ -39,7 +39,7 @@ require("start.php");
             <fieldset class="fieldset-login">
                
                 <div class="mg-up-down ">
-                    <form id="registrationForm" name="myForm" action="friends.html" method="" >
+                    <form id="registrationForm" name="myForm" action="friends.html" method="" oninput='up2.setCustomValidity(up2.value != up.value ? "Passwords do not match." : "")'>
                         <div class="bg-color-white pd-outer mg-up-down register-form-inner">
 <!-- >>>>>>> Stashed changes:html/register.html  -->
 
@@ -53,14 +53,14 @@ require("start.php");
                             <!-- password I -->
                             <div class="passwordOne d-flex justify-content-center">
                                 <label for="pword" class="login-register-label"></label>
-                                <input name="password" id="password" type="password" placeholder="Password"
+                                <input name="up" id="password" type="password" placeholder="Password"
                                     class="form-control" onchange="passwordCheck()"><br>
                             </div>
 
                             <!-- password II -->
                             <div class="passwordTwo d-flex justify-content-center">
                                 <label for="cpword" class="login-register-label"></label>
-                                <input name="passwordConfirmation" id="password-rep" type="password"
+                                <input name="up2" id="password-rep" type="password"
                                     placeholder="Confirm Password" class="form-control" onchange="passwordCheck()"><span
                                     id='message'></span>
                             </div>
