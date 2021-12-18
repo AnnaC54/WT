@@ -1,11 +1,13 @@
 <?php
 require("start.php");
-
+//User is supposed to be fetched by register
+//Test User for testing
 $_SESSION["user"] = new Model\User ("SomeUser");
 
 if (isset($_SESSION["user"])) {
 
-    if (isset($_POST["firstname"]) && isset($_POST["lastname"])) {
+    if (isset($_POST["firstname"]) && isset($_POST["lastname"])
+    && isset($_POST["textfield"]) && isset($_POST["radio"])) {
         $firstname = $_POST["firstname"];
         $lastname = $_POST["lastname"];
         $_SESSION["user"]->setFirstname($firstname);

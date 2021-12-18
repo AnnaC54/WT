@@ -7,6 +7,9 @@ class User implements JsonSerializable {
     private $username;
     private $firstname;
     private $lastname;
+    private $textfield;
+    private $radio;
+    private $drink;
     // ggf. weitere Attribute, z.B. description, layout optionen...
 
     public function __construct($username = null) {
@@ -33,6 +36,36 @@ class User implements JsonSerializable {
     
     public function getLastname(){
         return $this->lastname;
+    }
+
+    public function setTextfield($textfield){
+        $this->textfield = $textfield;
+        echo $textfield;
+
+    }
+    
+    public function getTextfield(){
+        return $this->textfield;
+    }
+
+    public function setDrink($drink){
+        $this->drink = $drink;
+        echo $drink;
+
+    }
+    
+    public function getDrink(){
+        return $this->drink;
+    }
+
+    public function setRadio($radio){
+        $this->radio = $radio;
+        echo $radio;
+
+    }
+    
+    public function getRadio(){
+        return $this->radio;
     }
 
     public function jsonSerialize() {
