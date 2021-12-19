@@ -32,30 +32,7 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
 
     // Check if User-SessionVariable exists and is not empty / is authentificated
 
-    if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
-        // load information from current authentificated user
-        $user = $service->loadUser($_GET["user"]);
-
-        if (isset($user) && !empty($user)) {
-            if (isset($_POST["backToChat"])) {
-                header("Location: chat.php");
-                exit();
-            }
-            if (isset($_POST(["removeFriend"]))) {
-                $service->friendRemove($user);
-                header("Location: friends.php");
-                exit();
-            }
-        } else {
-            header("Loaction: friends.php");
-            exit();
-        }
-    }
-    // if user is not authentificated
-    else {
-        header("Location: login.php");
-        exit();
-    }
+   
     ?>
 
 
@@ -64,15 +41,17 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
     </vor>
     <div class="container">
         <header class="row ">
-            <h2 class="offset-1">Chat with Tom</h2>
-            <div class="row mt-4 offset-1 ">
-                <button type="button" class=" me-3 col-2 btn btn-secondary "><a class="btn-link" href="friends.php">
-                        &#60; Back</a></button>
-                <button type="button" class=" me-3 col-2 btn btn-secondary"><a class="btn-link" href="profile.php">
-                        Show Profil</a></button>
-                <button class="me-3 col-2 btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button-addon2 sendbutton">Remove Friend</button>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <h2 class="offset-1">Chat with Tom</h2>
+                <div class="row mt-4 offset-1 ">
+                    <button name="goBack" type="submit" class=" me-3 col-2 btn btn-secondary "><a class="btn-link" href="friends.php">
+                            &#60; Back</a></button>
+                    <button name="showProfile" type="submit" class=" me-3 col-2 btn btn-secondary"><a class="btn-link" href="profile.php">
+                            Show Profil</a></button>
+                    <button name="removeFriend" class="me-3 col-2 btn btn-danger" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button-addon2 sendbutton">Remove Friend</button>
 
-            </div>
+                </div>
+            </form>
         </header>
 
         <!-- <div class=" col-9  offset-1 my-5 chat-background" id="chat"> </div> -->
