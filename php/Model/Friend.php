@@ -63,15 +63,17 @@ class Friend implements JsonSerializable
 */
     public static function fromJson($obj)
     {
-        $friend = new Friend();
+        $friends = [];
 
         foreach ($obj as $key => $value) {
-            // verwendet key als Zeichenkette
-            // für den zugriff auf Attribute
-            $friend->{$key} = $value;
+            $friend = new Friend();
+            $arrVal = (array)$value;
+            foreach ($arrVal as $key => $value) {
+                $friend->{$key} = $value;
+            }
+            array_push($friends, $friend);
         }
-
-        return $friend;
+        return $friends;
     }
 
 

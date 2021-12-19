@@ -121,7 +121,7 @@ class BackendService
 
             // var_dump($data);
             $friends = \Model\Friend::fromJson($data);
-            return $friends->jsonSerialize();
+            return $friends;
         } catch (\Exception $e) {
             error_log("Error: $e");
         }

@@ -4,7 +4,12 @@ require("start.php");
     header("Location: login.php");
 }
 else{ */
-    $friendsarray = $service->loadFriends();
+$friendAntolin = new Model\Friend("Sonja");
+$friendAnt = new Model\Friend("Son");
+$service->friendRequest($friendAntolin);
+$service->friendRequest($friendAnt);
+$friendsarray = $service->loadFriends();
+var_dump($friendsarray);
 //}
 ?>
 
@@ -37,30 +42,32 @@ else{ */
             <hr>
             <ul class="list-group">
                 <?php
-                foreach($friendsarray as $key => $value){      //iterate through return of loadfriends
-                ?>  
-                <li  class="list-group-item d-flex justify-content-between align-items-center">
-                <a class="text-decoration-none" href="chat.php"> <?php if($value !== null){        //create new list element if friend not null and print out username?? missing only status accepted
-                   echo $service->$value->getUsername(); } }?>
+                foreach ($friendsarray as $key => $value) {      //iterate through return of loadfriends
+                ?>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a class="text-decoration-none" href="chat.php"> <?php if ($value->getStatus() === "accepted") {        //create new list element if friend not null and print out username?? missing only status accepted
+                                                                                echo($value->getUsername());
+                                                                            }
+                                                                        } ?>
 
 
 
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a class="text-decoration-none" href="chat.php">Tom</a>
-                    <!-- <span class="badge bg-primary rounded-pill">0</span> -->
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a class="text-decoration-none" href="chat.php">Marvin</a>
-                    <span class="badge bg-primary rounded-pill">1</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a class="text-decoration-none" href="chat.php">Tick</a>
-                    <!-- <span class="badge bg-primary rounded-pill">1</span> -->
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a class="text-decoration-none" href="chat.php">Trick</a>
-                    <!-- <span class="badge bg-primary rounded-pill">1</span> -->
-                </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a class="text-decoration-none" href="chat.php">Tom</a>
+                        <!-- <span class="badge bg-primary rounded-pill">0</span> -->
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a class="text-decoration-none" href="chat.php">Marvin</a>
+                        <span class="badge bg-primary rounded-pill">1</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a class="text-decoration-none" href="chat.php">Tick</a>
+                        <!-- <span class="badge bg-primary rounded-pill">1</span> -->
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a class="text-decoration-none" href="chat.php">Trick</a>
+                        <!-- <span class="badge bg-primary rounded-pill">1</span> -->
+                    </li>
             </ul>
             <hr>
             <ul class="list-group list-group-numbered">
