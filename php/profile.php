@@ -35,9 +35,9 @@ require("start.php");
 
         </header>
 
-        <div class="row align-items-startrow align-items-start">
-            <div class=" col-4 ">
-                <div class="mg-left-right d-flex justify-content-center ">
+        <div class="row align-items-start">
+            <div class=" col-2 ">
+                <div class="d-flex justify-content-center">
                     <img src="../images/profile.png" alt="profile" class="rounded-circle justify-content-center" style="width: 100px;">
                 </div>
                 <div class="text-center">
@@ -52,7 +52,7 @@ require("start.php");
                 </div>
             </div>
 
-            <div class="col-4">
+            <div class="col-8 ">
                 <hr>
                 <p class="para-one">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni, beatae perferendis
                     modi perspiciatis, veniam repellendus ratione dolore, dolor accusamus dicta ipsam! Delectus, eaque
