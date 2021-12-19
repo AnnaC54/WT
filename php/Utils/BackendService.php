@@ -157,18 +157,16 @@ class BackendService
         }
     }
 
-    public function friendDismiss($friend = NULL)
+    public function friendDismiss($friend)
     {
-
         try {
-            HttpClient::put(
-                "https://online-lectures-cs.thi.de/chat/1c4e8ce9-ddfa-4d80-8b43-b77fa5b8ba4c/friend/Jerry",
-                array("status" => "accepted"),
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVG9tIiwiaWF0IjoxNjI5ODkzNTkwfQ.MRSZeLY8YNGp1dBWoYLUXTfs4ci1v13TkhQmke2nfII"
+            return HttpClient::put(
+                $this->base . "/" . $this->collectionId . "/friend" . "/" . $friend->getUsername(),
+                array("status"=> $friend->isDismissed()),
+                $_SESSION["chat-token"]
             );
-            echo "Accepted...";
         } catch (\Exception $e) {
-            echo "Error...";
+            error_log("Error: $e");
         }
     }
 
@@ -176,8 +174,8 @@ class BackendService
     {
         try {
             HttpClient::delete(
-                "https://online-lectures-cs.thi.de/chat/1c4e8ce9-ddfa-4d80-8b43-b77fa5b8ba4c/friend/Jerry",
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVG9tIiwiaWF0IjoxNjI5ODkzNTkwfQ.MRSZeLY8YNGp1dBWoYLUXTfs4ci1v13TkhQmke2nfII"
+                $this->base . "/" . $this->collectionId . "/friend" . "/" . $friend->getUsername(),
+                $_SESSION["chat-token"]
             );
             echo "Removed...";
         } catch (\Exception $e) {
@@ -202,9 +200,8 @@ class BackendService
     {
         try {
             $data = HttpClient::get(
-                "https://online-lectures-cs.thi.de/chat/1c4e8ce9-ddfa-4d80-8b43-b77fa5b8ba4c/unread",
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVG9tIiwiaWF0IjoxNjI5ODkzNTkwfQ.MRSZeLY8YNGp1dBWoYLUXTfs4ci1v13TkhQmke2nfII"
-            );
+                $this->base . "/" . $this->collectionId . "/unread" ,
+                $_SESSION["chat-token"]            );
             var_dump($data);
         } catch (\Exception $e) {
             echo "Error...";
