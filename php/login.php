@@ -59,10 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <button class="btn btn-lg btn-secondary">Register</button></a>
                     <button class="btn btn-lg btn-primary" type="submit" name="login">Sign in</button>
             </form>
-            <div class="m-3 text-center">
-                <a href="register.php">
-                    <button class="btn btn-lg btn-secondary">Register</button></a>
-                <button class="btn btn-lg btn-primary" type="submit" name="login">Sign in</button>
             </div>
         </div>
     </div>
