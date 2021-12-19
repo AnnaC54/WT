@@ -1,5 +1,17 @@
 <?php
 require("start.php");
+if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
+
+    if (
+        isset($_POST["firstname"]) && isset($_POST["lastname"])
+        && isset($_POST["textfield"]) && isset($_POST["radio"]) && isset($_POST["drink"])
+    ) {
+        
+    }
+} else {
+    header('location: login.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -18,53 +30,53 @@ require("start.php");
 
 <body>
 
-<br><br><br>
+    <br><br><br>
     <div class="container justify-content-center">
         <div class="offset-2 col-8 mb-5">
-            <h2 >Profile of Tom</h2>
+            <h2>Profile of <?php //echo \Model\User::fromJson($_SESSION["user"])->getFirstname() ?></h2>
             <hr>
-        
-        <header class="btn-group">
-            <!-- <div class="d-flex justify-content-center"> -->
+
+            <header class="btn-group">
+                <!-- <div class="d-flex justify-content-center"> -->
                 <a href="chat.php" class="btn btn-secondary"> Back to Chat</a>
-                <a href="friends.php" class="btn btn-secondary"  data-bs-toggle="modal"
-                    data-bs-target="#exampleModal" id="button-addon2 sendbutton">Remove Friend</a>
-            </div>
-            
-</div>
-
-        </header>
-
-        <div class="row align-items-start">
-            <div class=" col-2 ">
-                <div class="d-flex justify-content-center">
-                    <img src="../images/profile.png" alt="profile" class="rounded-circle justify-content-center" style="width: 100px;">
-                </div>
-                <div class="text-center">
-                    <p class="coffee">
-                        <h4>Coffee or Tea?</h4>
-                        Tea
-                    </p>
-                    <p class="name">
-                        <h4>Name</h4>
-                        Thomas
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-8 ">
-                <hr>
-                <p class="para-one">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni, beatae perferendis
-                    modi perspiciatis, veniam repellendus ratione dolore, dolor accusamus dicta ipsam! Delectus, eaque
-                    facilis sint omnis laborum dolores explicabo temporibus culpa enim! Quam voluptatibus quis nesciunt
-                    libero, amet minus sint a voluptatem in iste quo praesentium dicta, ducimus nisi accusantium
-                    officia.</p>
-            </div>
-
+                <a href="friends.php" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button-addon2 sendbutton">Remove Friend</a>
         </div>
 
+    </div>
 
-        <!-- Modal section -->
+    </header>
+
+    <div class="row align-items-start">
+        <div class=" col-2 ">
+            <div class="d-flex justify-content-center">
+                <img src="../images/profile.png" alt="profile" class="rounded-circle justify-content-center" style="width: 100px;">
+            </div>
+            <div class="text-center">
+                <p class="coffee">
+                <h4>Coffee or Tea?</h4>
+                <?php //echo \Model\User::fromJson($_SESSION["user"])->getDrink() ?>
+                </p>
+                <p class="name">
+                <h4>Name</h4>
+                <?php 
+                //    echo \Model\User::fromJson($_SESSION["user"])->getFirstname();
+                //    echo " ";
+                //    echo \Model\User::fromJson($_SESSION["user"])->getLastname();
+                ?>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-8 ">
+            <hr>
+            <p class="para-one"> <?php //echo \Model\User::fromJson($_SESSION["user"])->getTextfield() ?>
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- Modal section -->
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -78,8 +90,7 @@ require("start.php");
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button onclick="send()" type="button" class="btn btn-primary"><a class="btn-link  link-light"
-                            href="friends.php" >Jup, skip em </a></button>
+                    <button onclick="send()" type="button" class="btn btn-primary"><a class="btn-link  link-light" href="friends.php">Jup, skip em </a></button>
                 </div>
             </div>
         </div>

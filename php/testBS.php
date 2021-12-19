@@ -17,10 +17,19 @@ var_dump($service->login("Jan", "simonspwd"));
 // test new friend
 $friendAntolin = new Model\Friend("Sonja");
 $friendAnt = new Model\Friend("Son");
-
 // test new user
 
 $userAnt = new Model\User("Henri");
+echo "<hr>";
+//var_dump($_SESSION["user"]);
+//echo (\Model\User::fromJson($_SESSION["user"])->getFirstname());
+//var_dump($service->saveUser($_SESSION["user"]->getUsername()));
+
+echo "<hr>";
+var_dump($_SESSION["user"]);
+echo "<hr>";
+var_dump($service->saveUser($_SESSION["user"]));
+echo "<hr>";
 
 // test getUsername();
 

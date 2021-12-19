@@ -1,9 +1,12 @@
 <?php
+
 namespace Model;
+
 use JsonSerializable;
 
 
-class User implements JsonSerializable {
+class User implements JsonSerializable
+{
     private $username;
     private $firstname;
     private $lastname;
@@ -12,7 +15,8 @@ class User implements JsonSerializable {
     private $drink;
     // ggf. weitere Attribute, z.B. description, layout optionen...
 
-    public function __construct($username = null) {
+    public function __construct($username = null)
+    {
         $this->username = $username;
         $this->firstname = null;
         $this->lastname = null;
@@ -21,63 +25,71 @@ class User implements JsonSerializable {
         $this->drink = null;
     }
 
-    public function getUsername() {
+    public function getUsername()
+    {
         return $this->username;
     }
-    public function setFirstname($firstname){
+    public function setFirstname($firstname)
+    {
         $this->firstname = $firstname;
         echo $firstname;
-
     }
-    
-    public function getFirstname(){
+
+    public function getFirstname()
+    {
         return $this->firstname;
     }
-    
-    public function setLastname($lastname){
+
+    public function setLastname($lastname)
+    {
         $this->lastname = $lastname;
         echo $lastname;
     }
-    
-    public function getLastname(){
+
+    public function getLastname()
+    {
         return $this->lastname;
     }
 
-    public function setTextfield($textfield){
+    public function setTextfield($textfield)
+    {
         $this->textfield = $textfield;
         echo $textfield;
-
     }
-    
-    public function getTextfield(){
+
+    public function getTextfield()
+    {
         return $this->textfield;
     }
 
-    public function setDrink($drink){
+    public function setDrink($drink)
+    {
         $this->drink = $drink;
         echo $drink;
-
     }
-    
-    public function getDrink(){
+
+    public function getDrink()
+    {
         return $this->drink;
     }
 
-    public function setRadio($radio){
+    public function setRadio($radio)
+    {
         $this->radio = $radio;
         echo $radio;
-
     }
-    
-    public function getRadio(){
+
+    public function getRadio()
+    {
         return $this->radio;
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         return get_object_vars($this);
     }
 
-    
+
     /*public static function fromJson($data){
         $arrayvalue = (array)$data;
         $user = new User($arrayvalue["username"]);
@@ -89,24 +101,22 @@ class User implements JsonSerializable {
         return $user;
     }
 */
-public static function fromJson($obj) {
-    $user = new User();
+    public static function fromJson($obj)
+    {
+        $user = new User();
 
-    foreach ($obj as $key => $value) {
-        // verwendet key als Zeichenkette
-        // für den zugriff auf Attribute
-        $user->{$key} = $value;
+        foreach ($obj as $key => $value) {
+            // verwendet key als Zeichenkette
+            // für den zugriff auf Attribute
+            $user->{$key} = $value;
+        }
+
+        return $user;
     }
-
-    return $user;
-}
 
     // public function toJson() { manuell, nicht nötig...!
     //     return "{\"username\": \"$this->username\"}";
     // }
 
-    
+
 }
-
-
-?>
