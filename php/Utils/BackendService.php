@@ -82,7 +82,7 @@ class BackendService
 
     // dynamic
 
-    public function saveUser($username)
+    public function saveUser($username, $firstname, $lastname, $drink, $textfield, $radio)
     {
         try {
             // to do: http post aufruf mit token, instanz des users als parameter im aufruf übergeben
@@ -92,8 +92,16 @@ class BackendService
             // data and user right?
             $result = HttpClient::post("$this->base/$this->collectionId/user/$username", $user);
             return $result;
-        } catch (\Exception $e) {
-            error_log("Authentification failed: $e");
+            $dataArray = array (
+                "firstname" => $firstname,
+                "lastname" => $lastname,
+                "drink" => $drink,
+                "textfield" => $textfield,
+                "radio" => $radio
+            );
+            return HttpClient::post("$this->base/$this->collectionId/user/$username",$dataArray,$_SESSION["chat-token"],);
+        } catch(\Exception $e){
+            error_log("Error: $e");
             return false;
         }
     }

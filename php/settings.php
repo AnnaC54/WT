@@ -1,30 +1,39 @@
 <?php
 require("start.php");
+
+use Utils\BackendService;
 //User is supposed to be fetched by register
 //Test User for testing
 $_SESSION["user"] = new Model\User("SomeUser");
+//$service = new Utils\BackendService(CHAT_SERVER_URL, CHAT_SERVER_ID);
 
-var_dump($_SESSION["user"]);
 
 if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
+    ($service->loadUser($testuser));
 
     if (
-        isset($_GET["firstname"]) && isset($_GET["lastname"])
-        && isset($_GET["textfield"]) && isset($_GET["radio"]) && isset($_GET["drink"])
+        isset($_POST["firstname"]) && isset($_POST["lastname"])
+        && isset($_POST["textfield"]) && isset($_POST["radio"]) && isset($_POST["drink"])
     ) {
-        $firstname = $_GET["firstname"];
-        $lastname = $_GET["lastname"];
-        $textfield = $_GET["textfield"];
-        $radio = $_GET["radio"];
-        $drink = $_GET["drink"];
+
+        $firstname = $_POST["firstname"];
+        $lastname = $_POST["lastname"];
+        $textfield = $_POST["textfield"];
+        $radio = $_POST["radio"];
+        $drink = $_POST["drink"];
         $_SESSION["user"]->setFirstname($firstname);
         $_SESSION["user"]->setLastname($lastname);
-        $_SESSION["user"]->setDrink($drink);
+        if ($drink == "1") {
+            $_SESSION["user"]->setDrink("Coffee");
+        } else {
+            $_SESSION["user"]->setDrink("Tea");
+        }
         $_SESSION["user"]->setTextfield($textfield);
         $_SESSION["user"]->setRadio($radio);
         //Testing:
         //Model\User::fromJson($_SESSION["user2"]);
-        
+
+        //$service->saveUser();
         //var_dump($service->saveUser($_SESSION["user"]->getUsername()));
     }
 } else {
@@ -50,17 +59,17 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
 <body>
     <div class="container justify-content-center ">
 
-        <form class=" offset-2 col-8 mb-5" method="get">
+        <form class=" offset-2 col-8 mb-5" method="post">
             <h2>Profile Settings</h2>
 
             <h4>Base Data</h4>
             <div class="mb-3 form-floating">
-                <input aria-label="First name" name="firstname" placeholder="First Name" type="name" class="form-control" id="firstname" aria-describedby="firstname">
+                <input aria-label="First name" name="firstname" placeholder="First Name" type="name" class="form-control" id="firstname" aria-describedby="firstname" value="<?php echo (\Model\User::fromJson($_SESSION["user"])->getFirstname())?>">
                 <label for="firstname">First Name</label>
 
             </div>
             <div class="mb-3 form-floating">
-                <input aria-label="Last name" name="lastname" placeholder="Last name" type="name" class="form-control" id="lastname" aria-describedby="lastname">
+                <input aria-label="Last name" name="lastname" placeholder="Last name" type="name" class="form-control" id="lastname" aria-describedby="lastname" value="<?php echo (\Model\User::fromJson($_SESSION["user"])->getLastname())?>">
                 <label for="lastname">Last Name</label>
 
             </div>
@@ -70,7 +79,6 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
                     <option value="" disabled selected hidden>Choose your favourite drink </option>
                     <option value="1">Coffee</option>
                     <option value="2">Tea</option>
-                    <option value="3">Hot Chocolate</option>
                 </select>
                 <label for="floatingSelectGrid">Coffee or Tea</label>
             </div>

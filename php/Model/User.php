@@ -32,7 +32,6 @@ class User implements JsonSerializable
     public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
-        echo $firstname;
     }
 
     public function getFirstname()
@@ -43,7 +42,6 @@ class User implements JsonSerializable
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
-        echo $lastname;
     }
 
     public function getLastname()
@@ -54,7 +52,6 @@ class User implements JsonSerializable
     public function setTextfield($textfield)
     {
         $this->textfield = $textfield;
-        echo $textfield;
     }
 
     public function getTextfield()
@@ -65,7 +62,6 @@ class User implements JsonSerializable
     public function setDrink($drink)
     {
         $this->drink = $drink;
-        echo $drink;
     }
 
     public function getDrink()
@@ -76,7 +72,6 @@ class User implements JsonSerializable
     public function setRadio($radio)
     {
         $this->radio = $radio;
-        echo $radio;
     }
 
     public function getRadio()

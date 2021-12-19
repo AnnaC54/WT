@@ -1,12 +1,29 @@
 <?php
 require("start.php");
-if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
+$_SESSION["user"] = new Model\User("testuser");
+$testuser = ($service->loadUser("testuser"));
+$testuser->setFirstname("Anna");
+$testuser->setLastname("Preiwisch");
+$testuser->setRadio("oneline");
+$testuser->setTextfield("lorem  ipsum");
+$testuser->setDrink("Coffee");
 
-    if (
-        isset($_POST["firstname"]) && isset($_POST["lastname"])
-        && isset($_POST["textfield"]) && isset($_POST["radio"]) && isset($_POST["drink"])
-    ) {
-        
+if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
+    //var_dump($testuser);
+    //get User from Query Chat
+    //$user = $service->loadUser($_GET["user"]);
+    $user = $testuser;
+    if (isset($user) && !empty($user)) {
+        if (isset($_POST["back"])) {
+            header("Location: chat.php");
+            exit();
+        }
+        if (isset($_POST["remove"])) {
+            $service->friendRemove($user);
+            header("Location: friends.php");
+        }
+    } else {
+        header("Location: friends.php");
     }
 } else {
     header('location: login.php');
@@ -33,13 +50,14 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
     <br><br><br>
     <div class="container justify-content-center">
         <div class="offset-2 col-8 mb-5">
-            <h2>Profile of <?php //echo \Model\User::fromJson($_SESSION["user"])->getFirstname() ?></h2>
+            <h2>Profile of <?php echo $testuser->getFirstname()?></h2>
             <hr>
-
-            <header class="btn-group">
-                <!-- <div class="d-flex justify-content-center"> -->
-                <a href="chat.php" class="btn btn-secondary"> Back to Chat</a>
-                <a href="friends.php" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button-addon2 sendbutton">Remove Friend</a>
+            <form method="post">
+                <header class="btn-group">
+                    <!-- <div class="d-flex justify-content-center"> -->
+                    <a class="btn btn-secondary" name="back"> Back to Chat</a>
+                    <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button-addon2 sendbutton" name="remove">Remove Friend</a>
+            </form>
         </div>
 
     </div>
@@ -54,14 +72,15 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
             <div class="text-center">
                 <p class="coffee">
                 <h4>Coffee or Tea?</h4>
-                <?php //echo \Model\User::fromJson($_SESSION["user"])->getDrink() ?>
+                <?php echo $testuser->getDrink() 
+                ?>
                 </p>
                 <p class="name">
                 <h4>Name</h4>
-                <?php 
-                //    echo \Model\User::fromJson($_SESSION["user"])->getFirstname();
-                //    echo " ";
-                //    echo \Model\User::fromJson($_SESSION["user"])->getLastname();
+                <?php
+                    echo $testuser->getFirstname();
+                    echo " ";
+                    echo $testuser->getLastname();
                 ?>
                 </p>
             </div>
@@ -69,7 +88,8 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
 
         <div class="col-8 ">
             <hr>
-            <p class="para-one"> <?php //echo \Model\User::fromJson($_SESSION["user"])->getTextfield() ?>
+            <p class="para-one"> <?php echo $testuser->getTextfield() 
+                                    ?>
             </p>
         </div>
 
