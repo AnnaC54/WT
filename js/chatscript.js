@@ -4,50 +4,6 @@ window.setInterval(function () {
 }, 1000);
 
 
-/*function getMessages() {
-
-
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            let data = JSON.parse(xmlhttp.responseText);
-
-
-            var chat = document.getElementById("chat");
-            chat.innerHTML = "";
-            for (var i = 0; i < data.length; i++) {
-                var date = new Date(data[i].time);
-                var messagebox = document.createElement("span");
-                var namebox = document.createElement("span");
-                var textbox = document.createElement("span");
-                var timebox = document.createElement("span");
-
-                messagebox.classList.add("messagebox");
-                textbox.appendChild(namebox);
-                messagebox.appendChild(textbox);
-                messagebox.appendChild(timebox);
-                namebox.classList.add("leftdiv");
-                textbox.classList.add("centerdiv");
-                timebox.classList.add("rightdiv");  
-                namebox.appendChild(document.createTextNode(data[i].from));
-                textbox.appendChild(document.createTextNode(data[i].msg));
-                timebox.appendChild(document.createTextNode(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()));
-                chat.appendChild(messagebox);
-                var userbox = document.createElement("span");
-
-            }
-        }
-
-    };
-    xmlhttp.open("GET", "https://online-lectures-cs.thi.de/chat/e6cf9ca3-ab1f-4941-bdaf-441d8783950b/message/Jerry", true);
-    // Add token, e. g., from Tom
-    xmlhttp.setRequestHeader('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVG9tIiwiaWF0IjoxNjM3NTAxMTUyfQ.TQ9KDbIYjR1ZV2nEXOHeAFq6wLeYNZZ8FI8nT2isYEo');
-    xmlhttp.send();
-
-}*/
-
-
-
 function getMessages() {
 
 
