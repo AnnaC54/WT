@@ -170,16 +170,16 @@ class BackendService
         }
     }
 
-    public function friendRemove($friend = NULL)
+    public function friendRemove($friend)
     {
         try {
             HttpClient::delete(
                 $this->base . "/" . $this->collectionId . "/friend" . "/" . $friend->getUsername(),
                 $_SESSION["chat-token"]
             );
-            echo "Removed...";
+           // echo "Removed...";
         } catch (\Exception $e) {
-            echo "Error...";
+            error_log("Error: $e");
         }
     }
 
