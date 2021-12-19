@@ -71,7 +71,7 @@ class BackendService
     public function loadUser($username)
     {
         try {
-            $data = HttpClient::get("$this->base/$this->collectionId/user/$username");
+            $data = HttpClient::get("$this->base/$this->collectionId/user/$username", $_SESSION["chat-token"]);
             $user = User::fromJson($data);
             return $user;
         } catch (\Exception $e) {
@@ -87,7 +87,7 @@ class BackendService
         try {
             // to do: http post aufruf mit token, instanz des users als parameter im aufruf übergeben
             // ergebnis direkt zurückgeben?
-            $data = HttpClient::get("$this->base/$this->collectionId/user/$username");
+            $data = HttpClient::get("$this->base/$this->collectionId/user/$username", $_SESSION["chat-token"]);
             $user = User::fromJson($data);
             // data and user right?
             $result = HttpClient::post("$this->base/$this->collectionId/user/$username", $user);
@@ -123,7 +123,7 @@ class BackendService
             $friends = \Model\Friend::fromJson($data);
             return $friends->jsonSerialize();
         } catch (\Exception $e) {
-            echo "Error...";
+            error_log("Error: $e");
         }
     }
 
@@ -139,23 +139,21 @@ class BackendService
                 array("username" => $friend->getUsername()),
                 $_SESSION["chat-token"]
             );
-            echo "Requested...";
         } catch (\Exception $e) {
-            echo "Error...";
+            error_log("Error: $e");
         }
     }
 
-    public function friendAccept($friend = NULL)
+    public function friendAccept($friend)
     {
         try {
-            HttpClient::put(
-                "https://online-lectures-cs.thi.de/chat/1c4e8ce9-ddfa-4d80-8b43-b77fa5b8ba4c/friend/Jerry",
-                array("status" => "accepted"),
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVG9tIiwiaWF0IjoxNjI5ODkzNTkwfQ.MRSZeLY8YNGp1dBWoYLUXTfs4ci1v13TkhQmke2nfII"
+            return HttpClient::put(
+                $this->base . "/" . $this->collectionId . "/friend" . "/" . $friend->getUsername(),
+                array("status"=> $friend->isAccepted()),
+                $_SESSION["chat-token"]
             );
-            echo "Accepted...";
         } catch (\Exception $e) {
-            echo "Error...";
+            error_log("Error: $e");
         }
     }
 

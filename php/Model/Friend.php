@@ -12,7 +12,6 @@ class Friend implements JsonSerializable
     // ggf. weitere Attribute, z.B. description, layout optionen...
 
     public function __construct($username = null)
-    
     {
         $this->username = $username;
     }
@@ -43,18 +42,40 @@ class Friend implements JsonSerializable
     }
 
 
-    public static function fromJson($data)
+    /*public static function fromJson($data)
     {
-        $user = new Friend();
-
+        $friends = [];
+        $friend;
         foreach ($data as $key => $value) {
+            $arrayvalue = (array)$value;
+            
+            if (key($arrayvalue) === "username") {
+                $friend = new Friend($arrayvalue["username"]);
+                //echo ($friend->__toString());
+                echo "<br>";
+            } else if (key($arrayvalue) === "status") {
+                $friend->status = $arrayvalue["status"];
+            }
+            array_push($friends, $friend);
+        }
+        return $friends;
+    }
+*/
+    public static function fromJson($obj)
+    {
+        $friend = new Friend();
+
+        foreach ($obj as $key => $value) {
             // verwendet key als Zeichenkette
             // für den zugriff auf Attribute
-            $user->{$key} = $value;
+            $friend->{$key} = $value;
         }
 
-        return $user;
+        return $friend;
     }
+
+
+
     // public function toJson() { manuell, nicht nötig...!
     //     return "{\"username\": \"$this->username\"}";
     // }

@@ -14,6 +14,11 @@ class User implements JsonSerializable {
 
     public function __construct($username = null) {
         $this->username = $username;
+        $this->firstname = null;
+        $this->lastname = null;
+        $this->textfield = null;
+        $this->radio = null;
+        $this->drink = null;
     }
 
     public function getUsername() {
@@ -73,17 +78,29 @@ class User implements JsonSerializable {
     }
 
     
-public static function fromJson($data) {
-        $user = new User();
-
-        foreach ($data as $key => $value) {
-            // verwendet key als Zeichenkette
-            // für den zugriff auf Attribute
-            $user->{$key} = $value;
+    /*public static function fromJson($data){
+        $arrayvalue = (array)$data;
+        $user = new User($arrayvalue["username"]);
+        foreach ($data as $key => $arrayvalue) { 
+            if ($key != "username"){
+                $user->$key = $arrayvalue;
+            }
         }
-        //var_dump($user);
         return $user;
     }
+*/
+public static function fromJson($obj) {
+    $user = new User();
+
+    foreach ($obj as $key => $value) {
+        // verwendet key als Zeichenkette
+        // für den zugriff auf Attribute
+        $user->{$key} = $value;
+    }
+
+    return $user;
+}
+
     // public function toJson() { manuell, nicht nötig...!
     //     return "{\"username\": \"$this->username\"}";
     // }
