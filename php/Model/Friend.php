@@ -45,7 +45,7 @@ class Friend implements JsonSerializable
 
     public static function fromJson($data)
     {
-        $user = new User();
+        $user = new Friend();
 
         foreach ($data as $key => $value) {
             // verwendet key als Zeichenkette

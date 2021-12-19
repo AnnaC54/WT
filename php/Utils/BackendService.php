@@ -21,10 +21,11 @@ class BackendService
     {
         try {
             // Utils Prefix nicht notwendig
-            $url = "$this->server/$this->collectionId/register";
+            $url = "$this->base/$this->collectionId/register";
             // Fleißaufgabe, LoginData als Klasse in Model beschreiben, in Anlehnung an User, zweit Attribute, die JSON-Serialisierung usw.
             $data = array("username" => $username, "password" => $password);
             $result = HttpClient::post($url, $data);
+
             // Wichtig: Verzichten Sie auf "echo"-Anweisungen im BackendService!
             // Tipp: Fehler mit error_log();
             return $result->token; // return true?
@@ -103,7 +104,7 @@ class BackendService
     // backend liefert lieste von freunden zurück -> result zurückgeben
     public function loadFriends()
     {
-        try{
+        /* try{
             // Wo kommt Friend Token her?
             
             $data = HttpClient::get("$this->base/$this->collectionId/user/$username");
@@ -113,28 +114,33 @@ class BackendService
         } catch(\Exception $e){
             error_log("Error: " + $e);
             return false;
-        }   
-        /* try {
-    $data = Utils\HttpClient::get("https://online-lectures-cs.thi.de/chat/1c4e8ce9-ddfa-4d80-8b43-b77fa5b8ba4c/friend",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVG9tIiwiaWF0IjoxNjI5ODkzNTkwfQ.MRSZeLY8YNGp1dBWoYLUXTfs4ci1v13TkhQmke2nfII");
-    var_dump($data);
-} catch(\Exception $e) {
-    echo "Error...";
-}*/
+        }   */
+        try {
+            $data = HttpClient::get($this->base . "/" . $this->collectionId . "/friend", $_SESSION["chat-token"]);
+
+
+            // var_dump($data);
+            $friends = \Model\Friend::fromJson($data);
+            return $friends->jsonSerialize();
+        } catch (\Exception $e) {
+            echo "Error...";
+        }
     }
 
     // http post aufruf mit token 
     // ergebnis direkt zurückgeben
     // parameter friend = instanz der klasse friend
 
-    public function friendRequest($friend = NULL)
+    public function friendRequest($friend)
     {
         try {
-            HttpClient::post("https://online-lectures-cs.thi.de/chat/1c4e8ce9-ddfa-4d80-8b43-b77fa5b8ba4c/friend",
-                array("username" => "Jerry"),
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVG9tIiwiaWF0IjoxNjI5ODkzNTkwfQ.MRSZeLY8YNGp1dBWoYLUXTfs4ci1v13TkhQmke2nfII");
+            return HttpClient::post(
+                $this->base . "/" . $this->collectionId . "/friend",
+                array("username" => $friend->getUsername()),
+                $_SESSION["chat-token"]
+            );
             echo "Requested...";
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             echo "Error...";
         }
     }
@@ -197,12 +203,15 @@ class BackendService
     public function getUnread()
     {
         try {
-            $data = HttpClient::get("https://online-lectures-cs.thi.de/chat/1c4e8ce9-ddfa-4d80-8b43-b77fa5b8ba4c/unread",
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVG9tIiwiaWF0IjoxNjI5ODkzNTkwfQ.MRSZeLY8YNGp1dBWoYLUXTfs4ci1v13TkhQmke2nfII");
+            $data = HttpClient::get(
+                "https://online-lectures-cs.thi.de/chat/1c4e8ce9-ddfa-4d80-8b43-b77fa5b8ba4c/unread",
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVG9tIiwiaWF0IjoxNjI5ODkzNTkwfQ.MRSZeLY8YNGp1dBWoYLUXTfs4ci1v13TkhQmke2nfII"
+            );
             var_dump($data);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             echo "Error...";
-        }    }
+        }
+    }
 
     //test -> works fine
     public function test()
