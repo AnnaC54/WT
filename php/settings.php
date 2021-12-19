@@ -2,12 +2,14 @@
 require("start.php");
 //User is supposed to be fetched by register
 //Test User for testing
-$_SESSION["user"] = new Model\User ("SomeUser");
+$_SESSION["user"] = new Model\User("SomeUser");
 
 if (isset($_SESSION["user"])) {
 
-    if (isset($_POST["firstname"]) && isset($_POST["lastname"])
-    && isset($_POST["textfield"]) && isset($_POST["radio"]) && isset($_POST["drink"])) {
+    if (
+        isset($_POST["firstname"]) && isset($_POST["lastname"])
+        && isset($_POST["textfield"]) && isset($_POST["radio"]) && isset($_POST["drink"])
+    ) {
         $firstname = $_POST["firstname"];
         $lastname = $_POST["lastname"];
         $textfield = $_POST["textfield"];
@@ -15,13 +17,14 @@ if (isset($_SESSION["user"])) {
         $drink = $_POST["drink"];
         $_SESSION["user"]->setFirstname($firstname);
         $_SESSION["user"]->setLastname($lastname);
+        $_SESSION["user"]->setDrink($drink);
         $_SESSION["user"]->setTextfield($textfield);
         $_SESSION["user"]->setRadio($radio);
-        $_SESSION["user"]->setDrink($drink);
-
+        //Testing:
+        //Model\User::fromJson($_SESSION["user"]);
         
+        //Utils\BackendService::saveUser($_SESSION["user"]);
     }
-
 } else {
     header('location: login.php');
     exit();
@@ -51,12 +54,12 @@ if (isset($_SESSION["user"])) {
             <h4>Base Data</h4>
             <div class="mb-3 form-floating">
                 <input aria-label="First name" name="firstname" placeholder="First Name" type="name" class="form-control" id="firstname" aria-describedby="firstname">
-                <label for="firstname" >First Name</label>
+                <label for="firstname">First Name</label>
 
             </div>
             <div class="mb-3 form-floating">
                 <input aria-label="Last name" name="lastname" placeholder="Last name" type="name" class="form-control" id="lastname" aria-describedby="lastname">
-                <label for="lastname"  >Last Name</label>
+                <label for="lastname">Last Name</label>
 
             </div>
 

@@ -81,7 +81,7 @@ public static function fromJson($data) {
             // für den zugriff auf Attribute
             $user->{$key} = $value;
         }
-
+        //var_dump($user);
         return $user;
     }
     // public function toJson() { manuell, nicht nötig...!

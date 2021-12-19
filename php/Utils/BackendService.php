@@ -81,16 +81,15 @@ class BackendService
 
     // dynamic
 
-    public function saveUser($username)
+    public function saveUser($username) //Username = Token?
     {
         try {
             // to do: http post aufruf mit token, instanz des users als parameter im aufruf übergeben
             // ergebnis direkt zurückgeben?
-            $data = HttpClient::get("$this->base/$this->collectionId/user/$username");
-            $user = User::fromJson($data);
+            HttpClient::post("$this->base/user/$this->collectionId/$username", array(), $username);
+            
             // data and user right?
-            $result = HttpClient::post("$this->base/$this->collectionId/user/$username", $user);
-            return $result;
+            return true;
         } catch (\Exception $e) {
             error_log("Authentification failed: $e");
             return false;
