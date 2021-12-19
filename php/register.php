@@ -14,15 +14,10 @@ require("start.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <title>Register</title>
-    <style>
-        .error {
-            color: #FF0000;
-        }
-    </style>
+
 </head>
 
 <body>
@@ -45,6 +40,7 @@ require("start.php");
             $validation = false;
         } else {
             $name = test_input($_POST["fname"]);
+            echo "Username: " . $name . "<br>";
         }
 
         // check password
@@ -70,9 +66,19 @@ require("start.php");
         if ($validation) {
             $username = ($_POST["fname"]);
             $password = ($_POST["password"]);
-            \Utils\BackendService::register($username, $password);
+
+            if ($service->register($username, $password)) {
+                $_SESSION["user"] = $username;
+                var_dump($_SESSION["user"]);
+                header("Location: friends.php");
+                exit();
+            } else {
+                echo "Validation wrong";
+            }
         }
     }
+
+    // obvious not necessary 
 
     function test_input($data)
     {
@@ -84,60 +90,56 @@ require("start.php");
     ?>
 
     <div class="container">
-        <div class="text-center p-5">
+
+        <!-- image section -->
+        <section class="text-center p-5">
             <img src="../images/user.png" alt="user" class="rounded-circle" style="width: 100px;">
             <h1 class="h1 mb-4 mt-2 fw-normal text-center">Register yourself</h1>
-        </div>
+        </section>
 
-        <div class="d-flex justify-content-center">
-            <fieldset class="fieldset-login">
-                <div class="mg-up-down">
-                    <form id="registrationForm" name="myForm" action="friends.php" method="">
-                        <div class="bg-color-white pd-outer mg-up-down register-form-inner">
-                            <div class="d-flex justify-content-center">
-                                <fieldset class="fieldset-login">
-                                    <div class="mg-up-down ">
-                                        <form id="registrationForm" name="myForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="was-validated" style>
-                                            <div class="bg-color-white pd-outer mg-up-down register-form-inner">
+        <!-- form section -->
+        <section class="col-lg-6 offset-lg-3 justify-content-center">
+            <form id="registrationForm" name="myForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="was-validated">
 
-                                                <!-- username -->
-                                                <div class="username d-flex justify-content-center">
-                                                    <label for="fname" class="login-register-label"></label>
-                                                    <input name="fname" id="username" type="text" placeholder="Username" class="form-control"><br>
-                                                    <span class="error">* <?php echo $nameErr; ?></span>
-                                                </div>
+                <!-- username -->
 
-                                                <!-- password I -->
-                                                <div class="passwordOne d-flex justify-content-center">
-                                                    <label for="pword" class="login-register-label"></label>
-                                                    <input name="password" id="password" type="password" placeholder="Password" class="form-control" onchange="passwordCheck()"><br>
-                                                    <span><?php echo $passwordErr; ?></span>
-                                                </div>
-
-                                                <!-- password II -->
-                                                <div class="passwordTwo d-flex justify-content-center">
-                                                    <label for="cpword" class="login-register-label"></label>
-                                                    <input name="passwordCheck" id="password-rep" type="password" placeholder="Confirm Password" class="form-control" onchange="passwordCheck()"><span id='message'></span>
-                                                    <span><?php echo $passwordErr; ?></span>
-                                                </div>
-                                            </div>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button class="btn btn-secondary"><a class="btn-link link-light" href="login.php">Cancel</a></button>
-                                        <button type="submit" id="submit" class="btn btn-primary"><a class="btn-link link-light" onclick="">Create Account</a></button>
-                                        <!--href="login.php"-->
-                                        <input type="submit" name="submit" value="Submit">
-
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-                    </form>
+                <div class="mb-2 d-flex justify-content-center">
+                    <label for="fname"></label>
+                    <input name="fname" id="fname" type="text" placeholder="Username" class="form-control" "><br>
+                    <span><?php echo $nameErr; 
+                            ?></span>
                 </div>
-            </fieldset>
-        </div>
-        <script src="../js/register.js"></script>
-        <script src="../js/script.js"></script>
+
+                <!-- password I -->
+
+                <div class=" mb-2 d-flex justify-content-center">
+                    <label for="pword"></label>
+                    <input name="password" id="password" type="password" placeholder="Password" class="form-control"><br>
+                    <span><?php echo $passwordErr; 
+                            ?></span>
+                </div>
+
+                <!-- password II -->
+
+                <div class="mb-2 passwordTwo d-flex justify-content-center">
+                    <label for="cpword" class="login-register-label"></label>
+                    <input name="passwordCheck" id="password-rep" type="password" placeholder="Confirm Password" class="form-control"><span id='message'></span>
+                    <span><?php echo $passwordErr; 
+                                ?></span>
+                </div>
+
+                <!-- submit section -->
+
+                <div class="btn-group d-flex">
+                    <a href="#login.php"> <button class="btn btn-secondary">Go to Login</button></a>
+                    <button type="submit" id="submit" class="ml-3 btn btn-primary">Create account</button>
+                    <!--href="login.php"-->
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <!--  <script src="../js/script.js"></script>-->
 </body>
 
 </html>
