@@ -4,7 +4,7 @@ require("start.php");
 //Test User for testing
 $_SESSION["user"] = new Model\User("SomeUser");
 
-if (isset($_SESSION["user"])) {
+if (isset($_SESSION["chat-token"])) {
 
     if (
         isset($_POST["firstname"]) && isset($_POST["lastname"])
