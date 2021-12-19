@@ -1,6 +1,5 @@
 <?php
 require("start.php");
-$service = new Utils\BackendService(CHAT_SERVER_URL, CHAT_SERVER_ID);
 /* if(empty($_SESSION["user"])){   //if session user not set --> back to login
     header("Location: login.php");
 }
@@ -41,8 +40,8 @@ else{ */
                 foreach($friendsarray as $key => $value){      //iterate through return of loadfriends
                 ?>  
                 <li  class="list-group-item d-flex justify-content-between align-items-center">
-                <a class="text-decoration-none" href="chat.php"> <?php if($value !== null){        //create new list element if friend not null and print out username??
-                   echo $service->$value->getUsername(); } }?>
+                <a class="text-decoration-none" href="chat.php"> <?php if($value !== null){        //create new list element if friend not null and print out username?? missing only status accepted
+                   echo $value->getUsername(); } }?>
 
 
 
