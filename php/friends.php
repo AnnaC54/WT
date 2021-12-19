@@ -1,5 +1,11 @@
 <?php
 require("start.php");
+/*if(empty($_SESSION["user"])){   //if session user not set --> back to login
+    header("Location: login.php");
+}
+else{
+    loadFriends();
+}*/
 ?>
 
 <!DOCTYPE html>
