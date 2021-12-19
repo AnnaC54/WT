@@ -6,7 +6,7 @@ use Utils\BackendService;
 //Test User for testing
 $_SESSION["user"] = new Model\User("SomeUser");
 //$service = new Utils\BackendService(CHAT_SERVER_URL, CHAT_SERVER_ID);
-
+//var_dump($someuser->getFirstname());
 
 if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
     ($service->loadUser($testuser));
@@ -33,7 +33,7 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
         //Testing:
         //Model\User::fromJson($_SESSION["user2"]);
 
-        //$service->saveUser();
+        $service->saveUser($someuser, $firstname, $lastname, $drink, $textfield, $radio);
         //var_dump($service->saveUser($_SESSION["user"]->getUsername()));
     }
 } else {

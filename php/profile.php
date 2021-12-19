@@ -1,6 +1,6 @@
 <?php
 require("start.php");
-$_SESSION["user"] = new Model\User("testuser");
+$testuser = new Model\User("testuser");
 $testuser = ($service->loadUser("testuser"));
 $testuser->setFirstname("Anna");
 $testuser->setLastname("Preiwisch");
@@ -8,10 +8,12 @@ $testuser->setRadio("oneline");
 $testuser->setTextfield("lorem  ipsum");
 $testuser->setDrink("Coffee");
 
+var_dump($testuser);
 if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
     //var_dump($testuser);
     //get User from Query Chat
     //$user = $service->loadUser($_GET["user"]);
+    
     $user = $testuser;
     if (isset($user) && !empty($user)) {
         if (isset($_POST["back"])) {
@@ -115,7 +117,6 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
             </div>
         </div>
     </div>
-
 
 </body>
 
