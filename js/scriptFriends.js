@@ -33,7 +33,7 @@ xmlhttp.onreadystatechange = function () {
 
 };
 // Why does this not work?!
-
+/*
 let addFriend = document.getElementById("friendRequest");
 addFriend.addEventListener('click', function () {
 
@@ -41,7 +41,7 @@ addFriend.addEventListener('click', function () {
     let modalHeader = document.getElementById("modalFriendRequestHeader");
     modalHeader.innerText = "Friend Request from " + friendName;
 });
-
+*/
 xmlhttp.open("GET", "https://online-lectures-cs.thi.de/chat/44de65ae-0bf9-424e-ae7b-4a851bdd84f3/user", true);
 // Add token, e. g., from Tom
 xmlhttp.setRequestHeader('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVG9tIiwiaWF0IjoxNjM3MTgyNjI3fQ.WcP0yHyCKpg7UIbql8oQCXOZ8XKSArg1AY1s24Qv0pA');
