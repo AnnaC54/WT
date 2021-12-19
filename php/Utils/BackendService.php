@@ -204,7 +204,7 @@ class BackendService
                 $_SESSION["chat-token"]            );
             var_dump($data);
         } catch (\Exception $e) {
-            echo "Error...";
+            error_log("Error: " + $e);
         }
     }
 

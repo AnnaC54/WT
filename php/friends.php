@@ -1,11 +1,12 @@
 <?php
 require("start.php");
-/*if(empty($_SESSION["user"])){   //if session user not set --> back to login
+$service = new Utils\BackendService(CHAT_SERVER_URL, CHAT_SERVER_ID);
+/* if(empty($_SESSION["user"])){   //if session user not set --> back to login
     header("Location: login.php");
 }
-else{
-    loadFriends();
-}*/
+else{ */
+    $friendsarray = $service->loadFriends();
+//}
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +37,15 @@ else{
             </div>
             <hr>
             <ul class="list-group">
+                <?php
+                foreach($friendsarray as $key => $value){      //iterate through return of loadfriends
+                ?>  
+                <li  class="list-group-item d-flex justify-content-between align-items-center">
+                <a class="text-decoration-none" href="chat.php"> <?php if($value !== null){        //create new list element if friend not null and print out username??
+                   echo $service->$value->getUsername(); } }?>
+
+
+
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a class="text-decoration-none" href="chat.php">Tom</a>
                     <!-- <span class="badge bg-primary rounded-pill">0</span> -->
