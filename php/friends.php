@@ -3,11 +3,11 @@ require("start.php");
 /* if(empty($_SESSION["user"])){   //if session user not set --> back to login
     header("Location: login.php");
 }
-else{ */
+else{ 
 $friendAntolin = new Model\Friend("Sonja");
 $friendAnt = new Model\Friend("Son");
 $service->friendRequest($friendAntolin);
-$service->friendRequest($friendAnt);
+$service->friendRequest($friendAnt); */
 $friendsarray = $service->loadFriends();
 var_dump($friendsarray);
 //}
@@ -40,14 +40,21 @@ var_dump($friendsarray);
                 <a href="settings.php" class="btn btn-secondary">Edit Profile</a>
             </div>
             <hr>
+
+            <!-- friend list-->
+
             <ul class="list-group">
                 <form action="chat.php" method="get">
                     <?php
-                    foreach ($friendsarray as $key => $value) {      //iterate through return of loadfriends
-                    if ($value->getStatus() === "accepted") {  ?>
-                        <li class="list-group-item">
-                            <input type=submit name="person" value="<?php echo $value->getUsername() ?>"></input>
-                    <?php }} ?>
+                    foreach ($friendsarray as $key => $value) {      //iterate through return of loadfriends   probably bug if only requested friends but not empty
+                        if ($value === null) { ?>
+                            <li class="list-group-item"> You have no friends :( </li>
+                        <?php } else if ($value->getStatus() === "accepted") {  ?>
+                            <li class="list-group-item">
+                                <input type=submit name="person" value="<?php echo $value->getUsername() ?>"></input>
+                            </li> <!-- query -->
+                    <?php }
+                    } ?>
                 </form>
             </ul>
 
@@ -69,15 +76,41 @@ var_dump($friendsarray);
                     </li> -->
 
             <hr>
-            <ul class="list-group list-group-numbered">
-                <a class="text-decoration-none" href="chat.php" id="friendRequest" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-2 me-auto">
-                            <div class="fw-bold">Friend request from <span id="name-span">Tom</span></div>
-                            Do you wanna be his/her friend?
-                        </div>
-                        <span class="badge bg-primary rounded-pill">Do u?</span>
-                    </li>
+
+
+            <!-- requested list-->
+
+            <ul class="list-group">
+                <form id="friendRequest" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <?php
+                    foreach ($friendsarray as $key => $value) {      //iterate through return of loadfriends   probably bug if only requested friends but not empty
+                        if ($value === null) {
+                            exit();     // or do nothing instead of exit?
+                        } else if ($value->getStatus() === "requested") {  ?>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <input type=submit>
+                                    <div class="fw-bold">Friend request from <?php echo $value->getUsername() ?></div>
+                                    Do you wanna be his/her friend?
+                                    </input>
+                                </div>
+
+                            </li> <!-- query -->
+                    <?php }
+                    } ?>
+
+
+
+
+                </form id="friendRequest" data-bs-toggle="modal" data-bs-target="#exampleModal">
+
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Friend request from <span id="name-span">Tom</span></div>
+                        Do you wanna be his/her friend?
+                    </div>
+                    <span class="badge bg-primary rounded-pill">Do u?</span>
+                </li>
                 </a>
             </ul>
             <hr>

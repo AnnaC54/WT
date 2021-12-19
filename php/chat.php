@@ -32,6 +32,33 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
 
     // Check if User-SessionVariable exists and is not empty / is authentificated
 
+    $username= $_GET["person"];
+
+    if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
+        // load information from current authentificated user
+        var_dump($_SESSION["user"]);
+        $user = $service->loadUser($username);
+    /*var_dump($user);
+        if (isset($user) && !empty($user)) {
+            if (isset($_POST["goBack"])) {
+                header("Location: chat.php");
+                exit();
+            }
+            if (isset($_POST(["removeFriend"]))) {
+                $service->friendRemove($user);
+                header("Location: friends.php");
+                exit();
+            }
+        } else {
+            header("Loaction: friends.php");
+            exit();
+        }
+    }
+    // if user is not authentificated
+    else {
+        header("Location: login.php");
+        exit();*/
+    }
    
     ?>
 
@@ -42,7 +69,7 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
     <div class="container">
         <header class="row ">
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <h2 class="offset-1">Chat with Tom</h2>
+                <h2 class="offset-1">Chat with <?php echo $username ?></h2>
                 <div class="row mt-4 offset-1 ">
                     <button name="goBack" type="submit" class=" me-3 col-2 btn btn-secondary "><a class="btn-link" href="friends.php">
                             &#60; Back</a></button>
@@ -57,8 +84,6 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
         <!-- <div class=" col-9  offset-1 my-5 chat-background" id="chat"> </div> -->
 
         <div class="container overflow-scroll col-9 offset-1 my-5 bg-white pt-2 " style="height: 300px" id="chat"></div>
-
-
 
         <section class="row input-group mt-4 offset-1">
             <input class="col-8" id="message" type="text" class="form-control" placeholder="New message" aria-label="New message" aria-describedby="button-addon2">
