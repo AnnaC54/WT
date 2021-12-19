@@ -2,28 +2,30 @@
 require("start.php");
 //User is supposed to be fetched by register
 //Test User for testing
-//$_SESSION["user"] = new Model\User("SomeUser");
+$_SESSION["user"] = new Model\User("SomeUser");
 
-if (isset($_SESSION["chat-token"])) {
+var_dump($_SESSION["user"]);
+
+if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
 
     if (
-        isset($_POST["firstname"]) && isset($_POST["lastname"])
-        && isset($_POST["textfield"]) && isset($_POST["radio"]) && isset($_POST["drink"])
+        isset($_GET["firstname"]) && isset($_GET["lastname"])
+        && isset($_GET["textfield"]) && isset($_GET["radio"]) && isset($_GET["drink"])
     ) {
-        $firstname = $_POST["firstname"];
-        $lastname = $_POST["lastname"];
-        $textfield = $_POST["textfield"];
-        $radio = $_POST["radio"];
-        $drink = $_POST["drink"];
+        $firstname = $_GET["firstname"];
+        $lastname = $_GET["lastname"];
+        $textfield = $_GET["textfield"];
+        $radio = $_GET["radio"];
+        $drink = $_GET["drink"];
         $_SESSION["user"]->setFirstname($firstname);
         $_SESSION["user"]->setLastname($lastname);
         $_SESSION["user"]->setDrink($drink);
         $_SESSION["user"]->setTextfield($textfield);
         $_SESSION["user"]->setRadio($radio);
         //Testing:
-        //Model\User::fromJson($_SESSION["user"]);
+        //Model\User::fromJson($_SESSION["user2"]);
         
-        //$_SESSION["user"]->saveUser($_SESSION["user"]);
+        //var_dump($service->saveUser($_SESSION["user"]->getUsername()));
     }
 } else {
     header('location: login.php');
@@ -48,7 +50,7 @@ if (isset($_SESSION["chat-token"])) {
 <body>
     <div class="container justify-content-center ">
 
-        <form class=" offset-2 col-8 mb-5" method="post">
+        <form class=" offset-2 col-8 mb-5" method="get">
             <h2>Profile Settings</h2>
 
             <h4>Base Data</h4>
