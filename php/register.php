@@ -65,13 +65,14 @@ require("start.php");
 
         var_dump($validation);
 
-        if($validation){
+        // if validation was successfull => call register method
+
+        if ($validation) {
             $username = ($_POST["fname"]);
-            $password =($_POST["password"]);
+            $password = ($_POST["password"]);
             \Utils\BackendService::register($username, $password);
         }
     }
-
 
     function test_input($data)
     {
@@ -128,6 +129,9 @@ require("start.php");
                                         <input type="submit" name="submit" value="Submit">
 
                                     </div>
+                                </fieldset>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </fieldset>
