@@ -30,6 +30,11 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
 
     <?php
 
+    /*(isset($_POST['showProfile'])){
+    header('Location: profile.php'."?user=abc");
+    exit();*/
+}
+
     // Check if User-SessionVariable exists and is not empty / is authentificated
 
     $username= $_GET["person"];
@@ -38,6 +43,7 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
         // load information from current authentificated user
         var_dump($_SESSION["user"]);
         $user = $service->loadUser($username);
+
     /*var_dump($user);
         if (isset($user) && !empty($user)) {
             if (isset($_POST["goBack"])) {
@@ -62,18 +68,15 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
    
     ?>
 
-
-
-
     </vor>
     <div class="container">
         <header class="row ">
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <form action="profile.php" method="get">
                 <h2 class="offset-1">Chat with <?php echo $username ?></h2>
                 <div class="row mt-4 offset-1 ">
                     <button name="goBack" type="submit" class=" me-3 col-2 btn btn-secondary "><a class="btn-link" href="friends.php">
                             &#60; Back</a></button>
-                    <button name="showProfile" type="submit" class=" me-3 col-2 btn btn-secondary"><a class="btn-link" href="profile.php">
+                    <button name="showProfile" type="submit"  class=" me-3 col-2 btn btn-secondary"><a class="btn-link" href="profile.php">
                             Show Profil</a></button>
                     <button name="removeFriend" class="me-3 col-2 btn btn-danger" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button-addon2 sendbutton">Remove Friend</button>
 
