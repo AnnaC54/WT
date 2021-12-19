@@ -41,7 +41,7 @@ else{ */
                 ?>  
                 <li  class="list-group-item d-flex justify-content-between align-items-center">
                 <a class="text-decoration-none" href="chat.php"> <?php if($value !== null){        //create new list element if friend not null and print out username?? missing only status accepted
-                   echo $value->getUsername(); } }?>
+                   echo $service->$value->getUsername(); } }?>
 
 
 
