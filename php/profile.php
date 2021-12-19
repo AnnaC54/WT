@@ -23,9 +23,11 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
         if (isset($_POST["remove"])) {
             $service->friendRemove($user);
             header("Location: friends.php");
+            exit();
         }
     } else {
         header("Location: friends.php");
+        exit();
     }
 } else {
     header('location: login.php');
@@ -57,8 +59,9 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
             <form method="post">
                 <header class="btn-group">
                     <!-- <div class="d-flex justify-content-center"> -->
-                    <a class="btn btn-secondary" name="back"> Back to Chat</a>
-                    <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button-addon2 sendbutton" name="remove">Remove Friend</a>
+                    
+                <button class="btn btn-secondary" name="back" type="submit">Back to Chat</button>
+                <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button-addon2 sendbutton" name="remove">Remove Friend</a>
             </form>
         </div>
 
