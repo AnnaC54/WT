@@ -1,21 +1,16 @@
 <?php
-use Utils\BackendService;
 require("start.php");
 if (isset($_SESSION["user"])) {
     header("Location: friends.php");
 }
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-    if (!empty($_POST['username'])) {  //check if filled post form
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        echo $username . "," . $password;
-        if ($service->login($username, $password)) { //login with variables
-            $_SESSION["user"] = $username;
-            echo var_dump($_SESSION["user"]);
-            header("Location: friends.php");   //forward to friends like that???
-        }
+if (isset($_POST['login']) && !empty($_POST['username'] && !empty($_POST['password']))) {  //check if filled post form
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    echo $username . "," . $password;
+    if ($service->login($username, $password)) { //login with variables
+        $_SESSION["user"] = $username;
+        echo var_dump($_SESSION["user"]);
+        header("Location: friends.php");   //forward to friends like that???
     }
 }
 ?>
@@ -54,21 +49,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <input type="password" class="form-control" name="password" id="password" placeholder="Username">
                     <label for="floatingInput">Password</label>
                 </div>
-
-                <div class="m-3 text-center">
-                    <a href="register.php">
-                        <button class="btn btn-lg btn-secondary">Register</button></a>
-                    <button class="btn btn-lg btn-primary" type="submit" name="login">Sign in</button>
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-                </div>
-=======
->>>>>>> acd02a1cf8ce0cebf22e2d85b56128025d11bb51
->>>>>>> Stashed changes
             </form>
+            <div class="m-3 text-center">
+                <a href="register.php">
+                    <button class="btn btn-lg btn-secondary">Register</button></a>
+                <button class="btn btn-lg btn-primary" type="submit" name="login">Sign in</button>
+            </div>
         </div>
-    </div>
     </div>
 
 
