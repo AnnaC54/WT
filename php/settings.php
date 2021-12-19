@@ -2,7 +2,7 @@
 require("start.php");
 //User is supposed to be fetched by register
 //Test User for testing
-$_SESSION["user"] = new Model\User("SomeUser");
+//$_SESSION["user"] = new Model\User("SomeUser");
 
 if (isset($_SESSION["chat-token"])) {
 
