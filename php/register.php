@@ -71,6 +71,7 @@ require("start.php");
                 $_SESSION["user"] = $username;
                 var_dump($_SESSION["user"]);
                 header("Location: friends.php");
+
                 exit();
             } else {
                 echo "Validation wrong";
@@ -99,14 +100,14 @@ require("start.php");
 
         <!-- form section -->
         <section class="col-lg-6 offset-lg-3 justify-content-center">
-            <form id="registrationForm" name="myForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="was-validated">
+            <form id="registrationForm" name="myForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
                 <!-- username -->
 
                 <div class="mb-2 d-flex justify-content-center">
                     <label for="fname"></label>
                     <input name="fname" id="fname" type="text" placeholder="Username" class="form-control" "><br>
-                    <span><?php echo $nameErr; 
+                    <span><?php echo $nameErr;
                             ?></span>
                 </div>
 
@@ -115,7 +116,7 @@ require("start.php");
                 <div class=" mb-2 d-flex justify-content-center">
                     <label for="pword"></label>
                     <input name="password" id="password" type="password" placeholder="Password" class="form-control"><br>
-                    <span><?php echo $passwordErr; 
+                    <span><?php echo $passwordErr;
                             ?></span>
                 </div>
 
@@ -124,8 +125,8 @@ require("start.php");
                 <div class="mb-2 passwordTwo d-flex justify-content-center">
                     <label for="cpword" class="login-register-label"></label>
                     <input name="passwordCheck" id="password-rep" type="password" placeholder="Confirm Password" class="form-control"><span id='message'></span>
-                    <span><?php echo $passwordErr; 
-                                ?></span>
+                    <span><?php echo $passwordErr;
+                            ?></span>
                 </div>
 
                 <!-- submit section -->
@@ -140,6 +141,10 @@ require("start.php");
     </div>
 
     <!--  <script src="../js/script.js"></script>-->
+    <script>
+        window.collectionId = "<?= CHAT_SERVER_ID ?>";
+        window.chatServer = "<?= CHAT_SERVER_URL ?>";
+    </script>
 </body>
 
 </html>

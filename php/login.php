@@ -59,6 +59,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <a href="register.php">
                         <button class="btn btn-lg btn-secondary">Register</button></a>
                     <button class="btn btn-lg btn-primary" type="submit" name="login">Sign in</button>
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+                </div>
+=======
+>>>>>>> acd02a1cf8ce0cebf22e2d85b56128025d11bb51
+>>>>>>> Stashed changes
             </form>
         </div>
     </div>
