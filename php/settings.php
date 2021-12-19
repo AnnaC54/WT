@@ -4,7 +4,9 @@ require("start.php");
 use Utils\BackendService;
 //User is supposed to be fetched by register
 //Test User for testing
-$_SESSION["user"] = new Model\User("SomeUser");
+var_dump($testuser);
+$_SESSION["user"] = $service->loadUser($testuser);
+var_dump($_SESSION["user"]);
 //$service = new Utils\BackendService(CHAT_SERVER_URL, CHAT_SERVER_ID);
 //var_dump($someuser->getFirstname());
 
@@ -23,11 +25,7 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
         $drink = $_POST["drink"];
         $_SESSION["user"]->setFirstname($firstname);
         $_SESSION["user"]->setLastname($lastname);
-        if ($drink == "1") {
-            $_SESSION["user"]->setDrink("Coffee");
-        } else {
-            $_SESSION["user"]->setDrink("Tea");
-        }
+        $_SESSION["user"]->setDrink($drink);
         $_SESSION["user"]->setTextfield($textfield);
         $_SESSION["user"]->setRadio($radio);
         //Testing:
@@ -64,21 +62,22 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
 
             <h4>Base Data</h4>
             <div class="mb-3 form-floating">
-                <input aria-label="First name" name="firstname" placeholder="First Name" type="name" class="form-control" id="firstname" aria-describedby="firstname" value="<?php echo (\Model\User::fromJson($_SESSION["user"])->getFirstname())?>">
+                <input aria-label="First name" name="firstname" placeholder="First Name" type="name" class="form-control" id="firstname" aria-describedby="firstname" value="<?php echo (\Model\User::fromJson($_SESSION["user"])->getFirstname()) ?>">
                 <label for="firstname">First Name</label>
 
             </div>
             <div class="mb-3 form-floating">
-                <input aria-label="Last name" name="lastname" placeholder="Last name" type="name" class="form-control" id="lastname" aria-describedby="lastname" value="<?php echo (\Model\User::fromJson($_SESSION["user"])->getLastname())?>">
+                <input aria-label="Last name" name="lastname" placeholder="Last name" type="name" class="form-control" id="lastname" aria-describedby="lastname" value="<?php echo (\Model\User::fromJson($_SESSION["user"])->getLastname()) ?>">
                 <label for="lastname">Last Name</label>
 
             </div>
 
             <div class=" my-4 form-floating">
                 <select name="drink" class="form-select" id="floatingSelectGrid coffeetea" aria-label="Floating label select example">
-                    <option value="" disabled selected hidden>Choose your favourite drink </option>
-                    <option value="1">Coffee</option>
-                    <option value="2">Tea</option>
+                    <option value=disabled selected hidden>Choose your favourite drink </option>
+                    <option value="1" <?php //($someuser->getDrink() == 1) ? "selected" : ""?>>Coffee</option>
+                    <option value="2" <?php //($someuser->getDrink() == 2) ? "selected" : ""?>>Tea</option>
+
                 </select>
                 <label for="floatingSelectGrid">Coffee or Tea</label>
             </div>
