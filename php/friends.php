@@ -41,34 +41,33 @@ var_dump($friendsarray);
             </div>
             <hr>
             <ul class="list-group">
-                <?php
-                foreach ($friendsarray as $key => $value) {      //iterate through return of loadfriends
-                ?>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a class="text-decoration-none" href="chat.php"> <?php if ($value->getStatus() === "accepted") {        //create new list element if friend not null and print out username?? missing only status accepted
-                                                                                echo($value->getUsername());
-                                                                            }
-                                                                        } ?>
+                <form action="chat.php" method="get">
+                    <?php
+                    foreach ($friendsarray as $key => $value) {      //iterate through return of loadfriends
+                    if ($value->getStatus() === "accepted") {  ?>
+                        <li class="list-group-item">
+                            <input type=submit name="person" value="<?php echo $value->getUsername() ?>"></input>
+                    <?php }} ?>
+                </form>
+            </ul>
 
-
-
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a class="text-decoration-none" href="chat.php">Tom</a>
-                        <!-- <span class="badge bg-primary rounded-pill">0</span> -->
+            <!--<li class="list-group-item d-flex align-items-center">
+                        <a  href="chat.php">Tom</a>
+                         <span class="badge bg-primary rounded-pill">0</span> 
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a class="text-decoration-none" href="chat.php">Marvin</a>
+                        <a href="chat.php">Marvin</a>
                         <span class="badge bg-primary rounded-pill">1</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a class="text-decoration-none" href="chat.php">Tick</a>
-                        <!-- <span class="badge bg-primary rounded-pill">1</span> -->
+                    <li class="list-group-item d-flex align-items-center">
+                        <a  href="chat.php">Tick</a>
+                         <span class="badge bg-primary rounded-pill">1</span> 
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a class="text-decoration-none" href="chat.php">Trick</a>
-                        <!-- <span class="badge bg-primary rounded-pill">1</span> -->
-                    </li>
-            </ul>
+                    <li class="list-group-item d-flex align-items-center">
+                        <a  href="chat.php">Trick</a>
+                         <span class="badge bg-primary rounded-pill">1</span> 
+                    </li> -->
+
             <hr>
             <ul class="list-group list-group-numbered">
                 <a class="text-decoration-none" href="chat.php" id="friendRequest" data-bs-toggle="modal" data-bs-target="#exampleModal">
