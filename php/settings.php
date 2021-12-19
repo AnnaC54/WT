@@ -7,11 +7,19 @@ $_SESSION["user"] = new Model\User ("SomeUser");
 if (isset($_SESSION["user"])) {
 
     if (isset($_POST["firstname"]) && isset($_POST["lastname"])
-    && isset($_POST["textfield"]) && isset($_POST["radio"])) {
+    && isset($_POST["textfield"]) && isset($_POST["radio"]) && isset($_POST["drink"])) {
         $firstname = $_POST["firstname"];
         $lastname = $_POST["lastname"];
+        $textfield = $_POST["textfield"];
+        $radio = $_POST["radio"];
+        $drink = $_POST["drink"];
         $_SESSION["user"]->setFirstname($firstname);
         $_SESSION["user"]->setLastname($lastname);
+        $_SESSION["user"]->setTextfield($textfield);
+        $_SESSION["user"]->setRadio($radio);
+        $_SESSION["user"]->setDrink($drink);
+
+        
     }
 
 } else {
@@ -53,8 +61,8 @@ if (isset($_SESSION["user"])) {
             </div>
 
             <div class=" my-4 form-floating">
-                <select class="form-select" id="floatingSelectGrid coffeetea" aria-label="Floating label select example">
-                    <option selected>Choose your favourite drink </option>
+                <select name="drink" class="form-select" id="floatingSelectGrid coffeetea" aria-label="Floating label select example">
+                    <option value="" disabled selected hidden>Choose your favourite drink </option>
                     <option value="1">Coffee</option>
                     <option value="2">Tea</option>
                     <option value="3">Hot Chocolate</option>
@@ -65,20 +73,20 @@ if (isset($_SESSION["user"])) {
             <h4>Tell Something About You</h4>
 
             <div class=" mb-4 form-floating">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                <textarea name="textfield" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
                 <label for="floatingTextarea2">Short Description</label>
             </div>
 
             <h4>Prefered Chat Layout</h4>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <input class="form-check-input" type="radio" name="radio" id="flexRadioDefault1" value="oneline">
                 <label class="form-check-label" for="flexRadioDefault1">
                     Username and message in one line
                 </label>
             </div>
             <div class=" mb-4 form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <input class="form-check-input" type="radio" name="radio" id="flexRadioDefault2" value="seplines" checked>
                 <label class="form-check-label" for="flexRadioDefault2">
                     Username and message in separated lines
                 </label>
