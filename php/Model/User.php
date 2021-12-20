@@ -18,11 +18,7 @@ class User implements JsonSerializable
     public function __construct($username = null)
     {
         $this->username = $username;
-        $this->firstname = null;
-        $this->lastname = null;
-        $this->textfield = null;
-        $this->radio = null;
-        $this->drink = null;
+       
     }
 
     public function getUsername()
@@ -32,6 +28,7 @@ class User implements JsonSerializable
     public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
+        
     }
 
     public function getFirstname()

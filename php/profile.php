@@ -1,37 +1,44 @@
 <?php
 require("start.php");
-$testuser = new Model\User("testuser");
-$testuser = ($service->loadUser("testuser"));
-$testuser->setFirstname("Anna");
-$testuser->setLastname("Preiwisch");
-$testuser->setRadio("oneline");
-$testuser->setTextfield("lorem  ipsum");
-$testuser->setDrink("Coffee");
+// $testuser = new Model\User("testuser");
+// $testuser = ($service->loadUser("testuser"));
+// $testuser->setFirstname("Anna");
+// $testuser->setLastname("Preiwisch");
+// $testuser->setRadio("oneline");
+// $testuser->setTextfield("lorem  ipsum");
+// $testuser->setDrink("Coffee");
 
-var_dump($testuser);
+//var_dump($testuser);
+
 if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
     //var_dump($testuser);
     //get User from Query Chat
     //$user = $service->loadUser($_GET["user"]);
-    
-    $user = $testuser;
+
+    //Get username from Query Parameter
+
+    $user = $service->loadUser($_GET["person"]);
+
+    //TEST
+    //$user = $service->loadUser($_SESSION["user"]);
+
     if (isset($user) && !empty($user)) {
         if (isset($_POST["back"])) {
             header("Location: chat.php");
-            exit();
+            end();
         }
         if (isset($_POST["remove"])) {
             $service->friendRemove($user);
             header("Location: friends.php");
-            exit();
+            end();
         }
     } else {
         header("Location: friends.php");
-        exit();
+        end();
     }
 } else {
-    header('location: login.php');
-    exit();
+    header('Location: login.php');
+    end();
 }
 ?>
 
@@ -54,14 +61,14 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
     <br><br><br>
     <div class="container justify-content-center">
         <div class="offset-2 col-8 mb-5">
-            <h2>Profile of <?php echo $testuser->getFirstname()?></h2>
+            <h2>Profile of <?php echo $user->getFirstname()?></h2>
             <hr>
             <form method="post">
                 <header class="btn-group">
                     <!-- <div class="d-flex justify-content-center"> -->
                     
-                <button class="btn btn-secondary" name="back" type="submit">Back to Chat</button>
-                <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button-addon2 sendbutton" name="remove">Remove Friend</a>
+                <input class="btn btn-secondary" name="back" type="submit" value="Back to Chat" >
+                <input class="btn btn-secondary" name="remove" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button-addon2 sendbutton" name="remove" value="Remove Friend">
             </form>
         </div>
 
@@ -77,15 +84,15 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
             <div class="text-center">
                 <p class="coffee">
                 <h4>Coffee or Tea?</h4>
-                <?php echo $testuser->getDrink() 
+                <?php echo $user->getDrink() 
                 ?>
                 </p>
                 <p class="name">
                 <h4>Name</h4>
                 <?php
-                    echo $testuser->getFirstname();
+                    echo $user->getFirstname();
                     echo " ";
-                    echo $testuser->getLastname();
+                    echo $user->getLastname();
                 ?>
                 </p>
             </div>
@@ -93,7 +100,7 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
 
         <div class="col-8 ">
             <hr>
-            <p class="para-one"> <?php echo $testuser->getTextfield() 
+            <p class="para-one"> <?php echo $user->getTextfield() 
                                     ?>
             </p>
         </div>

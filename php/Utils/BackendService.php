@@ -83,24 +83,21 @@ class BackendService
 
     // dynamic
 
-    public function saveUser($username, $firstname, $lastname, $drink, $textfield, $radio)
+    public function saveUser($user)
     {
         try {
             // to do: http post aufruf mit token, instanz des users als parameter im aufruf übergeben
             // ergebnis direkt zurückgeben?
-            $data = HttpClient::get("$this->base/$this->collectionId/user/$username", $_SESSION["chat-token"]);
-            $user = User::fromJson($data);
             // data and user right?
-            $result = HttpClient::post("$this->base/$this->collectionId/user/$username", $user);
-            return $result;
             $dataArray = array (
-                "firstname" => $firstname,
-                "lastname" => $lastname,
-                "drink" => $drink,
-                "textfield" => $textfield,
-                "radio" => $radio
+                "firstname" => $user->getFirstname(),
+                "lastname" => $user->getLastname(),
+                "drink" => $user->getDrink(),
+                "textfield" => $user->getTextfield(),
+                "radio" => $user->getRadio()
             );
-            return HttpClient::post("$this->base/$this->collectionId/user/$username",$dataArray,$_SESSION["chat-token"],);
+            $username = $user->getUsername();
+            return HttpClient::post("$this->base/$this->collectionId/user/$username",$dataArray,$_SESSION["chat-token"]);
         } catch(\Exception $e){
             error_log("Error: $e");
             return false;

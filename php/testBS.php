@@ -28,7 +28,6 @@ echo "<hr>";
 echo "<hr>";
 var_dump($_SESSION["user"]);
 echo "<hr>";
-var_dump($service->saveUser($_SESSION["user"]));
 echo "<hr>";
 
 // test getUsername();
