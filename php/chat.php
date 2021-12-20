@@ -31,7 +31,7 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
 
     if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
 
-    // chat-goal ? 
+        // chat-goal ? 
 
         if (isset($friendname) && !empty($friendname)) {
         } else {
@@ -55,14 +55,35 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
                             &#60; Back</a></button>
                     <button name="showProfile" type="submit" class=" me-3 col-2 btn btn-secondary"><a class="btn-link" href="profile.php?person=<?= $friendname ?>">
                             Show Profil</a></button>
-                    <button name="removeFriend" class="me-3 col-2 btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('<?= $friendname?>')">Remove Friend</button>
+                    <button name="removeFriend" class="me-3 col-2 btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('<?= $friendname ?>')">Remove Friend</button>
                 </form>
             </div>
         </header>
 
-        <!-- Messages in chat-->
+        <!-- Messages in chat (js) -->
 
         <div class="container overflow-scroll col-9 offset-1 my-5 bg-white pt-2 " style="height: 300px" id="chat"></div>
+
+        <!-- Messages in chat via php -->
+
+        <div class="container overflow-scroll col-9 offset-1 my-5 bg-white pt-2 " style="height: 300px" id="chat"></div>
+
+        <?php
+            
+            //List Messages :: Lists all messages exchanged between the authenticated user and another. This request requires a token to be sent along.
+
+
+
+            //Send Messages :: Send a message to another user. This request requires a token to be sent along and requires the HTTP method POST.
+
+
+
+
+
+        ?>
+
+
+
 
         <section class="row input-group mt-4 offset-1">
             <input class="col-8" id="message" type="text" class="form-control" placeholder="New message" aria-label="New message" aria-describedby="button-addon2">
@@ -91,13 +112,12 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
     </div>
 
     <script>
-
         //on click -> open bootstrap modal
         var removeFriendModal = new bootstrap.Modal(document.getElementById("cancelFriendshipModal"));
 
         function openModal($friendname) {
             removeFriendModal.show();
-            document.getElementById("cancelFriendshipLabel").innerHTML = "Remove <?= $friendname?> as Friend";
+            document.getElementById("cancelFriendshipLabel").innerHTML = "Remove <?= $friendname ?> as Friend";
 
             // -> Jup, skip em: -> create Form with two hidden input fields to give name="action"+value="remove-friend" PLUS name="friendName"+value=§friendname to friends.php
 
@@ -106,8 +126,8 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
                 const newPostForm = document.createElement("form");
                 newPostForm.method = "post";
                 newPostForm.action = "friends.php";
-               // newPostForm.name = "myform";
-                
+                // newPostForm.name = "myform";
+
                 // create hidden Input Fields -> give friends.php
 
                 const hiddenInput = document.createElement("input");
@@ -128,10 +148,6 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
                 newPostForm.submit(); // -> submit() method is provided by object , see -> https://www.javascript-coder.com/javascript-form/javascript-form-submit/
             };
         }
-
-        // where do i use them?
-
-       
     </script>
 
 

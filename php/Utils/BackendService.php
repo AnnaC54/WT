@@ -89,7 +89,7 @@ class BackendService
             // to do: http post aufruf mit token, instanz des users als parameter im aufruf übergeben
             // ergebnis direkt zurückgeben?
             // data and user right?
-            $dataArray = array (
+            $dataArray = array(
                 "firstname" => $user->getFirstname(),
                 "lastname" => $user->getLastname(),
                 "drink" => $user->getDrink(),
@@ -97,8 +97,8 @@ class BackendService
                 "radio" => $user->getRadio()
             );
             $username = $user->getUsername();
-            return HttpClient::post("$this->base/$this->collectionId/user/$username",$dataArray,$_SESSION["chat-token"]);
-        } catch(\Exception $e){
+            return HttpClient::post("$this->base/$this->collectionId/user/$username", $dataArray, $_SESSION["chat-token"]);
+        } catch (\Exception $e) {
             error_log("Error: $e");
             return false;
         }
@@ -155,7 +155,7 @@ class BackendService
         try {
             return HttpClient::put(
                 $this->base . "/" . $this->collectionId . "/friend" . "/" . $friend->getUsername(),
-                array("status"=> $friend->isAccepted()),
+                array("status" => $friend->isAccepted()),
                 $_SESSION["chat-token"]
             );
         } catch (\Exception $e) {
@@ -168,7 +168,7 @@ class BackendService
         try {
             return HttpClient::put(
                 $this->base . "/" . $this->collectionId . "/friend" . "/" . $friend->getUsername(),
-                array("status"=> $friend->isDismissed()),
+                array("status" => $friend->isDismissed()),
                 $_SESSION["chat-token"]
             );
         } catch (\Exception $e) {
@@ -183,7 +183,7 @@ class BackendService
                 $this->base . "/" . $this->collectionId . "/friend" . "/" . $friend->getUsername(),
                 $_SESSION["chat-token"]
             );
-           // echo "Removed...";
+            // echo "Removed...";
         } catch (\Exception $e) {
             error_log("Error: $e");
         }
@@ -206,8 +206,9 @@ class BackendService
     {
         try {
             $data = HttpClient::get(
-                $this->base . "/" . $this->collectionId . "/unread" ,
-                $_SESSION["chat-token"]            );
+                $this->base . "/" . $this->collectionId . "/unread",
+                $_SESSION["chat-token"]
+            );
             var_dump($data);
         } catch (\Exception $e) {
             error_log("Error: " + $e);
@@ -223,5 +224,37 @@ class BackendService
             error_log($e);
         }
         return false;
+    }
+
+
+    //[{msg: "Hello, World!", from: "Tom", time: 0}, {msg: "42", from: "Jerry", time: 1}]
+
+    public function listMessages($username)
+    {
+        try {
+            $list = HttpClient::get("$this->base/$this->collectionId/message/$username", $_SESSION["chat-token"]
+            );
+            var_dump($list);
+        } catch (\Exception $e) {
+            echo "Error while loading list";
+        }
+    }
+
+    //{"msg": "Example", "to": "Jerry"}
+    // URL: https://online-lectures-cs.thi.de/chat/a25fbb52-604b-462c-b6cb-4715476630db/message
+
+
+    public function sendMessage($friend)
+    {
+        try {
+            $list = HttpClient::post(
+                "$this->base/$this->collectionId/message",
+                array("message" => "Hello?!", "to" => $friend),
+                $_SESSION["chat-token"]
+            );
+            var_dump($list);
+        } catch (\Exception $e) {
+            echo "Error while loading list";
+        }
     }
 }
