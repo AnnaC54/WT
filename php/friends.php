@@ -5,9 +5,10 @@ require("start.php");
 }
 else{ 
 $friendAntolin = new Model\Friend("Sonja");
-$friendAnt = new Model\Friend("Son");
-$service->friendRequest($friendAntolin);
+
 $service->friendRequest($friendAnt); */
+$friendAnt = new Model\Friend("Son");
+var_dump($service->friendRequest($friendAnt));
 $friendsarray = $service->loadFriends();
 var_dump($friendsarray);
 //}
@@ -81,12 +82,12 @@ var_dump($friendsarray);
             <!-- requested list-->
 
             <ul class="list-group">
-                <form id="friendRequest" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <input id="friendRequest" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <?php
                     foreach ($friendsarray as $key => $value) {      //iterate through return of loadfriends   probably bug if only requested friends but not empty
                         if ($value === null) {
                             exit();     // or do nothing instead of exit?
-                        } else if ($value->getStatus() === "requested") {  ?>
+                        } else if ($value->getStatus() === "requested") { //when accepted???! cant dismiss or accept ?>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
                                     <input type=submit>
@@ -119,7 +120,7 @@ var_dump($friendsarray);
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" name="friend" list="friendsList" id="friendsAdd" placeholder="Add to friend list" aria-label="Recipient's username" aria-describedby="button-addon2">
                     <datalist id="friendsList"></datalist>
-                    <a href="friends.html"><button class="btn btn-primary" type="submit">Button</button></a>
+                    <a href="friends.html"><button class="btn btn-primary"   type="submit">Button</button></a>  <!-- onclick add friend php   -->
                 </div>
             </form>
 
