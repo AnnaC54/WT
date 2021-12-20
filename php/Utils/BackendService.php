@@ -28,7 +28,8 @@ class BackendService
 
             // Wichtig: Verzichten Sie auf "echo"-Anweisungen im BackendService!
             // Tipp: Fehler mit error_log();
-            return $result->token; // return true?
+            $_SESSION["chat-token"] = $result->token;
+            return true; // return true?
         } catch (\Exception $e) {
             // error_log landet im XAMPP logs/php-error-log
             error_log("Authentification failed: $e");

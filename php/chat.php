@@ -29,59 +29,53 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
 
 
     <?php
+        $username= $_GET["person"];
 
-    /*(isset($_POST['showProfile'])){
-    header('Location: profile.php'."?user=abc");
-    exit();*/
-}
-
-    // Check if User-SessionVariable exists and is not empty / is authentificated
-
-    $username= $_GET["person"];
+/*
+  
 
     if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
         // load information from current authentificated user
         var_dump($_SESSION["user"]);
         $user = $service->loadUser($username);
-
-    /*var_dump($user);
-        if (isset($user) && !empty($user)) {
+        
+        if (isset($username) && !empty($username)) {
             if (isset($_POST["goBack"])) {
                 header("Location: chat.php");
-                exit();
+               // exit();
             }
             if (isset($_POST(["removeFriend"]))) {
                 $service->friendRemove($user);
                 header("Location: friends.php");
-                exit();
+               // exit();
             }
         } else {
-            header("Loaction: friends.php");
-            exit();
+            header("Location: friends.php");
+           // exit();
         }
     }
     // if user is not authentificated
     else {
         header("Location: login.php");
-        exit();*/
+       // exit();
     }
-   
+   */
     ?>
 
     </vor>
     <div class="container">
         <header class="row ">
-            <form action="profile.php" method="get">
                 <h2 class="offset-1">Chat with <?php echo $username ?></h2>
                 <div class="row mt-4 offset-1 ">
+                <form action="profile.php" method="get">
                     <button name="goBack" type="submit" class=" me-3 col-2 btn btn-secondary "><a class="btn-link" href="friends.php">
                             &#60; Back</a></button>
-                    <button name="showProfile" type="submit"  class=" me-3 col-2 btn btn-secondary"><a class="btn-link" href="profile.php">
+                    <button name="showProfile" type="submit"  class=" me-3 col-2 btn btn-secondary"><a class="btn-link" href="profile.php?person=<?= $username ?>" >
                             Show Profil</a></button>
-                    <button name="removeFriend" class="me-3 col-2 btn btn-danger" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button-addon2 sendbutton">Remove Friend</button>
-
+                    <button name="removeFriend" class="me-3 col-2 btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Remove Friend</button>
+                
+                     </form>
                 </div>
-            </form>
         </header>
 
         <!-- <div class=" col-9  offset-1 my-5 chat-background" id="chat"> </div> -->

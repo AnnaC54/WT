@@ -68,8 +68,8 @@ require("start.php");
             $password = ($_POST["password"]);
 
             if ($service->register($username, $password)) {
-                $_SESSION["user"] = new Model\User($username);
-                echo "session variable" . ($_SESSION["user"]);
+                $_SESSION["user"] = $username;
+               // echo "session variable" . ($_SESSION["user"]);
                 header("Location: friends.php");
                 // TODO: server und collectionID kostanten übergeben an Client
                 // after registration still not logged in 
@@ -147,5 +147,9 @@ require("start.php");
         window.chatServer = "<?= CHAT_SERVER_URL ?>";
     </script>
 </body>
-
+<footer>
+    <script>
+        document.getElementById("fname").value = "<?= $user->getFirstname()?>";
+    </script>
+</footer>
 </html>
