@@ -17,7 +17,11 @@ require("start.php");
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <title>Register</title>
-
+    <style>
+        span {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
@@ -38,9 +42,21 @@ require("start.php");
         } else if (strlen(($_POST["fname"])) < 3) {
             $nameErr = "user name is too short";
             $validation = false;
+        } else if ($service->userExists(($_POST["fname"]))) {
+            $validation = false;
+            $nameErr = "user exists already";
         } else {
             $name = test_input($_POST["fname"]);
             echo "Username: " . $name . "<br>";
+
+            // tried to validate form in real time but not working
+
+           // echo "<script type='text/javascript' src='../js/validateRegister.js' ></script> ";
+            /* echo '<script>
+            var fname = document.getElementById("fname");
+            fname.classList.remove("is-invalid");
+            fname.classList.add("is-valid");
+      </script>';*/
         }
 
         // check password
@@ -69,7 +85,7 @@ require("start.php");
 
             if ($service->register($username, $password)) {
                 $_SESSION["user"] = $username;
-               // echo "session variable" . ($_SESSION["user"]);
+                // echo "session variable" . ($_SESSION["user"]);
                 header("Location: friends.php");
                 // TODO: server und collectionID kostanten übergeben an Client
                 // after registration still not logged in 
@@ -80,7 +96,7 @@ require("start.php");
         }
     }
 
-    // obvious not necessary 
+    // obvious not necessary but maybe quiet nice to have
 
     function test_input($data)
     {
@@ -101,55 +117,63 @@ require("start.php");
 
         <!-- form section -->
         <section class="col-lg-6 offset-lg-3 justify-content-center">
-            <form id="registrationForm" name="myForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <form class="needs-validation" id="registrationForm" name="myForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
                 <!-- username -->
 
-                <div class="mb-2 d-flex justify-content-center">
+                <div class="mb-2 d-flex justify-content-center row">
                     <label for="fname"></label>
-                    <input name="fname" id="fname" type="text" placeholder="Username" class="form-control" "><br>
+                    <input name="fname" id="fname" type="text" placeholder="Username" class="form-control is-invalid" "></br>
+                  <div class=" row">
                     <span><?php echo $nameErr;
                             ?></span>
                 </div>
 
+
                 <!-- password I -->
 
-                <div class=" mb-2 d-flex justify-content-center">
+                <div class=" mb-2 d-flex justify-content-center row">
                     <label for="pword"></label>
-                    <input name="password" id="password" type="password" placeholder="Password" class="form-control"><br>
-                    <span><?php echo $passwordErr;
-                            ?></span>
+                    <input name="password" id="password" type="password" placeholder="Password" class="form-control is-invalid"><br>
+                    <div class="row">
+                        <span><?php echo $passwordErr;
+                                ?></span>
+                    </div>
                 </div>
 
                 <!-- password II -->
 
-                <div class="mb-2 passwordTwo d-flex justify-content-center">
+                <div class="mb-2 passwordTwo d-flex justify-content-center row">
                     <label for="cpword" class="login-register-label"></label>
-                    <input name="passwordCheck" id="password-rep" type="password" placeholder="Confirm Password" class="form-control"><span id='message'></span>
-                    <span><?php echo $passwordErr;
-                            ?></span>
+                    <input name="passwordCheck" id="password-rep" type="password" placeholder="Confirm Password" class="form-control is-invalid"><span id='message'></span>
+                    <div class="row">
+                        <span><?php echo $passwordErr;
+                                ?></span>
+                    </div>
                 </div>
 
                 <!-- submit section -->
 
                 <div class="btn-group d-flex">
-                    <a href="#login.php"> <button class="btn btn-secondary">Go to Login</button></a>
+                    <a class="btn btn-secondary" href="friends.php" role="button">Sign in maybe?</a>
                     <button type="submit" id="submit" class="ml-3 btn btn-primary">Create account</button>
                     <!--href="login.php"-->
                 </div>
             </form>
         </section>
     </div>
+    </div>
 
-    <!--  <script src="../js/script.js"></script>-->
+    <script src="../js/script.js"></script>
     <script>
         window.collectionId = "<?= CHAT_SERVER_ID ?>";
         window.chatServer = "<?= CHAT_SERVER_URL ?>";
     </script>
 </body>
 <footer>
-    <script>
-        document.getElementById("fname").value = "<?= $user->getFirstname()?>";
-    </script>
+
+
+
 </footer>
+
 </html>

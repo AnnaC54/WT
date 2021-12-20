@@ -3,7 +3,7 @@
 <?php
 require("start.php");
 
-//$service = new Utils\BackendService(CHAT_SERVER_URL, CHAT_SERVER_ID);
+$service = new Utils\BackendService(CHAT_SERVER_URL, CHAT_SERVER_ID);
 //var_dump($service->test());
 
 // register new users
@@ -14,12 +14,27 @@ echo "<br>";
 var_dump($service->login("Jan", "simonspwd"));
 
 
+// users that does exist for sure (for testing): 
+
+// user: maiborn pw: maibornpwd
+// user: Jan pw: simonspwd
+// user: simon pw: simonspwd
+// user: Jn pw: simonspwd
+// user: Monsieur Apel pw: webtechnologien
+// user: Monsieur Riener pw: software
+// user: Michael pw: michaels
+
 // test new friend
 $friendAntolin = new Model\Friend("Sonja");
 $friendAnt = new Model\Friend("Son");
+$friendMartin = new Model\Friend("Martin");
+$MonsieurRiener= new Model\Friend("Monsieur Riener");
+$MonsieurApel = new Model\Friend("Monsieur Apel");
+
 // test new user
 
 $userAnt = new Model\User("Henri");
+<<<<<<< Updated upstream
 echo "<hr>";
 //var_dump($_SESSION["user"]);
 //echo (\Model\User::fromJson($_SESSION["user"])->getFirstname());
@@ -29,6 +44,8 @@ echo "<hr>";
 var_dump($_SESSION["user"]);
 echo "<hr>";
 echo "<hr>";
+=======
+>>>>>>> Stashed changes
 
 // test getUsername();
 
@@ -42,7 +59,6 @@ echo "<br>";
 var_dump($service->friendRequest($friendAntolin));
 echo "<br>";
 var_dump($service->friendRequest($friendAnt));
-
 
 // test friendAccept();
 
