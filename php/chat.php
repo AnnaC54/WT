@@ -26,59 +26,41 @@ Abschließend müssen Sie über Ihre PHP-Implementierung den Server, die Collect
 insbesondere das aktuelle Token sowie das Chat-Ziel an die Client-Anwendung übergeben.
 Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
 
-
-
     <?php
-        $username= $_GET["person"];
-
-/*
-  
+    $friendname = $_GET["person"];
 
     if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
-        // load information from current authentificated user
-        var_dump($_SESSION["user"]);
-        $user = $service->loadUser($username);
-        
-        if (isset($username) && !empty($username)) {
-            if (isset($_POST["goBack"])) {
-                header("Location: chat.php");
-               // exit();
-            }
-            if (isset($_POST(["removeFriend"]))) {
-                $service->friendRemove($user);
-                header("Location: friends.php");
-               // exit();
-            }
+
+    // chat-goal ? 
+
+        if (isset($friendname) && !empty($friendname)) {
         } else {
             header("Location: friends.php");
-           // exit();
+            exit();
         }
     }
     // if user is not authentificated
     else {
         header("Location: login.php");
-       // exit();
+        exit();
     }
-   */
     ?>
 
-    </vor>
     <div class="container">
         <header class="row ">
-                <h2 class="offset-1">Chat with <?php echo $username ?></h2>
-                <div class="row mt-4 offset-1 ">
+            <h2 class="offset-1">Chat with <?php echo $friendname ?></h2>
+            <div class="row mt-4 offset-1 ">
                 <form action="profile.php" method="get">
                     <button name="goBack" type="submit" class=" me-3 col-2 btn btn-secondary "><a class="btn-link" href="friends.php">
                             &#60; Back</a></button>
-                    <button name="showProfile" type="submit"  class=" me-3 col-2 btn btn-secondary"><a class="btn-link" href="profile.php?person=<?= $username ?>" >
+                    <button name="showProfile" type="submit" class=" me-3 col-2 btn btn-secondary"><a class="btn-link" href="profile.php?person=<?= $friendname ?>">
                             Show Profil</a></button>
-                    <button name="removeFriend" class="me-3 col-2 btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Remove Friend</button>
-                
-                     </form>
-                </div>
+                    <button name="removeFriend" class="me-3 col-2 btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('<?= $friendname?>')">Remove Friend</button>
+                </form>
+            </div>
         </header>
 
-        <!-- <div class=" col-9  offset-1 my-5 chat-background" id="chat"> </div> -->
+        <!-- Messages in chat-->
 
         <div class="container overflow-scroll col-9 offset-1 my-5 bg-white pt-2 " style="height: 300px" id="chat"></div>
 
@@ -90,11 +72,11 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
 
     <!-- Modal section -->
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="cancelFriendshipModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Remove Friend</h5>
+                    <h5 class="modal-title" id="cancelFriendshipLabel"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -102,11 +84,72 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button onclick="send()" type="button" class="btn btn-primary"><a class="btn-link" href="friends.php">Jup ,skip em </a></button>
+                    <button type="button" class="btn btn-primary" id="cancelFriendship">Jup, skip em.</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+
+        //on click -> open bootstrap modal
+        var removeFriendModal = new bootstrap.Modal(document.getElementById("cancelFriendshipModal"));
+
+        function openModal($friendname) {
+            removeFriendModal.show();
+            document.getElementById("cancelFriendshipLabel").innerHTML = "Remove <?= $friendname?> as Friend";
+
+            // -> Jup, skip em: -> create Form with two hidden input fields to give name="action"+value="remove-friend" PLUS name="friendName"+value=§friendname to friends.php
+
+            document.getElementById("cancelFriendship").onclick = function() {
+
+                const newPostForm = document.createElement("newPostForm");
+                newPostForm.method = "post";
+                newPostForm.action = "friends.php";
+                newPostForm.name = "myform";
+                
+                // create hidden Input Field ONE
+
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = "hidden";
+                hiddenInput.name = "remove";
+                hiddenInput.value = "skipfriend";
+
+                newPostForm.appendChild(hiddenInput);
+
+                // create hidden Input Field TWO with $friendname
+
+                const friendName = document.createElement("input");
+                friendName.type = "hidden";
+                friendName.name = "friend";
+                friendName.value = "<?= $friendname ?>";
+
+
+                newPostForm.appendChild(friendName);
+
+                document.getElementById("cancelFriendshipModal").appendChild(newPostForm);
+                document.forms["myform"].submit(); // where is this?
+            };
+        }
+
+
+
+
+
+        // where do i use them?
+
+        function closeModal() {
+            removeFriendModal.hide();
+        }
+
+        function dismiss() {
+            removeFriendModal.hide();
+        }
+
+        function accept() {
+            removeFriendModal.hide();
+        }
+    </script>
 
 
     <script src="../js/chatscript.js"></script>
