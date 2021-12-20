@@ -28,12 +28,16 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
 
     <?php
     $friendname = $_GET["person"];
+    $_SESSION["friend"] = $friendname;
+
 
     if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
 
         // chat-goal ? 
 
         if (isset($friendname) && !empty($friendname)) {
+            // if user authetificated and chat-goal is known -> load messages via BackendService
+
         } else {
             header("Location: friends.php");
             exit();
@@ -64,30 +68,48 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
 
         <div class="container overflow-scroll col-9 offset-1 my-5 bg-white pt-2 " style="height: 300px" id="chat"></div>
 
-        <!-- Messages in chat via php -->
+        <div class="container overflow-scroll col-9 offset-1 my-5 bg-white pt-2 " style="height: 300px" id="chatMessages">
+            <div class="row">
+                <div class="col-2">
+                    <?php
+                    $messageList = $service->listMessages($friendname);
 
-        <div class="container overflow-scroll col-9 offset-1 my-5 bg-white pt-2 " style="height: 300px" id="chat"></div>
+                    echo gettype($messageList) . "<br>";
 
-        <?php
-            
-            //List Messages :: Lists all messages exchanged between the authenticated user and another. This request requires a token to be sent along.
-
-
-
-            //Send Messages :: Send a message to another user. This request requires a token to be sent along and requires the HTTP method POST.
-
-
-
-
-
-        ?>
+                    foreach ($messageList as $value) {
+                        $newVal = (array)$value;
+                        echo $newVal["from"];
+                        echo "<br>" . "<br>";
+                    };
+                    ?>
 
 
+
+                </div>
+                <div class="col-6">
+                    <?php
+                    $messageList = $service->listMessages($friendname);
+
+                    echo gettype($messageList) . "<br>";
+
+                    foreach ($messageList as $value) {
+                        $newVal = (array)$value;
+                        echo $newVal["msg"];
+                        echo "<br>" . "<br>";
+                    };
+                    ?>
+
+                </div>
+                <div class="col-4 text-right">Test</div>
+            </div>
+
+
+        </div>
 
 
         <section class="row input-group mt-4 offset-1">
             <input class="col-8" id="message" type="text" class="form-control" placeholder="New message" aria-label="New message" aria-describedby="button-addon2">
-            <button onclick="send()" id="sendbutton" type="button" class="col-1 btn btn-primary"><a class="btn-link">Send</a></button>
+            <button onclick="sendMessage()" name="sendButton" id="sendButton" type="button" class="col-1 btn btn-primary"><a class="btn-link">Send</a></button>
         </section>
     </div>
 
@@ -148,10 +170,83 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
                 newPostForm.submit(); // -> submit() method is provided by object , see -> https://www.javascript-coder.com/javascript-form/javascript-form-submit/
             };
         }
+
+
+
+
+        var chatToken = "<?= $_SESSION['chat-token']; ?>";
+        var chatCollectionId = "<?= CHAT_SERVER_ID; ?>";
+        var chatServer = "<?= CHAT_SERVER_URL; ?>";
+        var chatGoal = "<?= $_SESSION['friend']; ?>";
+
+        window.setInterval(function() {
+            getMessages();
+        }, 1000);
+
+
+        function getMessages() {
+
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    let data = JSON.parse(xmlhttp.responseText);
+                    var chat = document.getElementById("chat");
+                    chat.innerHTML = "";
+
+                    for (var i = 0; i < data.length; i++) {
+                        var date = new Date(data[i].time);
+                        var messagebox = document.createElement("div");
+                        messagebox.classList.add("row");
+                        var namebox = document.createElement("div");
+                        var textbox = document.createElement("div");
+                        var timebox = document.createElement("div");
+                        namebox.classList.add("col-2");
+                        textbox.classList.add("col-7");
+                        timebox.classList.add("col-3");
+                        timebox.classList.add("text-right");
+                        // messagebox.classList.add("messagebox");
+                        //textbox.appendChild(namebox);
+                        messagebox.appendChild(namebox);
+                        messagebox.appendChild(textbox);
+                        messagebox.appendChild(timebox);
+                        namebox.appendChild(document.createTextNode(data[i].from));
+                        textbox.appendChild(document.createTextNode(data[i].msg));
+                        timebox.appendChild(document.createTextNode(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()));
+                        chat.appendChild(messagebox);
+                        //var userbox = document.createElement("span");
+
+                    }
+                }
+            };
+
+            xmlhttp.open("GET", chatServer + "/" + chatCollectionId + "/message/" + chatGoal, true);
+            xmlhttp.setRequestHeader('Authorization', 'Bearer ' + chatToken);
+            xmlhttp.send();
+        }
+
+        function send() {
+            let xmlhttp1 = new XMLHttpRequest();
+            xmlhttp1.onreadystatechange = function() {
+                if (xmlhttp1.readyState == 4 && xmlhttp1.status == 204) {
+                    console.log("done...");
+                }
+            };
+            xmlhttp1.open("POST", chatServer + "/" + chatCollectionId + "/message", true);
+            xmlhttp1.setRequestHeader('Content-type', 'application/json');
+            // Add token, e. g., from Tom
+            xmlhttp1.setRequestHeader('Authorization', chatToken);
+            // Create request data with message and receiver
+            let data = {
+                message: document.getElementById('message').value,
+                to: chatGoal
+            };
+            document.getElementById('message').value = "";
+            let jsonString = JSON.stringify(data); // Serialize as JSON
+            xmlhttp1.send(jsonString); // Send JSON-data to server
+
+        }
     </script>
 
-
-    <script src="../js/chatscript.js"></script>
-</body>
 
 </html>

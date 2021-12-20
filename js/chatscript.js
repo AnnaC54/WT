@@ -1,4 +1,9 @@
 
+    var chatToken = "<?= echo $_SESSION['chat-token']; ?>";
+    var chatCollectionId = "<?= echo CHAT_SERVER_ID; ?>";
+    var chatServer = "<?= echo CHAT_SERVER_URL; ?>";
+    var chatGoal = "<?= echo $_SESSION['friend']; ?>";
+
 window.setInterval(function () {
     getMessages();
 }, 1000);
@@ -38,13 +43,11 @@ function getMessages() {
 
             }
         }
-
     };
-    xmlhttp.open("GET", "https://online-lectures-cs.thi.de/chat/e6cf9ca3-ab1f-4941-bdaf-441d8783950b/message/Jerry", true);
-    // Add token, e. g., from Tom
-    xmlhttp.setRequestHeader('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVG9tIiwiaWF0IjoxNjM3NTAxMTUyfQ.TQ9KDbIYjR1ZV2nEXOHeAFq6wLeYNZZ8FI8nT2isYEo');
-    xmlhttp.send();
 
+    xmlhttp.open("GET", chatServer+"/"+chatCollectionId+"/message/"+chatGoal, true);
+    xmlhttp.setRequestHeader('Authorization', chatToken);
+    xmlhttp.send();
 }
 
 function send() {
@@ -54,19 +57,20 @@ function send() {
             console.log("done...");
         }
     };
-    xmlhttp1.open("POST", "https://online-lectures-cs.thi.de/chat/e6cf9ca3-ab1f-4941-bdaf-441d8783950b/message", true);
+    xmlhttp1.open("POST", chatServer+"/"+chatCollectionId+"/message", true);
     xmlhttp1.setRequestHeader('Content-type', 'application/json');
     // Add token, e. g., from Tom
-    xmlhttp1.setRequestHeader('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVG9tIiwiaWF0IjoxNjM3NTAxMTUyfQ.TQ9KDbIYjR1ZV2nEXOHeAFq6wLeYNZZ8FI8nT2isYEo');
+    xmlhttp1.setRequestHeader('Authorization', chatToken);
     // Create request data with message and receiver
     let data = {
         message: document.getElementById('message').value,
-        to: "Jerry"
+        to: chatGoal
     };
     document.getElementById('message').value = "";
     let jsonString = JSON.stringify(data); // Serialize as JSON
     xmlhttp1.send(jsonString); // Send JSON-data to server
 
 }
+
 
 

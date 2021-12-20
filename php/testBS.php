@@ -34,18 +34,6 @@ $MonsieurApel = new Model\Friend("Monsieur Apel");
 // test new user
 
 $userAnt = new Model\User("Henri");
-<<<<<<< Updated upstream
-echo "<hr>";
-//var_dump($_SESSION["user"]);
-//echo (\Model\User::fromJson($_SESSION["user"])->getFirstname());
-//var_dump($service->saveUser($_SESSION["user"]->getUsername()));
-
-echo "<hr>";
-var_dump($_SESSION["user"]);
-echo "<hr>";
-echo "<hr>";
-=======
->>>>>>> Stashed changes
 
 // test getUsername();
 
@@ -73,5 +61,65 @@ var_dump($service->loadFriends());
 //$service->login("Antolin", "pwd");
 //$userAntolin = new User($_SESSION["user"]);
 
+echo"<br> <br>";
+
+// test send Message 
+
+echo " <br> <br>SEND MESSAGE SIMON <br> <br> send Message: "; 
+
+var_dump($service->sendMessage("Hello", "simon"));
+var_dump($service->sendMessage("Testnachricht", "Jan"));
+var_dump($service->sendMessage("Testnachricht", "Sonja"));
+
+// test list Message s
+
+echo " <br> <br>Simon list Messages<br> <br>"; 
+
+var_dump($service->listMessages("simon"));
+
+echo " <br> <br>Jan list Messages<br> <br>"; 
+
+var_dump($service->listMessages("Jan"));
+
+echo " <br> <br>Monsieur Riener  list Messages<br> <br>"; 
+
+var_dump($service->listMessages("Monsieur Riener"));
+
+echo " <br> <br>Son list Messages<br> <br>"; 
+
+var_dump($service->listMessages("Son"));
+
+echo " <br> <br>Sonja list Messages<br> <br>"; 
+
+var_dump($service->listMessages("Sonja"));
+
+// if session unset -> messages can´t be delivered
+
+session_unset();
+
+echo " <br> <br>SEND MESSAGE SIMON <br> <br> send Message: "; 
+
+var_dump($service->sendMessage("Hello", "simon"));
+var_dump($service->sendMessage("Testnachricht", "Jan"));
+var_dump($service->sendMessage("Testnachricht", "Sonja"));
+
+var_dump($service->listMessages("simon"));
+
+
+echo " <br> <br>LOGIN MONSIEUR APEL<br> <br>"; 
+
+var_dump($service->login("Monsieur Apel", "webtechnologien"));
+
+echo " <br> <br>LOGIN (as MONSIEUR APEL) -> send Message to Michael<br> <br>"; 
+
+
+var_dump($service->sendMessage("Testnachricht", "Michael"));
+
+echo " <br> <br>LOGIN (as MONSIEUR APEL) -> list Messages Michael<br> <br>"; 
+
+
+var_dump($service->listMessages("Michael"));
 
 ?>
+
+

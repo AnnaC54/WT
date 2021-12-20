@@ -227,12 +227,18 @@ class BackendService
     }
 
 
-    //[{msg: "Hello, World!", from: "Tom", time: 0}, {msg: "42", from: "Jerry", time: 1}]
 
-    public function listMessages($username)
+    //{"msg": "Example", "to": "Jerry"}
+    // URL: https://online-lectures-cs.thi.de/chat/a25fbb52-604b-462c-b6cb-4715476630db/message
+
+
+    public function sendMessage($message, $friend) // username or friendname
     {
         try {
-            $list = HttpClient::get("$this->base/$this->collectionId/message/$username", $_SESSION["chat-token"]
+            $list = HttpClient::post(
+                "$this->base/$this->collectionId/message",
+                array("message" => $message, "to" => $friend),
+                $_SESSION["chat-token"]
             );
             var_dump($list);
         } catch (\Exception $e) {
@@ -240,19 +246,17 @@ class BackendService
         }
     }
 
-    //{"msg": "Example", "to": "Jerry"}
-    // URL: https://online-lectures-cs.thi.de/chat/a25fbb52-604b-462c-b6cb-4715476630db/message
 
+    //[{msg: "Hello, World!", from: "Tom", time: 0}, {msg: "42", from: "Jerry", time: 1}]
 
-    public function sendMessage($friend)
+    public function listMessages($username) // username or friendname
     {
         try {
-            $list = HttpClient::post(
-                "$this->base/$this->collectionId/message",
-                array("message" => "Hello?!", "to" => $friend),
-                $_SESSION["chat-token"]
+            $list = HttpClient::get("$this->base/$this->collectionId/message/$username", $_SESSION["chat-token"]
             );
-            var_dump($list);
+           
+           return $list;
+         
         } catch (\Exception $e) {
             echo "Error while loading list";
         }

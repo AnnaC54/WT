@@ -49,7 +49,7 @@ require("start.php");
             $name = test_input($_POST["fname"]);
             echo "Username: " . $name . "<br>";
 
-            // tried to validate form in real time but not working
+            // tried to validate form in real time but not<
 
            // echo "<script type='text/javascript' src='../js/validateRegister.js' ></script> ";
             /* echo '<script>
