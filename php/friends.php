@@ -1,17 +1,43 @@
 <?php
 require("start.php");
-/* if(empty($_SESSION["user"])){   //if session user not set --> back to login
+if(empty($_SESSION["user"])){   //if session user not set --> back to login
     header("Location: login.php");
 }
-else{ 
+
+
+// If user wants to end friendship in chat vieew 
+if ($_POST["remove"] == "skipfriend" && $_POST["friend"] != "") {
+    $toBeRemovedFriend = new \Model\Friend($_POST["friend"]);
+    $service->friendRemove($toBeRemovedFriend);
+}
+
+
+$friendsacceptarray;
+$friendsrequestarray;
+$friendsarray = $service->loadFriends();
+foreach ($friendsarray as $key => $value) {
+    if ($value->getStatus() === "accepted"){
+        $friendsacceptarray[$key] = $value;
+    }
+    else if($value->getStatus() === "requested"){
+        $friendsrequestarray[$key] = $value;
+    }
+    if($friendsacceptarray !== null){
+    $friendsacceptarray= array_values($friendsacceptarray);
+    }
+    if($friendsrequestarray !== null){
+    $friendsrequestarray= array_values($friendsrequestarray);
+    }
+/* else{ 
 $friendAntolin = new Model\Friend("Sonja");
 
-$service->friendRequest($friendAnt); */
+$service->friendRequest($friendAnt); 
 $friendAnt = new Model\Friend("Son");
 var_dump($service->friendRequest($friendAnt));
 $friendsarray = $service->loadFriends();
-var_dump($friendsarray);
-//}
+var_dump($friendsarray); */
+//
+}
 ?>
 
 <!DOCTYPE html>
@@ -47,10 +73,11 @@ var_dump($friendsarray);
             <ul class="list-group">
                 <form action="chat.php" method="get">
                     <?php
-                    foreach ($friendsarray as $key => $value) {      //iterate through return of loadfriends   probably bug if only requested friends but not empty
-                        if ($value === null) { ?>
-                            <li class="list-group-item"> You have no friends :( </li>
-                        <?php } else if ($value->getStatus() === "accepted") {  ?>
+                    if ($friendsacceptarray === null) { ?>
+                        <li class="list-group-item"> You have no friends :( </li> <?php } else{
+                    foreach ($friendsacceptarray as $key => $value) {      //iterate through return of loadfriends   probably bug if only requested friends but not empty
+                        
+                           ?> 
                             <li class="list-group-item">
                                 <input type=submit name="person" value="<?php echo $value->getUsername() ?>"></input>
                             </li> <!-- query -->
@@ -82,18 +109,20 @@ var_dump($friendsarray);
             <!-- requested list-->
 
             <ul class="list-group">
-                <input id="friendRequest" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                
                     <?php
-                    foreach ($friendsarray as $key => $value) {      //iterate through return of loadfriends   probably bug if only requested friends but not empty
-                        if ($value === null) {
-                            exit();     // or do nothing instead of exit?
-                        } else if ($value->getStatus() === "requested") { //when accepted???! cant dismiss or accept ?>
+                    if ($friendsrequestarray === null || count($friendsrequestarray) === 0) { 
+                        exit();
+                         } else{
+                    foreach ($friendsrequesptarray as $key => $value) {     //iterate through return of loadfriends  
+                             // or do nothing instead of exit?
+                         //when accepted???! cant dismiss or accept ?>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
+                                <div class="modal-fade" id="friendRequest" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     <input type=submit>
                                     <div class="fw-bold">Friend request from <?php echo $value->getUsername() ?></div>
                                     Do you wanna be his/her friend?
-                                    </input>
+                                   
                                 </div>
 
                             </li> <!-- query -->
