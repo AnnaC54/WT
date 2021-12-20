@@ -90,20 +90,20 @@ if (isset($sessionuser) && !empty($sessionuser)) {
             <h4>Tell Something About You</h4>
 
             <div class=" mb-4 form-floating">
-                <textarea name="textfield" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                <textarea name="textfield" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" ><?php echo $user->getTextfield() ?></textarea>
                 <label for="floatingTextarea2">Short Description</label>
             </div>
 
             <h4>Prefered Chat Layout</h4>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="radio" id="flexRadioDefault1" value="oneline">
+                <input <?= ($user->getRadio() == "oneline") ? "checked" : "" ?> class="form-check-input" type="radio" name="radio" id="flexRadioDefault1" value="oneline">
                 <label class="form-check-label" for="flexRadioDefault1">
                     Username and message in one line
                 </label>
             </div>
             <div class=" mb-4 form-check">
-                <input class="form-check-input" type="radio" name="radio" id="flexRadioDefault2" value="seplines" checked>
+                <input <?= ($user->getRadio() == "seplines") ? "checked" : "" ?> class="form-check-input" type="radio" name="radio" id="flexRadioDefault2" value="seplines">
                 <label class="form-check-label" for="flexRadioDefault2">
                     Username and message in separated lines
                 </label>
