@@ -1,6 +1,6 @@
 <?php
 require("start.php");
-if(empty($_SESSION["user"])){   //if session user not set --> back to login
+if (empty($_SESSION["user"])) {   //if session user not set --> back to login
     header("Location: login.php");
 }
 
@@ -16,19 +16,18 @@ $friendsacceptarray;
 $friendsrequestarray;
 $friendsarray = $service->loadFriends();
 foreach ($friendsarray as $key => $value) {
-    if ($value->getStatus() === "accepted"){
+    if ($value->getStatus() === "accepted") {
         $friendsacceptarray[$key] = $value;
-    }
-    else if($value->getStatus() === "requested"){
+    } else if ($value->getStatus() === "requested") {
         $friendsrequestarray[$key] = $value;
     }
-    if($friendsacceptarray !== null){
-    $friendsacceptarray= array_values($friendsacceptarray);
+    if ($friendsacceptarray !== null) {
+        $friendsacceptarray = array_values($friendsacceptarray);
     }
-    if($friendsrequestarray !== null){
-    $friendsrequestarray= array_values($friendsrequestarray);
+    if ($friendsrequestarray !== null) {
+        $friendsrequestarray = array_values($friendsrequestarray);
     }
-/* else{ 
+    /* else{ 
 $friendAntolin = new Model\Friend("Sonja");
 
 $service->friendRequest($friendAnt); 
@@ -36,7 +35,7 @@ $friendAnt = new Model\Friend("Son");
 var_dump($service->friendRequest($friendAnt));
 $friendsarray = $service->loadFriends();
 var_dump($friendsarray); */
-//
+    //
 }
 ?>
 
@@ -74,15 +73,15 @@ var_dump($friendsarray); */
                 <form action="chat.php" method="get">
                     <?php
                     if ($friendsacceptarray === null) { ?>
-                        <li class="list-group-item"> You have no friends :( </li> <?php } else{
-                    foreach ($friendsacceptarray as $key => $value) {      //iterate through return of loadfriends   probably bug if only requested friends but not empty
-                        
-                           ?> 
+                        <li class="list-group-item"> You have no friends :( </li> <?php } else {
+                                                                                    foreach ($friendsacceptarray as $key => $value) {      //iterate through return of loadfriends   probably bug if only requested friends but not empty
+
+                                                                                    ?>
                             <li class="list-group-item">
                                 <input type=submit name="person" value="<?php echo $value->getUsername() ?>"></input>
                             </li> <!-- query -->
                     <?php }
-                    } ?>
+                                                                                } ?>
                 </form>
             </ul>
 
@@ -109,25 +108,26 @@ var_dump($friendsarray); */
             <!-- requested list-->
 
             <ul class="list-group">
-                
-                    <?php
-                    if ($friendsrequestarray === null || count($friendsrequestarray) === 0) { 
-                        exit();
-                         } else{
-                    foreach ($friendsrequesptarray as $key => $value) {     //iterate through return of loadfriends  
-                             // or do nothing instead of exit?
-                         //when accepted???! cant dismiss or accept ?>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="modal-fade" id="friendRequest" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    <input type=submit>
-                                    <div class="fw-bold">Friend request from <?php echo $value->getUsername() ?></div>
-                                    Do you wanna be his/her friend?
-                                   
-                                </div>
 
-                            </li> <!-- query -->
-                    <?php }
-                    } ?>
+                <?php
+                if ($friendsrequestarray === null || count($friendsrequestarray) === 0) {
+                    exit();
+                } else {
+                    foreach ($friendsrequesptarray as $key => $value) {     //iterate through return of loadfriends  
+                        // or do nothing instead of exit?
+                        //when accepted???! cant dismiss or accept 
+                ?>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="modal-fade" id="friendRequest" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <input type=submit>
+                                <div class="fw-bold">Friend request from <?php echo $value->getUsername() ?></div>
+                                Do you wanna be his/her friend?
+
+                            </div>
+
+                        </li> <!-- query -->
+                <?php }
+                } ?>
 
 
 
@@ -149,7 +149,7 @@ var_dump($friendsarray); */
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" name="friend" list="friendsList" id="friendsAdd" placeholder="Add to friend list" aria-label="Recipient's username" aria-describedby="button-addon2">
                     <datalist id="friendsList"></datalist>
-                    <a href="friends.html"><button class="btn btn-primary"   type="submit">Button</button></a>  <!-- onclick add friend php   -->
+                    <a href="friends.html"><button class="btn btn-primary" type="submit">Button</button></a> <!-- onclick add friend php   -->
                 </div>
             </form>
 
@@ -171,7 +171,6 @@ var_dump($friendsarray); */
                     </div>
                 </div>
             </div>
-
 
 
         </div>

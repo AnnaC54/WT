@@ -103,52 +103,35 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
 
             document.getElementById("cancelFriendship").onclick = function() {
 
-                const newPostForm = document.createElement("newPostForm");
+                const newPostForm = document.createElement("form");
                 newPostForm.method = "post";
                 newPostForm.action = "friends.php";
-                newPostForm.name = "myform";
+               // newPostForm.name = "myform";
                 
-                // create hidden Input Field ONE
+                // create hidden Input Fields -> give friends.php
 
-                const hiddenInput = document.createElement('input');
+                const hiddenInput = document.createElement("input");
+                const friendName = document.createElement("input");
+
                 hiddenInput.type = "hidden";
                 hiddenInput.name = "remove";
                 hiddenInput.value = "skipfriend";
 
-                newPostForm.appendChild(hiddenInput);
-
-                // create hidden Input Field TWO with $friendname
-
-                const friendName = document.createElement("input");
                 friendName.type = "hidden";
                 friendName.name = "friend";
                 friendName.value = "<?= $friendname ?>";
 
-
+                newPostForm.appendChild(hiddenInput);
                 newPostForm.appendChild(friendName);
 
                 document.getElementById("cancelFriendshipModal").appendChild(newPostForm);
-                document.forms["myform"].submit(); // where is this?
+                newPostForm.submit(); // -> submit() method is provided by object , see -> https://www.javascript-coder.com/javascript-form/javascript-form-submit/
             };
         }
 
-
-
-
-
         // where do i use them?
 
-        function closeModal() {
-            removeFriendModal.hide();
-        }
-
-        function dismiss() {
-            removeFriendModal.hide();
-        }
-
-        function accept() {
-            removeFriendModal.hide();
-        }
+       
     </script>
 
 
