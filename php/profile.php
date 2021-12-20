@@ -14,31 +14,32 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
     //var_dump($testuser);
     //get User from Query Chat
     //$user = $service->loadUser($_GET["user"]);
-
+    //------------------------------------------------------
     //Get username from Query Parameter
-
-    $user = $service->loadUser($_GET["person"]);
+    //Actualm method to use in the end
+    //$user = $service->loadUser($_GET["person"]);
+    //------------------------------------------------------
 
     //TEST
-    //$user = $service->loadUser($_SESSION["user"]);
+    $user = $service->loadUser($_SESSION["user"]);
 
     if (isset($user) && !empty($user)) {
         if (isset($_POST["back"])) {
             header("Location: chat.php");
-            end();
+            //end();
         }
         if (isset($_POST["remove"])) {
             $service->friendRemove($user);
             header("Location: friends.php");
-            end();
+            //end();
         }
     } else {
         header("Location: friends.php");
-        end();
+        //end();
     }
 } else {
     header('Location: login.php');
-    end();
+    //end();
 }
 ?>
 
@@ -61,14 +62,14 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
     <br><br><br>
     <div class="container justify-content-center">
         <div class="offset-2 col-8 mb-5">
-            <h2>Profile of <?php echo $user->getFirstname()?></h2>
+            <h2>Profile of <?php echo $user->getFirstname() ?></h2>
             <hr>
             <form method="post">
                 <header class="btn-group">
                     <!-- <div class="d-flex justify-content-center"> -->
-                    
-                <input class="btn btn-secondary" name="back" type="submit" value="Back to Chat" >
-                <input class="btn btn-secondary" name="remove" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button-addon2 sendbutton" name="remove" value="Remove Friend">
+
+                    <input class="btn btn-secondary" name="back" type="submit" value="Back to Chat">
+                    <input class="btn btn-secondary" name="remove" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button-addon2 sendbutton" name="remove" value="Remove Friend">
             </form>
         </div>
 
@@ -84,15 +85,20 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
             <div class="text-center">
                 <p class="coffee">
                 <h4>Coffee or Tea?</h4>
-                <?php echo $user->getDrink() 
+                <?php
+                if ($user->getDrink() == 1) {
+                    echo "Coffee";
+                } else if ($user->getDrink() == 2) {
+                    echo "Tea";
+                }
                 ?>
                 </p>
                 <p class="name">
                 <h4>Name</h4>
                 <?php
-                    echo $user->getFirstname();
-                    echo " ";
-                    echo $user->getLastname();
+                echo $user->getFirstname();
+                echo " ";
+                echo $user->getLastname();
                 ?>
                 </p>
             </div>
@@ -100,7 +106,7 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
 
         <div class="col-8 ">
             <hr>
-            <p class="para-one"> <?php echo $user->getTextfield() 
+            <p class="para-one"> <?php echo $user->getTextfield()
                                     ?>
             </p>
         </div>

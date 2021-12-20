@@ -10,7 +10,8 @@ use Utils\BackendService;
 //$service = new Utils\BackendService(CHAT_SERVER_URL, CHAT_SERVER_ID);
 //var_dump($someuser->getFirstname());
 
-$_SESSION["user"]="sonja";
+//Initialize Session variable
+//$_SESSION["user"]="sonja";
 //var_dump(new Model\User($_SESSION["user"]));
 
 
@@ -34,8 +35,9 @@ if (isset($sessionuser) && !empty($sessionuser)) {
         $user->setDrink($_POST["drink"]);
 
         $service->saveUser($user);
-        header("Location: settings.php");
-        end();
+        //header("Location: settings.php"); //Load settings again to test if load user updates
+        header("Location: profile.php");
+        //end();
     }
 } else {
     header('location: login.php');
