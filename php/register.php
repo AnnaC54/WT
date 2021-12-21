@@ -51,7 +51,7 @@ require("start.php");
 
             // tried to validate form in real time but not<
 
-           // echo "<script type='text/javascript' src='../js/validateRegister.js' ></script> ";
+            // echo "<script type='text/javascript' src='../js/validateRegister.js' ></script> ";
             /* echo '<script>
             var fname = document.getElementById("fname");
             fname.classList.remove("is-invalid");
@@ -123,10 +123,11 @@ require("start.php");
 
                 <div class="mb-2 d-flex justify-content-center row">
                     <label for="fname"></label>
-                    <input name="fname" id="fname" type="text" placeholder="Username" class="form-control is-invalid" "></br>
-                  <div class=" row">
-                    <span><?php echo $nameErr;
-                            ?></span>
+                    <input name="fname" id="fname" type="text" placeholder="Username" class="form-control"></br>
+                    <div class=row">
+                        <span><?php echo $nameErr;
+                                ?></span>
+                    </div>
                 </div>
 
 
@@ -134,7 +135,7 @@ require("start.php");
 
                 <div class=" mb-2 d-flex justify-content-center row">
                     <label for="pword"></label>
-                    <input name="password" id="password" type="password" placeholder="Password" class="form-control is-invalid"><br>
+                    <input name="password" id="password" type="password" placeholder="Password" class="form-control"><br>
                     <div class="row">
                         <span><?php echo $passwordErr;
                                 ?></span>
@@ -145,7 +146,7 @@ require("start.php");
 
                 <div class="mb-2 passwordTwo d-flex justify-content-center row">
                     <label for="cpword" class="login-register-label"></label>
-                    <input name="passwordCheck" id="password-rep" type="password" placeholder="Confirm Password" class="form-control is-invalid"><span id='message'></span>
+                    <input name="passwordCheck" id="password-rep" type="password" placeholder="Confirm Password" class="form-control"><span id='message'></span>
                     <div class="row">
                         <span><?php echo $passwordErr;
                                 ?></span>
@@ -154,11 +155,14 @@ require("start.php");
 
                 <!-- submit section -->
 
-                <div class="btn-group d-flex">
-                    <a class="btn btn-secondary" href="friends.php" role="button">Sign in maybe?</a>
-                    <button type="submit" id="submit" class="ml-3 btn btn-primary">Create account</button>
+                <div class="btn-group d-flex row ">
+                    <a class="btn btn-secondary btn-large  col-3" href="friends.php" role="button">Sign in </a>
+                    <div class="col-1"></div>
+                    <button type="submit" id="submit" class=" col-3  btn btn-primary">Create account</button>
                     <!--href="login.php"-->
                 </div>
+
+                
             </form>
         </section>
     </div>
