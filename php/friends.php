@@ -6,32 +6,32 @@ if (empty($_SESSION["user"])) {   //if session user not set --> back to login
 
 
 // Send Friend-Request
-if ($_POST["action"] == "add-friend" && $_POST["newFriendName"] != "") {
-    $newFriend = new \Model\Friend($_POST["newFriendName"]);
+if (isset($_POST["action"]) == "add-friend" && $_POST["friend"] != "") {
+    $newFriend = new \Model\Friend($_POST["friend"]);
     var_dumP($service->friendRequest($newFriend));
 }
 
 // If user wants to end friendship in chat vieew 
-if ($_POST["remove"] == "skipfriend" && $_POST["friend"] != "") {
+if (isset($_POST["remove"]) == "skipfriend" && $_POST["friend"] != "") {
     $toBeRemovedFriend = new \Model\Friend($_POST["friend"]);
     $service->friendRemove($toBeRemovedFriend);
 }
 
 //Behavious for Friendship-Acception
-if ($_POST["action"] == "accept_request" && $_POST["friendName"] != "") {
+if (isset($_POST["action"]) == "accept_request" && $_POST["friendName"] != "") {
     $acceptedFriend = new \Model\Friend($_POST["friendName"]);
     $service->friendAccept($acceptedFriend);
     echo ("HEY!");
 }
 //Behavious for Friendship-Dismission
-if ($_POST["action"] == "dismiss_request" && $_POST["friendName"] != "") {
+if (isset($_POST["action"]) == "dismiss_request" && $_POST["friendName"] != "") {
     $canceledFriend = new \Model\Friend($_POST["friendName"]);
     $service->friendDismiss($canceledFriend);
 }
 
 
-$friendsacceptarray;
-$friendsrequestarray;
+$friendsacceptarray = array();
+$friendsrequestarray = array();
 $friendsarray = $service->loadFriends();
 foreach ($friendsarray as $key => $value) {
     if ($value->getStatus() === "accepted") {
@@ -103,7 +103,10 @@ var_dump($friendsarray); */
                 </form>
             </ul>
 
-            <!--<li class="list-group-item d-flex align-items-center">
+            <!-- old chat dummies
+                
+            
+            <li class="list-group-item d-flex align-items-center">
                         <a  href="chat.php">Tom</a>
                          <span class="badge bg-primary rounded-pill">0</span> 
                     </li>
@@ -131,50 +134,14 @@ var_dump($friendsarray); */
                     </div>
                     <span class="badge bg-primary rounded-pill">Do u?</span>
                 </li>
-                
+
             </div>
             <hr>
 
 
-            <form id="add" action>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="friend" list="friendsList" id="friendsAdd" placeholder="Add to friend list" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <datalist id="friendsList"></datalist>
-                    <a href="friends.html"><button class="btn btn-primary" type="submit">Button</button></a> <!-- onclick add friend php   -->
-                </div>
-            </form>
-            <!-- requested list-->
+            <!-- add form (missing functions) -->
 
-            <ul class="list-group">
-
-                <?php
-                if ($friendsrequestarray != null || count($friendsrequestarray) != 0) {
-                    exit();
-                } else {
-                    foreach ($friendsrequesptarray as $key => $value) {     //iterate through return of loadfriends  
-                        // or do nothing instead of exit?
-                        //when accepted???! cant dismiss or accept 
-                ?>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="modal-fade" id="friendRequest" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <input type=submit>
-                                <div class="fw-bold">Friend request from <?php echo $value->getUsername() ?></div>
-                                Do you wanna be his/her friend?
-
-                            </div>
-
-                        </li> <!-- query -->
-                <?php }
-                } ?>
-
-
-
-
-
-
-                <!-- add form (missing functions) -->
-
-                <form id="add" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+            <form id="add" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" name="friend" list="friendsList" id="friendsAdd" placeholder="Add to friend list" aria-label="Recipient's username" aria-describedby="button-addon2">
                         <datalist id="friendsList"></datalist>
@@ -182,8 +149,7 @@ var_dump($friendsarray); */
                     </div>
                 </form>
 
-
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -201,12 +167,52 @@ var_dump($friendsarray); */
                     </div>
                 </div>
 
+            <!-- requested list-->
+            
+            <ul class="list-group">
+
+                <?php
+                if ($friendsrequestarray == null || count($friendsrequestarray) == 0) {
+                    
+                } else {
+                    foreach ($friendsrequestarray as $key => $value) {     //iterate through return of loadfriends  
+                        // or do nothing instead of exit?
+                        //when accepted???! cant dismiss or accept 
+                ?>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div >
+                                <!--<input type=submit> -->
+                                <button type="button" onclick="openModal()">Friend request from <?php echo $value->getUsername() ?></div>
+                                Do you wanna be his/her friend?
+
+                            </div>
+
+                        </li> <!-- query -->
+                <?php }
+                } ?>
+
+
+
+
+
+
+            
+
+                
+
+
+               
+
 
         </div>
 
     </div>
-
-    <script src="../js/scriptFriendsModal.js"></script>
+<script>
+    var requestModal = new bootstrap.Modal(document.getElementById("exampleModal"));
+function openModal(){
+    requestModal.show();
+}
+</script>
 </body>
 
 </html>
