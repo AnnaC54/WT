@@ -6,8 +6,8 @@ if (empty($_SESSION["user"])) {   //if session user not set --> back to login
 
 
 // Send Friend-Request
-if (isset($_POST["action"]) == "add-friend" && $_POST["friend"] != "") {
-    $newFriend = new \Model\Friend($_POST["friend"]);
+if (isset($_POST["action"]) == "add-friend" && $_POST["friendName"] != "") {
+    $newFriend = new \Model\Friend($_POST["friendName"]);
     var_dumP($service->friendRequest($newFriend));
 }
 
