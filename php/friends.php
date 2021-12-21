@@ -163,40 +163,61 @@ foreach ($friendsarray as $key => $value) {             //sort loop
 
         function requestModal(name) {
             //show modal
+
             friendModal.show(); 
+//header text
             document.getElementById("modalFriendRequestHeader").innerHTML = "Friend request of " + name;
+            //if accepting
+
             document.getElementById("accept_friendship_button").onclick = function() {
+            //submit form
                 const form = document.createElement('form');
                 form.method = "post";
                 form.action = "friends.php";
+                //input field for accepting info
+                
                 const hiddenActionField = document.createElement('input');
                 hiddenActionField.type = 'hidden';
                 hiddenActionField.name = "action";
                 hiddenActionField.value = "accept_request";
                 form.appendChild(hiddenActionField);
+                //input field for username info
+                
                 const hiddenNameField = document.createElement('input');
                 hiddenNameField.type = 'hidden';
                 hiddenNameField.name = "friend";
                 hiddenNameField.value = name;
                 form.appendChild(hiddenNameField);
                 document.getElementById("exampleModal").appendChild(form);
+                //submit
+
                 form.submit();
             };
+            //if dismissing
+
             document.getElementById("dismiss_friendship_button").onclick = function() {
+                //submit form
+
                 const form = document.createElement('form');
                 form.method = "post";
                 form.action = "friends.php";
+                //input field for dismissing info
+
                 const hiddenActionField = document.createElement('input');
                 hiddenActionField.type = 'hidden';
                 hiddenActionField.name = "action";
                 hiddenActionField.value = "dismiss_request";
                 form.appendChild(hiddenActionField);
+                //input field for username info
+                
                 const hiddenNameField = document.createElement('input');
                 hiddenNameField.type = 'hidden';
                 hiddenNameField.name = "friend";
                 hiddenNameField.value = name;
                 form.appendChild(hiddenNameField);
                 document.getElementById("exampleModal").appendChild(form);
+                 //submit
+
                 form.submit();
             };
         }
