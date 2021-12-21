@@ -68,6 +68,12 @@ var_dump($friendsarray); */
     <link rel="stylesheet" href="../css/style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <style>.no-border {
+            border: 0;
+            box-shadow: none;
+        }
+        </style> 
+
 </head>
 <title>Friends</title>
 
@@ -96,7 +102,7 @@ var_dump($friendsarray); */
 
                                                                                     ?>
                             <li class="list-group-item">
-                                <input type=submit name="person" value="<?php echo $value->getUsername() ?>"></input>
+                                <input class="bg-white no-border" type="submit" name="person" value="<?= $value->getUsername() ?>"></input>
                             </li> <!-- query -->
                     <?php }
                                                                                 } ?>
@@ -182,7 +188,7 @@ var_dump($friendsarray); */
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div >
                                 <!--<input type=submit> -->
-                                <button type="button" onclick="openModal()">Friend request from <?php echo $value->getUsername() ?></div>
+                                <button type="button" onclick="openModal(<?php echo $value->getUsername() ?>)">Friend request from <?php echo $value->getUsername() ?></div>
                                 Do you wanna be his/her friend?
 
                             </div>
@@ -209,8 +215,53 @@ var_dump($friendsarray); */
     </div>
 <script>
     var requestModal = new bootstrap.Modal(document.getElementById("exampleModal"));
-function openModal(){
+function openModal($name){
     requestModal.show();
+    document.getElementById("friendship_modal_title").innerHTML = "Request from <b><?= $name ?></b>";
+        document.getElementById("accept_friendship_button").onclick = function() {
+          const form = document.createElement('form');
+            form.method = "post";
+            form.action = "./friends.php";
+            const hiddenActionField = document.createElement('input');
+            hiddenActionField.type = 'hidden';
+            hiddenActionField.name = "action";
+            hiddenActionField.value = "accept_request";
+            form.appendChild(hiddenActionField);
+            const hiddenNameField = document.createElement('input');
+            hiddenNameField.type = 'hidden';
+            hiddenNameField.name = "friendName";
+            hiddenNameField.value = "<?= $name ?>";
+            form.appendChild(hiddenNameField);
+            document.getElementById("exampleModal").appendChild(form);
+            form.submit();
+          };
+        document.getElementById("dismiss_friendship_button").onclick = function() {
+          const form = document.createElement('form');
+            form.method = "post";
+            form.action = "./friends.php";
+            const hiddenActionField = document.createElement('input');
+            hiddenActionField.type = 'hidden';
+            hiddenActionField.name = "action";
+            hiddenActionField.value = "dismiss_request";
+            form.appendChild(hiddenActionField);
+            const hiddenNameField = document.createElement('input');
+            hiddenNameField.type = 'hidden';
+            hiddenNameField.name = "friendName";
+            hiddenNameField.value = "<?= $name ?>";
+            form.appendChild(hiddenNameField);
+            document.getElementById("exampleModal").appendChild(form);
+            form.submit();
+          };
+      }
+      function closeModal(){
+        requestModal.hide();
+      }
+      function dismiss(){
+        requestModal.hide();
+      }
+      function accept(){
+        requestModal.hide();
+      
 }
 </script>
 </body>
