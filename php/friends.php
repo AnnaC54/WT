@@ -167,8 +167,8 @@ var_dump($friendsarray); */
                             Do u wanne be his/her friend now?
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Dismiss</button>
-                            <button type="button" class="btn btn-primary">Accept</button>
+                            <button id="dismiss_friendship_button" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Dismiss</button>
+                            <button id="accept_friendship_button" type="button" class="btn btn-primary">Accept</button>
                         </div>
                     </div>
                 </div>
@@ -188,7 +188,7 @@ var_dump($friendsarray); */
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div>
                                 <!--<input type=submit> -->
-                                <button type="button" onclick="openModal(<?php echo $value->getUsername() ?>)">Friend request from <?php echo $value->getUsername() ?>
+                                <button type="button" onclick="openModal('<?php echo $value->getUsername() ?>')">Friend request from <?php echo $value->getUsername() ?>
                             </div>
                             Do you wanna be his/her friend?
 
@@ -215,62 +215,61 @@ var_dump($friendsarray); */
 
     </div>
     <script>
-        var requestModal = new bootstrap.Modal(document.getElementById("exampleModal"));
+'var name = <?php echo json_encode($name); ?>;
+</script>'
+    <script>
+        var myModal = new bootstrap.Modal(document.getElementById("exampleModal"));
         
         
-        function openModal($name) {
-            console.log("hi");
-            requestModal.show();
-
-            document.getElementById("friendship_modal_title").innerHTML = "Request from <b><?= $name ?></b>";
-            document.getElementById("accept_friendship_button").onclick = function() {
-                const form = document.createElement('form');
-                form.method = "post";
-                form.action = "./friends.php";
-                const hiddenActionField = document.createElement('input');
-                hiddenActionField.type = 'hidden';
-                hiddenActionField.name = "action";
-                hiddenActionField.value = "accept_request";
-                form.appendChild(hiddenActionField);
-                const hiddenNameField = document.createElement('input');
-                hiddenNameField.type = 'hidden';
-                hiddenNameField.name = "friendName";
-                hiddenNameField.value = "<?= $name ?>";
-                form.appendChild(hiddenNameField);
-                document.getElementById("exampleModal").appendChild(form);
-                form.submit();
-            };
-            document.getElementById("dismiss_friendship_button").onclick = function() {
-                const form = document.createElement('form');
-                form.method = "post";
-                form.action = "./friends.php";
-                const hiddenActionField = document.createElement('input');
-                hiddenActionField.type = 'hidden';
-                hiddenActionField.name = "action";
-                hiddenActionField.value = "dismiss_request";
-                form.appendChild(hiddenActionField);
-                const hiddenNameField = document.createElement('input');
-                hiddenNameField.type = 'hidden';
-                hiddenNameField.name = "friendName";
-                hiddenNameField.value = "<?= $name ?>";
-                form.appendChild(hiddenNameField);
-                document.getElementById("exampleModal").appendChild(form);
-                form.submit();
-            };
-        }
-        function closeModal() {
-            requestModal.hide();
-        }
-
-        function dismiss() {
-            requestModal.hide();
-        }
-
-        function accept() {
-            requestModal.hide();
-
-        }
-    </script>
+        function openModal(name) {
+            
+            myModal.show();
+        document.getElementById("modalFriendRequestHeader").innerHTML = "Friend request";
+        document.getElementById("accept_friendship_button").onclick = function() {
+          const form = document.createElement('form');
+            form.method = "post";
+            form.action = "./friends.php";
+            const hiddenActionField = document.createElement('input');
+            hiddenActionField.type = 'hidden';
+            hiddenActionField.name = "action";
+            hiddenActionField.value = "accept_request";
+            form.appendChild(hiddenActionField);
+            const hiddenNameField = document.createElement('input');
+            hiddenNameField.type = 'hidden';
+            hiddenNameField.name = "friendName";
+            hiddenNameField.value = name;
+            form.appendChild(hiddenNameField);
+            document.getElementById("exampleModal").appendChild(form);
+            form.submit();
+          };
+        document.getElementById("dismiss_friendship_button").onclick = function() {
+          const form = document.createElement('form');
+            form.method = "post";
+            form.action = "./friends.php";
+            const hiddenActionField = document.createElement('input');
+            hiddenActionField.type = 'hidden';
+            hiddenActionField.name = "action";
+            hiddenActionField.value = "dismiss_request";
+            form.appendChild(hiddenActionField);
+            const hiddenNameField = document.createElement('input');
+            hiddenNameField.type = 'hidden';
+            hiddenNameField.name = "friendName";
+            hiddenNameField.value = name;
+            form.appendChild(hiddenNameField);
+            document.getElementById("exampleModal").appendChild(form);
+            form.submit();
+          };
+      }
+      function closeModal(){
+        myModal.show();
+      }
+      function dismiss(){
+        myModal.hide();
+      }
+      function accept(){
+        myModal.hide();
+      }
+</script>
 </body>
 
 </html>
