@@ -270,7 +270,7 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
                 to: chatGoal
             };
 
-            //document.getElementById('message').value = "";
+            document.getElementById('message').value = "";
             let jsonString = JSON.stringify(data); // Serialize as JSON
             xmlhttp1.send(jsonString); // Send JSON-data to server
 

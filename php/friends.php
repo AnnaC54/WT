@@ -68,11 +68,12 @@ var_dump($friendsarray); */
     <link rel="stylesheet" href="../css/style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <style>.no-border {
+    <style>
+        .no-border {
             border: 0;
             box-shadow: none;
         }
-        </style> 
+    </style>
 
 </head>
 <title>Friends</title>
@@ -148,53 +149,53 @@ var_dump($friendsarray); */
             <!-- add form (missing functions) -->
 
             <form id="add" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="friend" list="friendsList" id="friendsAdd" placeholder="Add to friend list" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <datalist id="friendsList"></datalist>
-                        <button class="btn btn-primary" type="submit" id="friendsAddSubmit" name="action" value="add-friend">Button</button> <!-- onclick add friend php   -->
-                    </div>
-                </form>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="friend" list="friendsList" id="friendsAdd" placeholder="Add to friend list" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <datalist id="friendsList"></datalist>
+                    <button class="btn btn-primary" type="submit" id="friendsAddSubmit" name="action" value="add-friend">Button</button> <!-- onclick add friend php   -->
+                </div>
+            </form>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalFriendRequestHeader"></h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                Do u wanne be his/her friend now?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Dismiss</button>
-                                <button type="button" class="btn btn-primary">Accept</button>
-                            </div>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalFriendRequestHeader"></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Do u wanne be his/her friend now?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Dismiss</button>
+                            <button type="button" class="btn btn-primary">Accept</button>
                         </div>
                     </div>
                 </div>
+            </div>
 
             <!-- requested list-->
-            
+
             <ul class="list-group">
 
                 <?php
                 if ($friendsrequestarray == null || count($friendsrequestarray) == 0) {
-                    
                 } else {
                     foreach ($friendsrequestarray as $key => $value) {     //iterate through return of loadfriends  
                         // or do nothing instead of exit?
                         //when accepted???! cant dismiss or accept 
                 ?>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div >
+                            <div>
                                 <!--<input type=submit> -->
-                                <button type="button" onclick="openModal(<?php echo $value->getUsername() ?>)">Friend request from <?php echo $value->getUsername() ?></div>
-                                Do you wanna be his/her friend?
-
+                                <button type="button" onclick="openModal(<?php echo $value->getUsername() ?>)">Friend request from <?php echo $value->getUsername() ?>
                             </div>
+                            Do you wanna be his/her friend?
 
-                        </li> <!-- query -->
-                <?php }
+        </div>
+
+        </li> <!-- query -->
+<?php }
                 } ?>
 
 
@@ -202,68 +203,74 @@ var_dump($friendsarray); */
 
 
 
-            
-
-                
 
 
-               
 
 
-        </div>
+
+
+
 
     </div>
-<script>
-    var requestModal = new bootstrap.Modal(document.getElementById("exampleModal"));
-function openModal($name){
-    requestModal.show();
-    document.getElementById("friendship_modal_title").innerHTML = "Request from <b><?= $name ?></b>";
-        document.getElementById("accept_friendship_button").onclick = function() {
-          const form = document.createElement('form');
-            form.method = "post";
-            form.action = "./friends.php";
-            const hiddenActionField = document.createElement('input');
-            hiddenActionField.type = 'hidden';
-            hiddenActionField.name = "action";
-            hiddenActionField.value = "accept_request";
-            form.appendChild(hiddenActionField);
-            const hiddenNameField = document.createElement('input');
-            hiddenNameField.type = 'hidden';
-            hiddenNameField.name = "friendName";
-            hiddenNameField.value = "<?= $name ?>";
-            form.appendChild(hiddenNameField);
-            document.getElementById("exampleModal").appendChild(form);
-            form.submit();
-          };
-        document.getElementById("dismiss_friendship_button").onclick = function() {
-          const form = document.createElement('form');
-            form.method = "post";
-            form.action = "./friends.php";
-            const hiddenActionField = document.createElement('input');
-            hiddenActionField.type = 'hidden';
-            hiddenActionField.name = "action";
-            hiddenActionField.value = "dismiss_request";
-            form.appendChild(hiddenActionField);
-            const hiddenNameField = document.createElement('input');
-            hiddenNameField.type = 'hidden';
-            hiddenNameField.name = "friendName";
-            hiddenNameField.value = "<?= $name ?>";
-            form.appendChild(hiddenNameField);
-            document.getElementById("exampleModal").appendChild(form);
-            form.submit();
-          };
-      }
-      function closeModal(){
-        requestModal.hide();
-      }
-      function dismiss(){
-        requestModal.hide();
-      }
-      function accept(){
-        requestModal.hide();
-      
-}
-</script>
+
+    </div>
+    <script>
+        var requestModal = new bootstrap.Modal(document.getElementById("exampleModal"));
+        
+        
+        function openModal($name) {
+            console.log("hi");
+            requestModal.show();
+
+            document.getElementById("friendship_modal_title").innerHTML = "Request from <b><?= $name ?></b>";
+            document.getElementById("accept_friendship_button").onclick = function() {
+                const form = document.createElement('form');
+                form.method = "post";
+                form.action = "./friends.php";
+                const hiddenActionField = document.createElement('input');
+                hiddenActionField.type = 'hidden';
+                hiddenActionField.name = "action";
+                hiddenActionField.value = "accept_request";
+                form.appendChild(hiddenActionField);
+                const hiddenNameField = document.createElement('input');
+                hiddenNameField.type = 'hidden';
+                hiddenNameField.name = "friendName";
+                hiddenNameField.value = "<?= $name ?>";
+                form.appendChild(hiddenNameField);
+                document.getElementById("exampleModal").appendChild(form);
+                form.submit();
+            };
+            document.getElementById("dismiss_friendship_button").onclick = function() {
+                const form = document.createElement('form');
+                form.method = "post";
+                form.action = "./friends.php";
+                const hiddenActionField = document.createElement('input');
+                hiddenActionField.type = 'hidden';
+                hiddenActionField.name = "action";
+                hiddenActionField.value = "dismiss_request";
+                form.appendChild(hiddenActionField);
+                const hiddenNameField = document.createElement('input');
+                hiddenNameField.type = 'hidden';
+                hiddenNameField.name = "friendName";
+                hiddenNameField.value = "<?= $name ?>";
+                form.appendChild(hiddenNameField);
+                document.getElementById("exampleModal").appendChild(form);
+                form.submit();
+            };
+        }
+        function closeModal() {
+            requestModal.hide();
+        }
+
+        function dismiss() {
+            requestModal.hide();
+        }
+
+        function accept() {
+            requestModal.hide();
+
+        }
+    </script>
 </body>
 
 </html>
