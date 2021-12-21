@@ -23,6 +23,9 @@ var_dump($service->login("Jan", "simonspwd"));
 // user: Monsieur Apel pw: webtechnologien
 // user: Monsieur Riener pw: software
 // user: Michael pw: michaels
+// user: anna pw: simonspwd
+// user: Felix pw: simonspwd
+
 
 // test new friend
 $friendAntolin = new Model\Friend("Sonja");
