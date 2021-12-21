@@ -62,59 +62,61 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
 <body>
 
     <br><br><br>
-    <div class="container justify-content-center">
-        <div class="offset-2 col-8 mb-5">
-            <h2>Profile of <?php echo $user->getFirstname() ?></h2>
-            <hr>
-            <form method="post">
-                <header class="btn-group">
-                    <!-- <div class="d-flex justify-content-center"> -->
+    <div class="container">
+        <div class="row">
+        <div class="col-2 d-flex justify-content-center px-3">
+                    <img src="../images/profile.png" alt="profile" class="rounded-circle justify-content-center pd-" style="width: 115px; height: 115px;">
+                </div>
+            <div class="col-8 mb-5">
+                <h2>Profile of <?php echo $user->getFirstname() ?></h2>
+                <hr>
+                <form method="post">
+                    <header class="btn-group">
+                        <!-- <div class="d-flex justify-content-center"> -->
 
-                    <input class="btn btn-secondary" name="back" type="submit" value="Back to Chat">
-                    <input class="btn btn-secondary" name="remove" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button-addon2 sendbutton" name="remove" value="Remove Friend">
-            </form>
-        </div>
-
-    </div>
-
-    </header>
-
-    <div class="row align-items-start">
-        <div class=" col-2 ">
-            <div class="d-flex justify-content-center">
-                <img src="../images/profile.png" alt="profile" class="rounded-circle justify-content-center" style="width: 100px;">
-            </div>
-            <div class="text-center">
-                <p class="coffee">
-                <h4>Coffee or Tea?</h4>
-                <?php
-                if ($user->getDrink() == 1) {
-                    echo "Coffee";
-                } else if ($user->getDrink() == 2) {
-                    echo "Tea";
-                }
-                ?>
-                </p>
-                <p class="name">
-                <h4>Name</h4>
-                <?php
-                echo $user->getFirstname();
-                echo " ";
-                echo $user->getLastname();
-                ?>
-                </p>
+                        <input class="btn btn-secondary" name="back" type="submit" value="Back to Chat">
+                        <input class="btn btn-secondary" name="remove" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button-addon2 sendbutton" name="remove" value="Remove Friend">
+                </form>
             </div>
         </div>
-
-        <div class="col-8 ">
-            <hr>
-            <p class="para-one"> <?php echo $user->getTextfield()
-                                    ?>
-            </p>
-        </div>
-
     </div>
 
+
+    <div class="container">
+        <div class=" row ">
+            <div class=" col-2 ">
+
+                <div class="text-center">
+                    <p class="coffee">
+                    <h4>Coffee or Tea?</h4>
+                    <?php
+                    if ($user->getDrink() == 1) {
+                        echo "Coffee";
+                    } else if ($user->getDrink() == 2) {
+                        echo "Tea";
+                    }
+                    ?>
+                    </p>
+                    <p class="name">
+                    <h4>Name</h4>
+                    <?php
+                    echo $user->getFirstname();
+                    echo " ";
+                    echo $user->getLastname();
+                    ?>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-8 ">
+                <hr>
+                <p class="para-one"> <?php echo $user->getTextfield()
+                                        ?>
+                </p>
+            </div>
+
+        </div>
+    </div>
 
     <!-- Modal section -->
 
