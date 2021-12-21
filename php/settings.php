@@ -90,7 +90,7 @@ if (isset($sessionuser) && !empty($sessionuser)) {
             <h4>Tell Something About You</h4>
 
             <div class=" mb-4 form-floating">
-                <textarea name="textfield" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" ><?php echo $user->getTextfield() ?></textarea>
+                <textarea name="textfield" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"><?php echo $user->getTextfield() ?></textarea>
                 <label for="floatingTextarea2">Short Description</label>
             </div>
 

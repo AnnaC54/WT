@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!empty($_POST['username'])) {  //check if filled post form
         $username = $_POST['username'];
         $password = $_POST['password'];
-       // echo $username . "," . $password;
+        // echo $username . "," . $password;
         if ($service->login($username, $password)) { //login with variables
             $_SESSION["user"] = $username;
             //echo $_SESSION["user"];
@@ -56,11 +56,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <div class="m-3 text-center">
                     <a href="register.php">
-                        <button class="btn btn-lg btn-secondary">Register</button></a>
-                    <button class="btn btn-lg btn-primary" type="submit" name="login">Sign in</button>
+                        <button class="btn btn-lg btn-secondary" type="button">Register</button></a> 
+                        <button class="btn btn-lg btn-primary" type="submit" name="login">Sign in</button>
             </form>
-            </div>
         </div>
+    </div>
     </div>
 
 
