@@ -33,12 +33,12 @@ class Friend implements JsonSerializable
 
     public  function isAccepted()
     {
-        $this->status = 'accepted';
+       return $this->status = 'accepted';
     }
 
     public function isDismissed()
     {
-        $this->status = 'dismissed';
+       return $this->status = 'dismissed';  //etiher return value
     }
 
 
