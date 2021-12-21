@@ -17,9 +17,9 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
     //------------------------------------------------------
     //Get username from Query Parameter
     //Actual method to use in the end
-     $user = $service->loadUser($_GET["person"]);
-     echo "<hr>";
-     var_dump($service->loadUser($_GET["person"]));
+    $user = $service->loadUser($_GET["person"]);
+    //  echo "<hr>";
+    //  var_dump($service->loadUser($_GET["person"]));
     //------------------------------------------------------
 
     //TEST

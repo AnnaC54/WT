@@ -168,6 +168,9 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
             document.getElementById("cancelFriendshipLabel").innerHTML = "Remove <?= $friendname ?> as Friend";
 
             // -> Jup, skip em: -> create Form with two hidden input fields to give name="action"+value="remove-friend" PLUS name="friendName"+value=§friendname to friends.php
+            
+            //Shiny nice Lösung
+            //document.location.href = „sometarget.php?username=…“
 
             document.getElementById("cancelFriendship").onclick = function() {
 
