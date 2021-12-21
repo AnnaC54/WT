@@ -18,24 +18,14 @@ require("start.php");
 
 <body>
 
-    <!-- Beginnen Sie mit einem PHP-Block am Anfang der Datei, welcher die Datei start.php lädt und
-prüfen Sie ob die Session-Variable user gesetzt und nicht leer ist. Anschließend prüfen Sie ob
-der Query-Parameter für das Chat-Ziel (z.B. friend) existiert und nicht leer ist. Stimmen Sie
-dies mit der Implementierung der Freundesliste ab.
-Abschließend müssen Sie über Ihre PHP-Implementierung den Server, die Collection ID und
-insbesondere das aktuelle Token sowie das Chat-Ziel an die Client-Anwendung übergeben.
-Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
-
     <?php
-    
-   
-    
+
     $friendname = $_GET["person"];
     $_SESSION["friend"] = $friendname;
-   
 
 
-   /* if(array_key_exists('button1', $_POST)) {
+    // COULDN`T MAKE THE PHP WORK :( 
+    /* if(array_key_exists('button1', $_POST)) {
         button1();
     }
 
@@ -48,30 +38,27 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
         echo "This is Button1 that is selected";
     }*/
 
-   
+
 
     if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
 
         // chat-goal set 
-
         if (isset($_SESSION["friend"]) && !empty($_SESSION["friend"])) {
-            // if user authetificated and chat-goal is known -> load messages via BackendService
             $messageList = $service->listMessages($_SESSION["friend"]);
         } else {
             header("Location: friends.php");
             exit();
         }
     }
+
     // if user is not authentificated
     else {
         header("Location: login.php");
         exit();
     }
-   
-
     ?>
 
-    <div class="container">
+    <div class="container col-10 offset-2 ">
         <header class="row ">
             <h2 class="offset-1">Chat with <?php echo $_SESSION["friend"] ?></h2>
             <div class="row mt-4 offset-1 ">
@@ -86,17 +73,19 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
         </header>
 
         <!-- Messages in chat (js) -->
-        <h6 class="container mt-5">JavaScript Version</h6>
-        <div class="container overflow-scroll col-9 offset-1 my-5 bg-white pt-2 " style="height: 300px" id="chat">
+        <h6 class="container mt-5 col-9 offset-1">JavaScript Version</h6>
+        <div class="container overflow-scroll col-9 offset-1 my-5 bg-white px-5 " style="height: 300px" id="chat">
         </div>
-        <h6 class="mt-6">PHP Version</h6>
-        <div class="container overflow-scroll col-9 offset-1 my-5 bg-white pt-2 " style="height: 300px" id="chatMessages">
+
+        <!-- Messages in chat (php) -->
+        <h6 class="mt-6 col-9 offset-1">PHP Version - not completely working :(</h6>
+
+        <div class="container overflow-scroll col-9 offset-1 my-5 bg-white px-5 " style="height: 300px" id="chatMessages">
 
             <div class="row ">
-
                 <div class="col-2">
                     <?php
-                    
+
                     foreach ($messageList as $value) {
                         $newVal = (array)$value;
                         echo $newVal["from"];
@@ -105,7 +94,7 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
                     ?>
 
                 </div>
-                <div class="col-6">
+                <div class="col-7">
                     <?php
                     foreach ($messageList as $value) {
                         $newVal = (array)$value;
@@ -115,7 +104,7 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
                     ?>
 
                 </div>
-                <div class="col-4 text-right">
+                <div class="col-3 text-right">
                     <?php
                     foreach ($messageList as $value) {
                         $newVal = (array)$value;
@@ -131,11 +120,11 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
 
 
         <section class="row input-group mt-4 offset-1">
-           <!-- <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">-->
-                <input name="message" class="col-8" id="message" type="text" class="form-control" placeholder="New message" aria-label="New message" aria-describedby="button-addon2">
-              <button onclick="send()" name="sendButton" id="sendButton" type="input" class="col-1 btn btn-primary"><a class="btn-link">Send</a></button>
-              <!--  <button id="sendButton" type="button" name="button1"  class="col-1 btn btn-primary"><a class="btn-link">Send</a></button>-->
-           <!-- </form>-->
+            <!-- <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">-->
+            <input name="message" class="col-8" id="message" type="text" class="form-control" placeholder="New message" aria-label="New message" aria-describedby="button-addon2">
+            <button onclick="send()" name="sendButton" id="sendButton" type="input" class="col-1 btn btn-primary"><a class="btn-link">Send</a></button>
+            <!--  <button id="sendButton" type="button" name="button1"  class="col-1 btn btn-primary"><a class="btn-link">Send</a></button>-->
+            <!-- </form>-->
         </section>
     </div>
 
@@ -159,7 +148,8 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
         </div>
     </div>
 
-     <script>
+    <script src="../js/chatscript.js"></script>
+    <script>
         //on click -> open bootstrap modal
         var removeFriendModal = new bootstrap.Modal(document.getElementById("cancelFriendshipModal"));
 
@@ -168,7 +158,7 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
             document.getElementById("cancelFriendshipLabel").innerHTML = "Remove <?= $friendname ?> as Friend";
 
             // -> Jup, skip em: -> create Form with two hidden input fields to give name="action"+value="remove-friend" PLUS name="friendName"+value=§friendname to friends.php
-            
+
             //Shiny nice Lösung
             //document.location.href = „sometarget.php?username=…“
 
@@ -200,90 +190,10 @@ Gehen Sie hier analog zum abschließenden Schritt in der Freundesliste vor. -->
             };
         }
 
-
-
-
-        var chatToken = "<?= $_SESSION['chat-token']; ?>";
-        var chatCollectionId = "<?= CHAT_SERVER_ID; ?>";
-        var chatServer = "<?= CHAT_SERVER_URL; ?>";
-        var chatGoal = "<?= $_SESSION['friend']; ?>";
-
-        window.setInterval(function() {
-            getMessages();
-        }, 1000);
-
-
-        function getMessages() {
-
-
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    let data = JSON.parse(xmlhttp.responseText);
-                    var chat = document.getElementById("chat");
-                    chat.innerHTML = "";
-
-                    for (var i = 0; i < data.length; i++) {
-                        var date = new Date(data[i].time);
-                        var messagebox = document.createElement("div");
-                        messagebox.classList.add("row");
-                        var namebox = document.createElement("div");
-                        var textbox = document.createElement("div");
-                        var timebox = document.createElement("div");
-                        namebox.classList.add("col-2");
-                        textbox.classList.add("col-7");
-                        timebox.classList.add("col-3");
-                        timebox.classList.add("text-right");
-                        //messagebox.classList.add("messagebox");
-                        //textbox.appendChild(namebox);
-                        messagebox.appendChild(namebox);
-                        messagebox.appendChild(textbox);
-                        messagebox.appendChild(timebox);
-                        namebox.appendChild(document.createTextNode(data[i].from));
-                        textbox.appendChild(document.createTextNode(data[i].msg));
-                        timebox.appendChild(document.createTextNode(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()));
-                        chat.appendChild(messagebox);
-                        //var userbox = document.createElement("span");
-
-                    }
-                }
-            };
-
-            xmlhttp.open("GET", chatServer + "/" + chatCollectionId + "/message/" + chatGoal, true);
-            xmlhttp.setRequestHeader('Authorization', 'Bearer ' + chatToken);
-            xmlhttp.send();
-        }
-
-        function send() {
-            let xmlhttp1 = new XMLHttpRequest();
-            xmlhttp1.onreadystatechange = function() {
-                if (xmlhttp1.readyState == 4 && xmlhttp1.status == 204) {
-                    console.log("done...");
-                }
-            };
-            xmlhttp1.open("POST", chatServer + "/" + chatCollectionId + "/message", true);
-            xmlhttp1.setRequestHeader('Content-type', 'application/json');
-            // Add token, e. g., from Tom
-            xmlhttp1.setRequestHeader('Authorization', 'Bearer ' + chatToken);
-            // Create request data with message and receiver
-            let message = document.getElementById('message').value; 
-            console.log(message);
-            let data = {
-                message: message,
-                to: chatGoal
-            };
-
-            document.getElementById('message').value = "";
-            let jsonString = JSON.stringify(data); // Serialize as JSON
-            xmlhttp1.send(jsonString); // Send JSON-data to server
-
-        }
-
-
-
-
-
-
+        window.chatToken = "<?= $_SESSION['chat-token'] ?>";
+        window.chatCollectionId = "<?= CHAT_SERVER_ID ?>";
+        window.chatServer = "<?= CHAT_SERVER_URL ?>";
+        window.chatGoal = "<?= $_SESSION['friend']; ?>";
     </script>
 
 

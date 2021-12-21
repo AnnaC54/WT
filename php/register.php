@@ -27,14 +27,13 @@ require("start.php");
 <body>
 
     <?php
-    // define variables and set to empty values
     $name = $password = $passwordRep =  "";
     $nameErr = $passwordErr  = "";
     $validation = true;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        // check firstname
+        // check name
 
         if (empty($_POST["fname"])) {
             $nameErr = "Name is required";
@@ -47,16 +46,15 @@ require("start.php");
             $nameErr = "user exists already";
         } else {
             $name = test_input($_POST["fname"]);
-            echo "Username: " . $name . "<br>";
+           // echo "Username: " . $name . "<br>";
 
-            // tried to validate form in real time but not<
 
             // echo "<script type='text/javascript' src='../js/validateRegister.js' ></script> ";
             /* echo '<script>
             var fname = document.getElementById("fname");
             fname.classList.remove("is-invalid");
             fname.classList.add("is-valid");
-      </script>';*/
+            </script>';*/
         }
 
         // check password
@@ -75,9 +73,7 @@ require("start.php");
             $passwordCheck = test_input($_POST["passwordCheck"]);
         }
 
-        var_dump($validation);
-
-        // if validation was successfull => call register method
+        //var_dump($validation);
 
         if ($validation) {
             $username = ($_POST["fname"]);
@@ -85,10 +81,7 @@ require("start.php");
 
             if ($service->register($username, $password)) {
                 $_SESSION["user"] = $username;
-                // echo "session variable" . ($_SESSION["user"]);
                 header("Location: friends.php");
-                // TODO: server und collectionID kostanten übergeben an Client
-                // after registration still not logged in 
                 exit();
             } else {
                 echo "Validation wrong";
@@ -124,7 +117,7 @@ require("start.php");
                 <div class="mb-2 d-flex justify-content-center row">
                     <label for="fname"></label>
                     <input name="fname" id="fname" type="text" placeholder="Username" class="form-control"></br>
-                    <div class=row">
+                    <div class="row">
                         <span><?php echo $nameErr;
                                 ?></span>
                     </div>

@@ -1,9 +1,3 @@
-
-    var chatToken = "<?= echo $_SESSION['chat-token']; ?>";
-    var chatCollectionId = "<?= echo CHAT_SERVER_ID; ?>";
-    var chatServer = "<?= echo CHAT_SERVER_URL; ?>";
-    var chatGoal = "<?= echo $_SESSION['friend']; ?>";
-
 window.setInterval(function () {
     getMessages();
 }, 1000);
@@ -30,7 +24,7 @@ function getMessages() {
                 textbox.classList.add("col-7");
                 timebox.classList.add("col-3");
                 timebox.classList.add("text-right");
-                // messagebox.classList.add("messagebox");
+                //messagebox.classList.add("messagebox");
                 //textbox.appendChild(namebox);
                 messagebox.appendChild(namebox);
                 messagebox.appendChild(textbox);
@@ -45,8 +39,8 @@ function getMessages() {
         }
     };
 
-    xmlhttp.open("GET", chatServer+"/"+chatCollectionId+"/message/"+chatGoal, true);
-    xmlhttp.setRequestHeader('Authorization', chatToken);
+    xmlhttp.open("GET", chatServer + "/" + chatCollectionId + "/message/" + chatGoal, true);
+    xmlhttp.setRequestHeader('Authorization', 'Bearer ' + chatToken);
     xmlhttp.send();
 }
 
@@ -57,20 +51,20 @@ function send() {
             console.log("done...");
         }
     };
-    xmlhttp1.open("POST", chatServer+"/"+chatCollectionId+"/message", true);
+    xmlhttp1.open("POST", chatServer + "/" + chatCollectionId + "/message", true);
     xmlhttp1.setRequestHeader('Content-type', 'application/json');
     // Add token, e. g., from Tom
-    xmlhttp1.setRequestHeader('Authorization', chatToken);
+    xmlhttp1.setRequestHeader('Authorization', 'Bearer ' + chatToken);
     // Create request data with message and receiver
+    let message = document.getElementById('message').value;
+    console.log(message);
     let data = {
-        message: document.getElementById('message').value,
+        message: message,
         to: chatGoal
     };
+
     document.getElementById('message').value = "";
     let jsonString = JSON.stringify(data); // Serialize as JSON
     xmlhttp1.send(jsonString); // Send JSON-data to server
 
 }
-
-
-
