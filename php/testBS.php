@@ -120,6 +120,9 @@ echo " <br> <br>LOGIN (as MONSIEUR APEL) -> list Messages Michael<br> <br>";
 
 var_dump($service->listMessages("Michael"));
 
+var_dump($service->sendMessage("Hello", "Sonja"));
+
+
 ?>
 
 

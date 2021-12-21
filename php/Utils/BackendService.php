@@ -242,7 +242,8 @@ class BackendService
             );
             var_dump($list);
         } catch (\Exception $e) {
-            echo "Error while loading list";
+            error_log("Error: sending message failed" + $e);
+            return false;
         }
     }
 
@@ -258,7 +259,8 @@ class BackendService
            return $list;
          
         } catch (\Exception $e) {
-            echo "Error while loading list";
+            error_log("Error: loading list messages " + $e);
+            return false;
         }
     }
 }
