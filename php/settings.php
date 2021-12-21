@@ -21,9 +21,7 @@ if (isset($sessionuser) && !empty($sessionuser)) {
     $user = $service->loadUser($sessionuser);
     var_dump($user);
 
-    if (
-        isset($_POST["save"])
-    ) {
+    if (isset($_POST["save"])) {
         //$service->loadUser($sessionuser);
         echo $_POST["firstname"];
         echo "<hr>";
@@ -38,6 +36,8 @@ if (isset($sessionuser) && !empty($sessionuser)) {
         //header("Location: settings.php"); //Load settings again to test if load user updates
         header("Location: profile.php");
         //end();
+    } else if (isset($_POST["cancel"])) {
+        header("Location: profile.php");
     }
 } else {
     header('location: login.php');
@@ -110,7 +110,7 @@ if (isset($sessionuser) && !empty($sessionuser)) {
             </div>
 
             <div class="row justify-content-center">
-                <input name="cancel" class=" col-5 btn btn-lg btn-secondary mx-1 " value="Cancel">
+                <input name="cancel" class=" col-5 btn btn-lg btn-secondary mx-1 " type="submit" value="Cancel">
                 <input name="save" class=" col-6 btn btn-lg btn-primary ms-4" type="submit" value="Save">
             </div>
         </form>
