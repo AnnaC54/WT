@@ -16,25 +16,27 @@ use Utils\BackendService;
 
 
 $sessionuser = $_SESSION["user"];
-
+//var_dump($_SESSION["user"]);
+//echo $sessionuser;
 if (isset($sessionuser) && !empty($sessionuser)) {
     $user = $service->loadUser($sessionuser);
-    var_dump($user);
+    //var_dump($user);
 
     if (isset($_POST["save"])) {
         //$service->loadUser($sessionuser);
         echo $_POST["firstname"];
         echo "<hr>";
         $user->setFirstname($_POST['firstname']);
-        echo $user->getFirstname();
+        //$user->getFirstname());
         $user->setLastname($_POST["lastname"]);
+        //echo $user->getLastname($_POST["lastname"]);
         $user->setTextfield($_POST["textfield"]);
         $user->setRadio($_POST["radio"]);
         $user->setDrink($_POST["drink"]);
-
+        //var_dump($user);
         $service->saveUser($user);
         //header("Location: settings.php"); //Load settings again to test if load user updates
-        header("Location: profile.php");
+        header("Location: friends.php");
         //end();
     } else if (isset($_POST["cancel"])) {
         header("Location: profile.php");
@@ -64,7 +66,7 @@ if (isset($sessionuser) && !empty($sessionuser)) {
 
         <form class=" offset-2 col-8 mb-5" method="post">
             <h2>Profile Settings</h2>
-
+            
             <h4>Base Data</h4>
             <div class="mb-3 form-floating">
                 <input aria-label="First name" name="firstname" placeholder="First Name" type="name" class="form-control" id="firstname" aria-describedby="firstname" value="<?php echo $user->getFirstname() ?>">
@@ -94,7 +96,7 @@ if (isset($sessionuser) && !empty($sessionuser)) {
                 <label for="floatingTextarea2">Short Description</label>
             </div>
 
-            <h4>Prefered Chat Layout</h4>
+            <h4>Preferred Chat Layout</h4>
 
             <div class="form-check">
                 <input <?= ($user->getRadio() == "oneline") ? "checked" : "" ?> class="form-check-input" type="radio" name="radio" id="flexRadioDefault1" value="oneline">
