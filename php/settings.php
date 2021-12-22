@@ -16,7 +16,7 @@ use Utils\BackendService;
 
 
 $sessionuser = $_SESSION["user"];
-//var_dump($_SESSION["user"]);
+//var_dump($_SESSION["user"]); 
 //echo $sessionuser;
 if (isset($sessionuser) && !empty($sessionuser)) {
     $user = $service->loadUser($sessionuser);

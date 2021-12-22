@@ -31,7 +31,8 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
             //end();
         }
         if (isset($_POST["remove"])) {
-            $service->friendRemove($user);
+            //$service->friendRemove($user);
+
             header("Location: friends.php");
             //end();
         }
@@ -64,9 +65,9 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
     <br><br><br>
     <div class="container">
         <div class="row">
-        <div class="col-2 d-flex justify-content-center px-3">
-                    <img src="../images/profile.png" alt="profile" class="rounded-circle justify-content-center pd-" style="width: 115px; height: 115px;">
-                </div>
+            <div class="col-2 d-flex justify-content-center px-3">
+                <img src="../images/profile.png" alt="profile" class="rounded-circle justify-content-center pd-" style="width: 115px; height: 115px;">
+            </div>
             <div class="col-8 mb-5">
                 <h2>Profile of <?php echo $user->getFirstname() ?></h2>
                 <hr>
@@ -75,7 +76,7 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
                         <!-- <div class="d-flex justify-content-center"> -->
 
                         <input class="btn btn-secondary" name="back" type="submit" value="Back to Chat">
-                        <input class="btn btn-secondary" name="remove" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button-addon2 sendbutton" name="remove" value="Remove Friend">
+                        <input type="submit" class="btn btn-secondary" name="remove" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button-addon2 sendbutton" name="remove" value="Remove Friend">
                 </form>
             </div>
         </div>
@@ -120,7 +121,7 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
 
     <!-- Modal section -->
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="cancelFriendshipModalProfile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -132,12 +133,41 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button onclick="send()" type="button" class="btn btn-primary"><a class="btn-link  link-light" href="friends.php">Jup, skip em </a></button>
+                    <button type="button" class="btn btn-primary" id="cancelFriendshipProfile">Jup, skip em </button>
                 </div>
             </div>
         </div>
     </div>
 
 </body>
+<script>
+    document.getElementById("cancelFriendshipProfile").onclick = function() {
+
+        const newPostForm = document.createElement("form");
+        newPostForm.method = "post";
+        newPostForm.action = "friends.php";
+        // newPostForm.name = "myform";
+
+        // create hidden Input Fields -> give friends.php
+
+        const hiddenInput = document.createElement("input");
+        const friendName = document.createElement("input");
+
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "remove";
+        hiddenInput.value = "skipfriend";
+
+        friendName.type = "hidden";
+        friendName.name = "friend";
+        friendName.value = "<?= $friendname ?>";
+
+        newPostForm.appendChild(hiddenInput);
+        newPostForm.appendChild(friendName);
+
+        document.getElementById("cancelFriendshipModalProfile").appendChild(newPostForm);
+        newPostForm.submit(); // -> submit() method is provided by object , see -> https://www.javascript-coder.com/javascript-form/javascript-form-submit/
+    };
+    
+</script>
 
 </html>
