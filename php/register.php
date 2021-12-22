@@ -110,13 +110,13 @@ require("start.php");
 
         <!-- form section -->
         <section class="col-lg-6 offset-lg-3 justify-content-center">
-            <form class="needs-validation" id="registrationForm" name="myForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <form class="needs-validation" id="registrationForm" name="myForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" novalidate>
 
                 <!-- username -->
 
                 <div class="mb-2 d-flex justify-content-center row">
                     <label for="fname"></label>
-                    <input name="fname" id="fname" type="text" placeholder="Username" class="form-control"></br>
+                    <input name="fname" id="fname" type="text" placeholder="Username" class="form-control" required></br>
                     <div class="row">
                         <span><?php echo $nameErr;
                                 ?></span>
@@ -128,7 +128,7 @@ require("start.php");
 
                 <div class=" mb-2 d-flex justify-content-center row">
                     <label for="pword"></label>
-                    <input name="password" id="password" type="password" placeholder="Password" class="form-control"><br>
+                    <input name="password" id="password" type="password" placeholder="Password" class="form-control" required><br>
                     <div class="row">
                         <span><?php echo $passwordErr;
                                 ?></span>
@@ -139,7 +139,7 @@ require("start.php");
 
                 <div class="mb-2 passwordTwo d-flex justify-content-center row">
                     <label for="cpword" class="login-register-label"></label>
-                    <input name="passwordCheck" id="password-rep" type="password" placeholder="Confirm Password" class="form-control"><span id='message'></span>
+                    <input name="passwordCheck" id="password-rep" type="password" placeholder="Confirm Password" class="form-control" required><span id='message'></span>
                     <div class="row">
                         <span><?php echo $passwordErr;
                                 ?></span>

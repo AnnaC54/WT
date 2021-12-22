@@ -168,7 +168,7 @@ class BackendService
         try {
             return HttpClient::put(
                 $this->base . "/" . $this->collectionId . "/friend" . "/" . $friend->getUsername(),
-                array("status" => $friend->isDismissed()),
+                array("status" => $friend->isDismissed()),  //get status
                 $_SESSION["chat-token"]
             );
         } catch (\Exception $e) {
