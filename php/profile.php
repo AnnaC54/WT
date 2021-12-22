@@ -65,9 +65,9 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
     <br><br><br>
     <div class="container d-flex justify-content-center">
         <div class="row">
-        <div class="col-2 d-flex justify-content-center">
-                    <img src="../images/profile.png" alt="profile" class="rounded-circle justify-content-center pd-" style="width: 115px; height: 115px;">
-                </div>
+            <div class="col-2 d-flex justify-content-center">
+                <img src="../images/profile.png" alt="profile" class="rounded-circle justify-content-center pd-" style="width: 115px; height: 115px;">
+            </div>
             <div class="col-8 mb-5 offset-1">
                 <h2>Profile of <?php echo $user->getFirstname() ?></h2>
                 <hr>
@@ -83,12 +83,12 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
     </div>
 
 
-    <div class="container  d-flex justify-content-center">
-        <div class=" row ">
+    <div class="container  d-flex justify-content-center ">
+        <div class=" row border bg-light">
             <div class=" col-2 d-flex pe-5 ">
 
-                <div class="text-center">
-                    <p class="coffee">
+                <div class="text-center >
+                    <p class=" coffee">
                     <h4>Coffee or Tea?</h4>
                     <?php
                     if ($user->getDrink() == 1) {
@@ -110,10 +110,10 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
             </div>
 
             <div class="col-8  mb-5 offset-1">
-                <hr>
-                <p class="para-one"> <?php echo $user->getTextfield()
-                                        ?>
-                </p>
+                <br>
+                <h6> <?php echo $user->getTextfield()
+                        ?>
+                </h6>
             </div>
 
         </div>
@@ -167,7 +167,6 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
         document.getElementById("cancelFriendshipModalProfile").appendChild(newPostForm);
         newPostForm.submit(); // -> submit() method is provided by object , see -> https://www.javascript-coder.com/javascript-form/javascript-form-submit/
     };
-    
 </script>
 
 </html>
