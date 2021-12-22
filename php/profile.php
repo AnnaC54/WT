@@ -63,12 +63,12 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
 <body>
 
     <br><br><br>
-    <div class="container">
+    <div class="container d-flex justify-content-center">
         <div class="row">
-            <div class="col-2 d-flex justify-content-center px-3">
-                <img src="../images/profile.png" alt="profile" class="rounded-circle justify-content-center pd-" style="width: 115px; height: 115px;">
-            </div>
-            <div class="col-8 mb-5">
+        <div class="col-2 d-flex justify-content-center">
+                    <img src="../images/profile.png" alt="profile" class="rounded-circle justify-content-center pd-" style="width: 115px; height: 115px;">
+                </div>
+            <div class="col-8 mb-5 offset-1">
                 <h2>Profile of <?php echo $user->getFirstname() ?></h2>
                 <hr>
                 <form method="post">
@@ -83,9 +83,9 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
     </div>
 
 
-    <div class="container">
+    <div class="container  d-flex justify-content-center">
         <div class=" row ">
-            <div class=" col-2 ">
+            <div class=" col-2 d-flex pe-5 ">
 
                 <div class="text-center">
                     <p class="coffee">
@@ -109,7 +109,7 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
                 </div>
             </div>
 
-            <div class="col-8 ">
+            <div class="col-8  mb-5 offset-1">
                 <hr>
                 <p class="para-one"> <?php echo $user->getTextfield()
                                         ?>
