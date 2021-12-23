@@ -9,40 +9,41 @@ if (isset($_POST["action"]) == "add-friend" && $_POST["friend"] != "") {
     $newFriend = new \Model\Friend($_POST["friend"]);
     $service->friendRequest($newFriend);
 }
+
 // If user wants to end friendship in chat vieew 
 if (isset($_POST["remove"]) == "skipfriend" && $_POST["friend"] != "") {
     $toBeRemovedFriend = new \Model\Friend($_POST["friend"]);
     $service->friendRemove($toBeRemovedFriend);
 }
+
 //accept from modal
 
-if (isset($_POST["action"]) == "accept_request" && $_POST["friend"] != "") {
-    $acceptedFriend = new \Model\Friend($_POST["friend"]);
-    $service->friendAccept($acceptedFriend);
-}
-//dismiss from modal
 
 if (isset($_POST["action"]) == "dismiss_request" && $_POST["friend"] != "") {
     $dismissFriend = new \Model\Friend($_POST["friend"]);
     $service->friendDismiss($dismissFriend);
 }
 
+//a from modal
 
+if (isset($_POST["action"]) == "accept_request" && $_POST["friend"] != "") {
+    $acceptedFriend = new \Model\Friend($_POST["friend"]);
+    $service->friendAccept($acceptedFriend);
+}
+
+
+
+$unreadarray = json_decode(json_encode($service->getUnread()), true);  //unread array
 $friendsacceptarray = array();           //array for accept status
 $friendsrequestarray = array();           //array for request status
 $friendsarray = $service->loadFriends();
 foreach ($friendsarray as $key => $value) {             //sort loop
     if ($value->getStatus() === "accepted") {
-        $friendsacceptarray[] = $value;
+        $friendsacceptarray[$key] = $value;
     } else if ($value->getStatus() === "requested") {
-        $friendsrequestarray[] = $value;
+        $friendsrequestarray[$key] = $value;
     }
-    /*if ($friendsacceptarray !== null) {
-        $friendsacceptarray = array_values($friendsacceptarray);
-    }
-    if ($friendsrequestarray !== null) {
-        $friendsrequestarray = array_values($friendsrequestarray);
-    } */
+    
 }
 ?>
 
@@ -87,15 +88,21 @@ foreach ($friendsarray as $key => $value) {             //sort loop
                 <form action="chat.php" method="get">
                     <?php
                     if ($friendsacceptarray === null) { ?>
-                        <li class="list-group-item"> You have no friends :( </li> <?php } else {
-                                                                                    foreach ($friendsacceptarray as $key => $value) {      //iterate through return of loadfriends accepted
+                        <li class="list-group-item"> You have no friends :( </li>
+                        <?php    } else {
+                        foreach ($friendsacceptarray as $key => $value) {      //iterate through return of loadfriends accepted
+                        ?> <li class="list-group-item">
+                            
+                                <input class="bg-white no-border" type="submit" name="person" value="<?= $value->getUsername() ?>" ></input>
 
-                                                                                    ?>
-                            <li class="list-group-item">
-                                <input class="bg-white no-border" type="submit" name="person" value="<?= $value->getUsername() ?>"></input>
+<!-- unread counter -->
+
+                                <span class="badge bg-secondary"><?php if(!empty($unreadarray[$value->getUsername()])){
+                                echo $unreadarray[$value->getUsername()];
+                            }; ?></span>
                             </li> <!-- query -->
                     <?php }
-                                                                                } ?>
+                    } ?>
                 </form>
             </ul>
 
@@ -112,10 +119,10 @@ foreach ($friendsarray as $key => $value) {             //sort loop
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div>
                                 <!--<input type=submit> -->
-                                <button type="button" onclick="requestModal('<?php echo $value->getUsername() ?>')">Friend request from <?php echo $value->getUsername() ?>
+                                <button class="btn btn-primary" type="button" onclick="requestModal(<?php echo $value->getUsername() ?>)">Friend request from <?php echo $value->getUsername() ?>
                                     <!--create modal with username info -->
                             </div>
-                            Do you wanna be his/her friend?
+                            <p class="mx-3">Do you wanna be his/her friend?</p>
                         </li> <!-- query -->
                 <?php }
                 } ?>
@@ -126,9 +133,10 @@ foreach ($friendsarray as $key => $value) {             //sort loop
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" name="friend" list="friendsList" placeholder="Add to friend list" aria-label="Recipient's username" aria-describedby="button-addon2">
                         <datalist id="friendsList"></datalist>
-                        <button class="btn btn-primary" type="submit" name="action" value="add-friend">Button</button> <!-- onclick add friend php   -->
+                        <button class="btn btn-primary" type="submit" name="action" value="add-friend">Add</button> <!-- onclick add friend php   -->
                     </div>
                 </form>
+
                 <!-- modal layout -->
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -152,12 +160,17 @@ foreach ($friendsarray as $key => $value) {             //sort loop
     </div>
     <!-- pass php variable to js  -->
 
+    
     <script>
         'var name = <?php echo json_encode($name); ?>;  
     </script>'
 
-
     <script>
+        window.chatToken = "<?= $_SESSION['chat-token'] ?>";
+        window.chatCollectionId = "<?= CHAT_SERVER_ID ?>";
+        window.chatServer = "<?= CHAT_SERVER_URL ?>";
+        window.chatGoal = "<?= $_SESSION['friend']; ?>"
+        console.log(chatGoal);
         var friendModal = new bootstrap.Modal(document.getElementById("exampleModal")); // create modal
         //individualize modal
 
@@ -167,7 +180,72 @@ foreach ($friendsarray as $key => $value) {             //sort loop
             friendModal.show();
             //header text
             document.getElementById("modalFriendRequestHeader").innerHTML = "Friend request of " + name;
-            //if accepting
+
+            //if dismissing (with JS)
+
+            document.getElementById("dismiss_friendship_button").onclick = function() {
+                //submit form
+                console.log("test");
+                const form = document.createElement('form');
+                form.method = "post";
+                form.action = "friends.php";
+                //input field for dismissing info
+
+                const hiddenActionField = document.createElement('input');
+                hiddenActionField.type = 'hidden';
+                hiddenActionField.name = "action";
+                hiddenActionField.value = "dismiss_request";
+                form.appendChild(hiddenActionField);
+                //input field for username info
+
+                const hiddenNameField = document.createElement('input');
+                hiddenNameField.type = 'hidden';
+                hiddenNameField.name = "friend";
+                hiddenNameField.value = name;
+                form.appendChild(hiddenNameField);
+                document.getElementById("exampleModal").appendChild(form);
+                //submit
+                form.submit();
+
+
+
+
+                //   * just another try to make it work * 
+
+                let xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 204) {
+                        console.log("Dismissed...");
+                    }
+                };
+                xmlhttp.open("PUT", chatServer + "/" + chatCollectionId + "/friend/" + name , true);
+                xmlhttp.setRequestHeader('Content-type', 'application/json');
+                xmlhttp.setRequestHeader('Authorization', 'Bearer ' + chatToken);
+                let data = {
+                    status: "dismissed"
+
+                };
+                let jsonString = JSON.stringify(data);
+                xmlhttp.send(jsonString);
+
+                // removes friends request onClick
+
+                var allSubjectName = document.querySelectorAll(".friendRequest");
+                for (var index = 0; index < allSubjectName.length; index++) {
+                    allSubjectName[index].addEventListener("click", function() {
+                        this.classList.toggle("active");
+                    });
+                    allSubjectName[index].querySelector("button").addEventListener("click",
+                        function() {
+                            this.closest(".friendRequest").remove();
+
+                        });
+                }
+
+                window.location.reload(true)
+            };
+
+            // if accepting(with PHP)
 
             document.getElementById("accept_friendship_button").onclick = function() {
                 //submit form
@@ -190,48 +268,10 @@ foreach ($friendsarray as $key => $value) {             //sort loop
                 form.appendChild(hiddenNameField);
                 document.getElementById("exampleModal").appendChild(form);
                 //submit
-
                 form.submit();
             };
-            //if dismissing
 
-            document.getElementById("dismiss_friendship_button").onclick = function() {
-                //submit form
 
-                const form = document.createElement('form');
-                form.method = "post";
-                form.action = "friends.php";
-                //input field for dismissing info
-
-                const hiddenActionField = document.createElement('input');
-                hiddenActionField.type = 'hidden';
-                hiddenActionField.name = "action";
-                hiddenActionField.value = "dismiss_request";
-                form.appendChild(hiddenActionField);
-                //input field for username info
-
-                const hiddenNameField = document.createElement('input');
-                hiddenNameField.type = 'hidden';
-                hiddenNameField.name = "friend";
-                hiddenNameField.value = name;
-                form.appendChild(hiddenNameField);
-                document.getElementById("exampleModal").appendChild(form);
-                //submit
-
-                form.submit();
-            };
-        }
-
-        function closeModal() {
-            friendModal.show();
-        }
-
-        function dismiss() {
-            friendModal.hide();
-        }
-
-        function accept() {
-            friendModal.hide();
         }
     </script>
 </body>
