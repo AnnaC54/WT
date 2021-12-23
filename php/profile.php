@@ -69,7 +69,7 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
                 <img src="../images/profile.png" alt="profile" class="rounded-circle justify-content-center pd-" style="width: 115px; height: 115px;">
             </div>
             <div class="col-8 mb-5 offset-1">
-                <h2>Profile of <?php echo $user->getFirstname() ?></h2>
+                <h2>Profile of <?php echo htmlspecialchars($_GET["person"]) ?></h2>
                 <hr>
                 <form method="post">
                     <header class="btn-group">
@@ -95,15 +95,27 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
                         echo "Coffee";
                     } else if ($user->getDrink() == 2) {
                         echo "Tea";
+                    } else{
+                        echo "Neither";
                     }
                     ?>
                     </p>
                     <p class="name">
                     <h4>Name</h4>
                     <?php
+                    if(!empty($user->getFirstname())){
                     echo $user->getFirstname();
+                } else{
+                    echo "No first name";
+                }
+                if(!empty($user->getLastname())){
                     echo " ";
                     echo $user->getLastname();
+                } else{
+                    echo "<br>";
+                    echo "No last name";
+                }
+               
                     ?>
                     </p>
                 </div>
@@ -111,7 +123,11 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
 
             <div class="col-8  mb-5 offset-1">
                 <br>
-                <h6> <?php echo $user->getTextfield()
+                <h6> <?php  if(!empty( $user->getTextfield())){
+                echo $user->getTextfield();
+                } else{
+                    echo "No text input given.";
+                }
                         ?>
                 </h6>
             </div>
