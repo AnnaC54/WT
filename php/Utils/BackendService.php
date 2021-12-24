@@ -209,7 +209,7 @@ class BackendService
                 $this->base . "/" . $this->collectionId . "/unread",
                 $_SESSION["chat-token"]
             );
-            var_dump($data);
+            return($data);
         } catch (\Exception $e) {
             error_log("Error: " + $e);
         }

@@ -102,6 +102,7 @@ foreach ($friendsarray as $key => $value) {             //sort loop
                             }; ?></span>
                             </li> <!-- query -->
                     <?php }
+                    
                     } ?>
                 </form>
             </ul>
