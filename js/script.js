@@ -1,9 +1,9 @@
 
 
 let conf = {}
-    import("config.js").then(module => {
-        conf = module.val(); 
-    });
+import("config.js").then(module => {
+    conf = module.val(); 
+});
 
 
 
@@ -29,95 +29,93 @@ var userName;
 
 function passwordCheck(){
 
-    if (password1.value == password2.value) {
-       
-       document.getElementById('password').classList.remove('is-invalid');
-       document.getElementById('password-rep').classList.remove('is-invalid');
-       document.getElementById('password').classList.add('is-valid');
-       document.getElementById('password-rep').classList.add('is-valid');
-    }
+if (password1.value == password2.value) {
+   
+   document.getElementById('password').classList.remove('is-invalid');
+   document.getElementById('password-rep').classList.remove('is-invalid');
+   document.getElementById('password').classList.add('is-valid');
+   document.getElementById('password-rep').classList.add('is-valid');
+}
 
-    else {
-        
-        document.getElementById('password').classList.remove('is-valid');
-       document.getElementById('password-rep').classList.remove('is-valid');
-        document.getElementById('password').classList.add('is-invalid');
-        document.getElementById('password-rep').classList.add('is-invalid');
-    }
+else {
+    
+    document.getElementById('password').classList.remove('is-valid');
+   document.getElementById('password-rep').classList.remove('is-valid');
+    document.getElementById('password').classList.add('is-invalid');
+    document.getElementById('password-rep').classList.add('is-invalid');
+}
 }
 
 function checkExistState(userName) {
 
-    userName = userName;
+userName = userName;
 
-    // no username given 
-    if (user == "") {
-        alert("Pls enter your username");
-        return false;
-    }
-    // bc you have to wait until server response if user already exists, you deactive the asynchronous property
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", serverRequest, false);
-    xmlhttp.send();
+// no username given 
+if (user == "") {
+    alert("Pls enter your username");
+    return false;
+}
+// bc you have to wait until server response if user already exists, you deactive the asynchronous property
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.open("GET", serverRequest, false);
+xmlhttp.send();
 
-    if (xmlhttp.status == 204) {
-        return false;
-    } else if (xmlhttp.status == 404) {
-        return true;
+if (xmlhttp.status == 204) {
+    return false;
+} else if (xmlhttp.status == 404) {
+    return true;
 
-    }
+}
 }
 
 
 document.getElementById("registrationForm").onsubmit = function (evt) {
 
-    var validation = true;
-   document.getElementById('username').classList.remove('is-invalid');
-   document.getElementById('username').classList.add('is-valid');
+var validation = true;
 
-    if (user.value.length < 3) {
-        
-        document.getElementById('username').classList.remove('is-valid');
-        document.getElementById('username').classList.add('is-invalid');
-        validation = false;
-        alert("alarm")
-    }
+if (user.value.length < 3) {
+    
+    document.getElementById('username').classList.remove('is-valid');
+    document.getElementById('username').classList.add('is-invalid');
+    validation = false;
+    alert("alarm")
+}
 
-    if (password1.value.length < 8 || password2.value.length < 8) {
-        document.getElementById('password').classList.remove('is-valid');
-       document.getElementById('password-rep').classList.remove('is-valid');
-        document.getElementById('password').classList.add('is-invalid');
-        document.getElementById('password-rep').classList.add('is-invalid');
-        validation = false;
-    }
-
-   
-
-    if (password2.value != password1.value) {
-        
-        document.getElementById('password').classList.remove('is-valid');
-       document.getElementById('password-rep').classList.remove('is-valid');
-        document.getElementById('password').classList.add('is-invalid');
-        document.getElementById('password-rep').classList.add('is-invalid');
-        validation = false;
-    }
-
-    if (checkExistState(user.value) == false ) {
-        
-        document.getElementById('username').classList.remove('is-valid');
-        document.getElementById('username').classList.add('is-invalid');
-        validation = false;
-    }
+if (password1.value.length < 8 || password2.value.length < 8) {
+    document.getElementById('password').classList.remove('is-valid');
+   document.getElementById('password-rep').classList.remove('is-valid');
+    document.getElementById('password').classList.add('is-invalid');
+    document.getElementById('password-rep').classList.add('is-invalid');
+    validation = false;
+}
 
 
-    if (validation) {
-        alert("Registrierung erfolgreich")
 
-    }
+if (password2.value != password1.value) {
+    
+    document.getElementById('password').classList.remove('is-valid');
+   document.getElementById('password-rep').classList.remove('is-valid');
+    document.getElementById('password').classList.add('is-invalid');
+    document.getElementById('password-rep').classList.add('is-invalid');
+    validation = false;
+}
 
-    else {
-        evt.preventDefault();
-    }
+if (checkExistState(user.value) == false ) {
+    
+    document.getElementById('username').classList.remove('is-valid');
+    document.getElementById('username').classList.add('is-invalid');
+    validation = false;
+}
+
+
+if (validation) {
+    alert("Registrierung erfolgreich")
+
+}
+
+else {
+    evt.preventDefault();
+}
 
 
 

@@ -62,6 +62,7 @@ require("start.php");
         if (empty($_POST["password"]) || empty($_POST["passwordCheck"])) {
             $passwordErr = "Password is required";
             $validation = false;
+
         } else if (strlen(($_POST["password"])) < 8 || strlen(($_POST["passwordCheck"])) < 8) {
             $passwordErr = "Password is too short";
             $validation = false;
@@ -119,6 +120,9 @@ require("start.php");
                     <input name="fname" id="fname" type="text" placeholder="Username" class="form-control" required></br>
                     <div class="row">
                         <span><?php echo $nameErr;
+                        if($nameErr != ""){
+                            echo "<script> document.getElementById('fname').classList.add('is-invalid')</script>";
+                        }
                                 ?></span>
                     </div>
                 </div>
@@ -131,6 +135,9 @@ require("start.php");
                     <input name="password" id="password" type="password" placeholder="Password" class="form-control" required><br>
                     <div class="row">
                         <span><?php echo $passwordErr;
+                        if($passwordErr != ""){
+                            echo "<script> document.getElementById('password').classList.add('is-invalid')</script>";
+                        }
                                 ?></span>
                     </div>
                 </div>
@@ -142,6 +149,9 @@ require("start.php");
                     <input name="passwordCheck" id="password-rep" type="password" placeholder="Confirm Password" class="form-control" required><span id='message'></span>
                     <div class="row">
                         <span><?php echo $passwordErr;
+                        if($passwordErr != ""){
+                            echo "<script> document.getElementById('password-rep').classList.add('is-invalid')</script>";
+                        }
                                 ?></span>
                     </div>
                 </div>
