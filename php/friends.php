@@ -120,7 +120,7 @@ foreach ($friendsarray as $key => $value) {             //sort loop
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div>
                                 <!--<input type=submit> -->
-                                <button class="btn btn-primary" type="button" onclick="requestModal(<?php echo $value->getUsername() ?>)">Friend request from <?php echo $value->getUsername() ?>
+                                <button class="btn btn-primary" type="button" onclick="requestModal('<?php echo $value->getUsername() ?>')">Friend request from <?php echo $value->getUsername() ?>
                                     <!--create modal with username info -->
                             </div>
                             <p class="mx-3">Do you wanna be his/her friend?</p>
