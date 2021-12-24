@@ -4,11 +4,16 @@ if (empty($_SESSION["user"])) {   //if session user not set --> back to login
     header("Location: login.php");
 }
 // request for friend
-
+$erroradd = "";
 if (isset($_POST["action"]) == "add-friend" && $_POST["friend"] != "") {
     $newFriend = new \Model\Friend($_POST["friend"]);
     $service->friendRequest($newFriend);
+    $erroradd = "";
 }
+else if (isset($_POST["action"]) == "add-friend" && $_POST["friend"] == "") {
+$erroradd = "Enter correct username for friend";
+}
+
 
 // If user wants to end friendship in chat vieew 
 if (isset($_POST["remove"]) == "skipfriend" && $_POST["friend"] != "") {
@@ -67,7 +72,11 @@ foreach ($friendsarray as $key => $value) {             //sort loop
 
 </head>
 <title>Friends</title>
-
+<style>
+        span {
+            color: red;
+        }
+    </style>
 <body>
 
     <script src="../js/scriptFriends.js"></script>
@@ -136,6 +145,7 @@ foreach ($friendsarray as $key => $value) {             //sort loop
                         <datalist id="friendsList"></datalist>
                         <button class="btn btn-primary" type="submit" name="action" value="add-friend">Add</button> <!-- onclick add friend php   -->
                     </div>
+                    <span><?= $erroradd ?></span>
                 </form>
 
                 <!-- modal layout -->
