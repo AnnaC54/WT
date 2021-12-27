@@ -29,7 +29,7 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
     if (isset($user) && !empty($user)) {
         if (isset($_POST["back"])) {
             header("Location: chat.php");
-            //end();
+            exit();
         }
         if (isset($_POST["remove"])) {
             //$service->friendRemove($user);
