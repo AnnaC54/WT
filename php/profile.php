@@ -17,7 +17,7 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
     //------------------------------------------------------
     //Get username from Query Parameter
     //Actual method to use in the end
-    $user = $service->loadUser($_GET["person"]);
+    $user = $service->loadUser($_SESSION["friend"]);
     echo ($_GET["person"]);
     //  echo "<hr>";
     //  var_dump($service->loadUser($_GET["person"]));
@@ -28,7 +28,7 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
 
     if (isset($user) && !empty($user)) {
         if (isset($_POST["back"])) {
-            $location = $_GET["person"];
+            $location = $_SESSION["friend"];
             header("Location: chat.php?person=$location");
             exit();
         }
@@ -70,7 +70,7 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
                 <img src="../images/profile.png" alt="profile" class="rounded-circle justify-content-center pd-" style="width: 115px; height: 115px;">
             </div>
             <div class="col-8 mb-5 offset-1">
-                <h2>Profile of <?php echo htmlspecialchars($_GET["person"]) ?></h2>
+                <h2>Profile of <?php echo htmlspecialchars($_SESSION["friend"]) ?></h2>
                 <hr>
                 <form method="post">
                     <header class="btn-group">
