@@ -18,7 +18,7 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
     //Get username from Query Parameter
     //Actual method to use in the end
     $user = $service->loadUser($_GET["person"]);
-   
+    echo ($_GET["person"]);
     //  echo "<hr>";
     //  var_dump($service->loadUser($_GET["person"]));
     //------------------------------------------------------
@@ -28,7 +28,8 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
 
     if (isset($user) && !empty($user)) {
         if (isset($_POST["back"])) {
-            header("Location: chat.php");
+            $location = $_GET["person"];
+            header("Location: chat.php?person=$location");
             exit();
         }
         if (isset($_POST["remove"])) {
