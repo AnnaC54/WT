@@ -36,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <title>Profile</title>
 
 <body>
-
     <div class="container">
         <div class="text-center p-5">
             <img src="../images/chat.png" alt="chat" class="rounded-circle" style="width: 100px;">
@@ -56,8 +55,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <div class="m-3 text-center">
                     <a href="register.php">
-                        <button class="btn btn-lg btn-secondary" type="button">Register</button></a> 
-                        <button class="btn btn-lg btn-primary" type="submit" name="login">Sign in</button>
+                        <button class="btn btn-lg btn-secondary" type="button">Register</button>
+                    </a>
+                    <button class="btn btn-lg btn-primary" type="submit" name="login">Sign in</button>
+                </div>
             </form>
         </div>
     </div>

@@ -18,6 +18,7 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
     //Get username from Query Parameter
     //Actual method to use in the end
     $user = $service->loadUser($_GET["person"]);
+   
     //  echo "<hr>";
     //  var_dump($service->loadUser($_GET["person"]));
     //------------------------------------------------------
@@ -34,15 +35,15 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
             //$service->friendRemove($user);
 
             header("Location: friends.php");
-            //end();
+            exit();
         }
     } else {
         header("Location: friends.php");
-        //end();
+        exit();
     }
 } else {
     header('Location: login.php');
-    //end();
+    exit();
 }
 ?>
 
@@ -55,7 +56,6 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <title>Profile</title>
 </head>
