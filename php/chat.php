@@ -21,7 +21,7 @@ require("start.php");
     <?php
 
     $friendname = $_GET["person"];
-    echo $friendname;
+    //echo $friendname;
     $_SESSION["friend"] = $friendname;
 
 
