@@ -66,7 +66,7 @@ require("start.php");
                 <button type="submit" href="friends.php" class=" me-3 col-1 btn btn-secondary"><a class="btn-link" href="friends.php">
                         Back</a></button>
                 <form class="col-6" action="profile.php" method="get">
-                    <button name="person" type="submit" class=" me-3 col-2 btn btn-secondary"><a class="btn-link" href="profile.php?person=<?= $_SESSION["friend"] ?>">
+                   <a class=" me-3 col-2 btn btn-secondary" href="profile.php?person=<?= $_SESSION["friend"] ?>">
                             Show Profil</a></button>
                     <button name="removeFriend" class="me-3 col-2 btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('<?= $_SESSION["friend"] ?>')">Remove Friend</button>
                 </form>

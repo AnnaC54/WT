@@ -52,6 +52,8 @@ foreach ($friendsarray as $key => $value) {             //sort loop
 }
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -171,11 +173,10 @@ foreach ($friendsarray as $key => $value) {             //sort loop
     </div>
     <!-- pass php variable to js  -->
 
-    
     <script>
         'var name = <?php echo json_encode($name); ?>;  
     </script>'
-
+    
     <script>
         window.chatToken = "<?= $_SESSION['chat-token'] ?>";
         window.chatCollectionId = "<?= CHAT_SERVER_ID ?>";
