@@ -196,7 +196,7 @@ class BackendService
             HttpClient::get("$this->base/$this->collectionId/user/$username");
             return true;
         } catch (\Exception $e) {
-            error_log("Error: " + $e);
+            error_log("Error:  + $e");
             return false;
         }
         // get aufruf mit token

@@ -39,7 +39,7 @@ if (isset($sessionuser) && !empty($sessionuser)) {
         header("Location: friends.php");
         //end();
     } else if (isset($_POST["cancel"])) {
-        header("Location: profile.php");
+        header("Location: friends.php");
     }
 } else {
     header('location: login.php');

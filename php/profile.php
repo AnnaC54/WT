@@ -88,8 +88,8 @@ if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
         <div class=" row border bg-light">
             <div class=" col-2 d-flex pe-5 ">
 
-                <div class="text-center >
-                    <p class=" coffee">
+                <div class="text-center" >
+                    <p class="coffee">
                     <h4>Coffee or Tea?</h4>
                     <?php
                     if ($user->getDrink() == 1) {
