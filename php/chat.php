@@ -78,7 +78,7 @@ require("start.php");
         <div class="container overflow-scroll col-9 offset-1 my-5 bg-white px-5 " style="height: 300px" id="chat">
         </div>
 
-        <!-- Messages in chat (php) -->
+        <!-- Messages in chat (php) 
         <h6 class="mt-6 col-9 offset-1">PHP Version - not completely working :(</h6>
 
         <div class="container overflow-scroll col-9 offset-1 my-5 bg-white px-5 " style="height: 300px" id="chatMessages">
@@ -86,7 +86,7 @@ require("start.php");
             <div class="row ">
                 <div class="col-2">
                     <?php
-
+/*
                     foreach ($messageList as $value) {
                         $newVal = (array)$value;
                         echo $newVal["from"];
@@ -111,13 +111,15 @@ require("start.php");
                         $newVal = (array)$value;
                         echo $newVal["time"];
                         echo "<br>" . "<br>";
-                    };
+                    };*/
                     ?></div>
 
             </div>
 
 
         </div>
+
+         -->
 
 
         <section class="row input-group mt-4 offset-1">
@@ -149,48 +151,11 @@ require("start.php");
         </div>
     </div>
 
+
+
     <script src="../js/chatscript.js"></script>
+    <script src="../js/chat.js"></script>
     <script>
-        //on click -> open bootstrap modal
-        var removeFriendModal = new bootstrap.Modal(document.getElementById("cancelFriendshipModal"));
-
-        function openModal($friendname) {
-            removeFriendModal.show();
-            document.getElementById("cancelFriendshipLabel").innerHTML = "Remove <?= $friendname ?> as Friend";
-
-            // -> Jup, skip em: -> create Form with two hidden input fields to give name="action"+value="remove-friend" PLUS name="friendName"+value=§friendname to friends.php
-
-            //Shiny nice Lösung
-            //document.location.href = „sometarget.php?username=…“
-
-            document.getElementById("cancelFriendship").onclick = function() {
-
-                const newPostForm = document.createElement("form");
-                newPostForm.method = "post";
-                newPostForm.action = "friends.php";
-                // newPostForm.name = "myform";
-
-                // create hidden Input Fields -> give friends.php
-
-                const hiddenInput = document.createElement("input");
-                const friendName = document.createElement("input");
-
-                hiddenInput.type = "hidden";
-                hiddenInput.name = "remove";
-                hiddenInput.value = "skipfriend";
-
-                friendName.type = "hidden";
-                friendName.name = "friend";
-                friendName.value = "<?= $friendname ?>";
-
-                newPostForm.appendChild(hiddenInput);
-                newPostForm.appendChild(friendName);
-
-                document.getElementById("cancelFriendshipModal").appendChild(newPostForm);
-                newPostForm.submit(); // -> submit() method is provided by object , see -> https://www.javascript-coder.com/javascript-form/javascript-form-submit/
-            };
-        }
-
         window.chatToken = "<?= $_SESSION['chat-token'] ?>";
         window.chatCollectionId = "<?= CHAT_SERVER_ID ?>";
         window.chatServer = "<?= CHAT_SERVER_URL ?>";

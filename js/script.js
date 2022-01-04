@@ -1,10 +1,10 @@
 
-
+/*
 let conf = {}
 import("config.js").then(module => {
     conf = module.val(); 
 });
-
+*/
 
 
 /*var chatServer = "https://online-lectures-cs.thi.de/chat";
